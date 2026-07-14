@@ -75,7 +75,7 @@ export function ServicesSection() {
         {t.services.title}
       </motion.h2>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         {items.map((s, i) => {
           const n = String(i + 1).padStart(2, "0");
           const isHovered = hovered === i;

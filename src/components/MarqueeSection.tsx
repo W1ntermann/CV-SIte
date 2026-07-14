@@ -63,7 +63,7 @@ export function MarqueeSection() {
             alt=""
             loading="lazy"
             className="rounded-2xl object-cover flex-shrink-0"
-            style={{ width: 420, height: 270 }}
+            style={{ width: "clamp(280px, 30vw, 520px)", height: "clamp(180px, 19vw, 340px)" }}
           />
         ))}
       </div>
@@ -75,7 +75,7 @@ export function MarqueeSection() {
             alt=""
             loading="lazy"
             className="rounded-2xl object-cover flex-shrink-0"
-            style={{ width: 420, height: 270 }}
+            style={{ width: "clamp(280px, 30vw, 520px)", height: "clamp(180px, 19vw, 340px)" }}
           />
         ))}
       </div>

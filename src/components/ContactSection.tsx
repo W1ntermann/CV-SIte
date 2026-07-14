@@ -18,7 +18,7 @@ export function ContactSection() {
       className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-20 sm:pb-24 md:pb-32"
       style={{ backgroundColor: "#0C0C0C" }}
     >
-      <div className="max-w-5xl mx-auto flex flex-col items-center gap-12 sm:gap-16">
+      <div className="max-w-6xl mx-auto flex flex-col items-center gap-12 sm:gap-16">
         <FadeIn y={40}>
           <h2
             className="hero-heading font-black uppercase leading-none tracking-tight text-center"
@@ -36,7 +36,7 @@ export function ContactSection() {
           </p>
         </FadeIn>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mt-4">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-4">
           {socials.map((s, i) => {
             const Icon = s.icon;
             return (
@@ -45,16 +45,16 @@ export function ContactSection() {
                   href={s.href}
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center gap-4 sm:gap-6 rounded-full border-2 px-5 sm:px-7 py-4 sm:py-5 transition-colors hover:bg-white/5"
-                  style={{ borderColor: "#D7E2EA" }}
+                  className="group flex flex-col items-center gap-3 sm:gap-4 rounded-2xl border-2 px-5 sm:px-6 py-6 sm:py-7 transition-all duration-300 hover:bg-white/5 hover:-translate-y-1"
+                  style={{ borderColor: "rgba(215,226,234,0.2)" }}
                 >
                   <span
-                    className="flex items-center justify-center rounded-full w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0"
+                    className="flex items-center justify-center rounded-full w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
                     style={{ backgroundColor: "rgba(215,226,234,0.08)" }}
                   >
-                    <Icon size={20} color="#D7E2EA" />
+                    <Icon size={22} color="#D7E2EA" />
                   </span>
-                  <span className="flex flex-col min-w-0">
+                  <span className="flex flex-col items-center text-center min-w-0">
                     <span
                       className="uppercase tracking-widest text-xs sm:text-sm font-light"
                       style={{ color: "#D7E2EA", opacity: 0.6 }}
@@ -62,8 +62,8 @@ export function ContactSection() {
                       {s.label}
                     </span>
                     <span
-                      className="font-medium truncate"
-                      style={{ color: "#D7E2EA", fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)" }}
+                      className="font-medium truncate max-w-full"
+                      style={{ color: "#D7E2EA", fontSize: "clamp(0.85rem, 1.2vw, 1.05rem)" }}
                     >
                       {s.value}
                     </span>

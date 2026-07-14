@@ -9,15 +9,19 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="h-screen flex flex-col relative" style={{ overflowX: "clip" }}>
+    <section className="min-h-dvh flex flex-col relative pt-28 sm:pt-32 lg:pt-28" style={{ overflowX: "clip" }}>
 
-      <div className="flex-1 flex flex-col justify-end px-6 md:px-10 relative">
+      <div className="flex-1 flex flex-col justify-between lg:justify-center px-6 md:px-10 relative">
+        <div
+          className="absolute left-0 right-0 z-10 flex justify-center pointer-events-none"
+          style={{ top: "clamp(20%, 28%, 34%)", bottom: "auto" }}
+        >
         <Magnet
           padding={150}
           strength={3}
           activeTransition="transform 0.3s ease-out"
           inactiveTransition="transform 0.6s ease-in-out"
-          className="absolute left-1/2 -translate-x-1/2 z-10 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px]"
+          className="w-[46vw] max-w-[400px] sm:max-w-[380px] lg:max-w-[480px] pointer-events-auto"
         >
           <FadeIn delay={0.6} y={30}>
             <img
@@ -27,10 +31,11 @@ export function HeroSection() {
             />
           </FadeIn>
         </Magnet>
+        </div>
 
         <div className="overflow-hidden relative z-20">
           <FadeIn delay={0.15} y={40}>
-            <h1 className="hero-heading font-black uppercase tracking-tight leading-none w-full text-[clamp(2.5rem,10vw,6rem)] sm:text-[clamp(3rem,11vw,7rem)] md:text-[clamp(3.5rem,12vw,8rem)] text-balance mt-6 sm:mt-4 md:-mt-5">
+            <h1 className="hero-heading font-black uppercase tracking-tight leading-none w-full text-[clamp(2.5rem,10vw,6rem)] sm:text-[clamp(3rem,11vw,7rem)] md:text-[clamp(3.5rem,12vw,8rem)] text-balance mt-0">
               {t.hero.greeting}
             </h1>
           </FadeIn>
@@ -39,7 +44,7 @@ export function HeroSection() {
         <div className="flex justify-between items-end pb-7 sm:pb-8 md:pb-10 relative z-20">
           <FadeIn delay={0.35} y={20}>
             <p
-              className="font-light uppercase tracking-wide leading-snug max-w-[160px] sm:max-w-[220px] md:max-w-[260px]"
+              className="font-light uppercase tracking-wide leading-snug max-w-[160px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[400px]"
               style={{ color: "#D7E2EA", fontSize: "clamp(0.75rem, 1.4vw, 1.5rem)" }}
             >
               {t.hero.tagline}
