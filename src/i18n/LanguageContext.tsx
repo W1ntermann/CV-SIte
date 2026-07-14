@@ -1,0 +1,134 @@
+"use client";
+
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+
+export type Lang = "en" | "ua";
+
+type Dict = {
+  nav: { about: string; services: string; projects: string; contact: string };
+  hero: { greeting: string; tagline: string };
+  about: {
+    title: string;
+    body: string;
+  };
+  services: {
+    title: string;
+    items: { name: string; desc: string }[];
+  };
+  projects: { title: string; live: string; categories: { client: string; personal: string } };
+  contact: {
+    title: string;
+    intro: string;
+    labels: { email: string; instagram: string; telegram: string; github: string };
+  };
+  buttons: { contact: string };
+};
+
+const en: Dict = {
+  nav: { about: "About", services: "Services", projects: "Projects", contact: "Contact" },
+  hero: {
+    greeting: "Hi, i'm bohdan",
+    tagline: "a fullstack developer building scalable web apps with c#, .net, react & next.js",
+  },
+  about: {
+    title: "About me",
+    body:
+      "I'm Bohdan Hembatiuk — a passionate Full Stack Developer with expertise in React, TypeScript, C#, .NET, and REST APIs. I build scalable, high-performance digital solutions with clean architecture, robust ASP.NET Core backends, and modern React/Next.js frontends. Let's build something incredible together!",
+  },
+  services: {
+    title: "Services",
+    items: [
+      { name: "FullStack .NET Development", desc: "End-to-end solutions built with ASP.NET Core, Entity Framework, and modern React/Next.js frontends — clean architecture, tested, production-ready." },
+      { name: "C# / .NET Backend", desc: "Robust backend systems with ASP.NET Core: authentication, business logic, background jobs, and integrations following clean architecture principles." },
+      { name: "REST API Design", desc: "Well-structured, documented, and secure RESTful APIs in C# — versioning, validation, and performance built in from day one." },
+      { name: "React & Next.js Frontends", desc: "Fast, accessible, and responsive UIs with React, Next.js, and TypeScript — pixel-precise implementations of your designs." },
+      { name: "Database Design", desc: "SQL Server schemas modelled with Entity Framework — efficient migrations, indexes, and query patterns that scale with your product." },
+    ],
+  },
+  projects: {
+    title: "Project",
+    live: "Live Project",
+    categories: { client: "Client", personal: "Personal" },
+  },
+  contact: {
+    title: "Let's talk",
+    intro: "Got a project in mind or just want to say hi? Reach out on any of the channels below.",
+    labels: { email: "Email", instagram: "Instagram", telegram: "Telegram", github: "GitHub" },
+  },
+  buttons: { contact: "Contact Me" },
+};
+
+const ua: Dict = {
+  nav: { about: "Про мене", services: "Послуги", projects: "Проєкти", contact: "Контакти" },
+  hero: {
+    greeting: "привіт, я богдан",
+    tagline: "fullstack розробник, який будує масштабовані веб-додатки на c#, .net, react та next.js",
+  },
+  about: {
+    title: "Про мене",
+    body:
+      "Я Богдан Гембатюк — захоплений Full Stack розробник з експертизою у React, TypeScript, C#, .NET та REST API. Створюю масштабовані, високопродуктивні цифрові рішення з чистою архітектурою, надійними бекендами на ASP.NET Core та сучасними фронтендами на React/Next.js. Давайте створимо щось неймовірне разом!",
+  },
+  services: {
+    title: "Послуги",
+    items: [
+      { name: "FullStack .NET розробка", desc: "Комплексні рішення на ASP.NET Core, Entity Framework та сучасних фронтендах React/Next.js — чиста архітектура, покрито тестами, готово до продакшену." },
+      { name: "Бекенд на C# / .NET", desc: "Надійні бекенд-системи на ASP.NET Core: автентифікація, бізнес-логіка, фонові задачі та інтеграції за принципами чистої архітектури." },
+      { name: "Проєктування REST API", desc: "Добре структуровані, задокументовані та безпечні RESTful API на C# — версіонування, валідація та продуктивність з першого дня." },
+      { name: "Фронтенди React та Next.js", desc: "Швидкі, доступні та адаптивні інтерфейси на React, Next.js та TypeScript — піксельно точна реалізація ваших дизайнів." },
+      { name: "Проєктування баз даних", desc: "Схеми SQL Server, змодельовані через Entity Framework — ефективні міграції, індекси та патерни запитів, що масштабуються разом із продуктом." },
+    ],
+  },
+  projects: {
+    title: "Проєкти",
+    live: "Переглянути",
+    categories: { client: "Клієнт", personal: "Особистий" },
+  },
+  contact: {
+    title: "Зв'язатись",
+    intro: "Маєте ідею для проєкту чи просто хочете привітатися? Пишіть будь-де нижче.",
+    labels: { email: "Пошта", instagram: "Instagram", telegram: "Telegram", github: "GitHub" },
+  },
+  buttons: { contact: "Написати" },
+};
+
+const DICTS: Record<Lang, Dict> = { en, ua };
+
+const LanguageContext = createContext<{ lang: Lang; setLang: (l: Lang) => void; t: Dict } | null>(
+  null,
+);
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<Lang>("en");
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("lang") as Lang | null;
+      if (saved === "en" || saved === "ua") setLangState(saved);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    try {
+      window.localStorage.setItem("lang", l);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  return (
+    <LanguageContext.Provider value={{ lang, setLang, t: DICTS[lang] }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
+
+export function useLanguage() {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
+  return ctx;
+}
+
