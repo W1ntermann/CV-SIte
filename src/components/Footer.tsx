@@ -30,7 +30,7 @@ export function Footer() {
 
   return (
     <footer
-      className="relative z-10 px-6 md:px-10 py-14 sm:py-18 md:py-20"
+      className="relative z-10 px-6 md:px-10 py-14 sm:py-18 md:py-24 lg:py-28"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       {/* Top divider */}
@@ -41,30 +41,30 @@ export function Footer() {
 
       <div className="max-w-7xl mx-auto flex w-full flex-col justify-between gap-12 lg:flex-row lg:items-start lg:text-left">
         {/* Brand column */}
-        <div className="flex w-full flex-col justify-between gap-6 lg:items-start lg:max-w-[320px]">
+        <div className="flex w-full flex-col justify-between gap-6 lg:items-start lg:max-w-[420px] xl:max-w-[480px]">
           <div className="flex items-center gap-2 lg:justify-start">
             <span
-              className="text-lg sm:text-xl font-bold uppercase tracking-tight"
+              className="text-lg sm:text-xl lg:text-2xl font-bold uppercase tracking-tight"
               style={{ color: "#D7E2EA" }}
             >
               Bohdan
             </span>
             <span
-              className="text-lg sm:text-xl font-bold"
+              className="text-lg sm:text-xl lg:text-2xl font-bold"
               style={{ color: "rgba(215,226,234,0.4)" }}
             >
               .
             </span>
           </div>
           <p
-            className="text-sm leading-relaxed"
+            className="text-sm lg:text-base leading-relaxed max-w-[300px]"
             style={{ color: "rgba(215,226,234,0.5)" }}
           >
             {t.hero.tagline}
           </p>
 
           {/* Social icons row — visible on mobile below brand, on desktop as well */}
-          <ul className="flex items-center gap-5 md:gap-4">
+          <ul className="flex items-center gap-5 md:gap-4 lg:gap-5">
             {socials.map((social, idx) => {
               const Icon = social.icon;
               return (
@@ -83,7 +83,7 @@ export function Footer() {
                       (e.currentTarget.style.color = "rgba(215,226,234,0.65)")
                     }
                   >
-                    <Icon className="size-5 md:size-5" />
+                    <Icon className="size-5 lg:size-6" />
                   </a>
                 </li>
               );
@@ -92,16 +92,16 @@ export function Footer() {
         </div>
 
         {/* Navigation columns */}
-        <div className="grid w-full grid-cols-2 gap-8 md:gap-12 lg:max-w-[400px] lg:gap-20">
+        <div className="grid w-full grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20" style={{ maxWidth: "none" }}>
           {/* Navigation */}
           <div>
             <h3
-              className="mb-5 text-[10px] sm:text-xs uppercase tracking-[0.15em] font-medium"
+              className="mb-5 text-[10px] sm:text-xs lg:text-sm uppercase tracking-[0.15em] font-medium"
               style={{ color: "rgba(215,226,234,0.3)" }}
             >
               Navigation
             </h3>
-            <ul className="space-y-3.5 text-sm">
+            <ul className="space-y-3.5 lg:space-y-4 text-sm lg:text-base">
               {navLinks.map((link, linkIdx) => (
                 <li key={linkIdx}>
                   <a
@@ -129,12 +129,12 @@ export function Footer() {
           {/* Social */}
           <div>
             <h3
-              className="mb-5 text-[10px] sm:text-xs uppercase tracking-[0.15em] font-medium"
+              className="mb-5 text-[10px] sm:text-xs lg:text-sm uppercase tracking-[0.15em] font-medium"
               style={{ color: "rgba(215,226,234,0.3)" }}
             >
               Social
             </h3>
-            <ul className="space-y-3.5 text-sm">
+            <ul className="space-y-3.5 lg:space-y-4 text-sm lg:text-base">
               {socials.map((social, linkIdx) => {
                 const Icon = social.icon;
                 return (
@@ -158,7 +158,7 @@ export function Footer() {
                     >
                       <Icon
                         size={14}
-                        className="transition-colors duration-200 shrink-0"
+                        className="transition-colors duration-200 shrink-0 lg:size-4"
                         style={{ color: "rgba(215,226,234,0.65)" }}
                       />
                       <span>{social.name}</span>

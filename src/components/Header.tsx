@@ -59,7 +59,7 @@ export function Header() {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-3 md:py-4 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 md:py-5 transition-all duration-300 ${
           scrolled
             ? "bg-[rgba(12,12,12,0.85)] backdrop-blur-[16px] border-b border-[rgba(215,226,234,0.08)]"
             : "bg-transparent border-b border-transparent"
@@ -67,24 +67,24 @@ export function Header() {
       >
         <nav className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Left: logo */}
-          <div className="flex items-center gap-8 md:gap-12">
+          <div className="flex items-center gap-8 md:gap-12 lg:gap-16">
             <a
               href="#"
-              className="text-lg md:text-xl font-bold tracking-tight text-[#D7E2EA] select-none"
+              className="text-xl md:text-2xl font-bold tracking-tight text-[#D7E2EA] select-none"
               aria-label="Home"
             >
               BH
             </a>
 
             {/* Desktop navigation links */}
-            <ul className="hidden md:flex items-center gap-5 md:gap-8">
+            <ul className="hidden md:flex items-center gap-6 md:gap-8 lg:gap-10">
               {navLinks.map((l) => {
                 const isActive = activeSection === l.href;
                 return (
                   <li key={l.href}>
                     <button
                       onClick={() => handleNavClick(l.href)}
-                      className="relative font-medium uppercase tracking-wider text-xs md:text-sm transition-colors duration-300 cursor-pointer"
+                      className="relative font-medium uppercase tracking-wider text-sm lg:text-base transition-colors duration-300 cursor-pointer"
                       style={{
                         color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.6)",
                       }}
@@ -111,8 +111,8 @@ export function Header() {
           </div>
 
           {/* Right: CTA + LangToggle (desktop) */}
-          <div className="hidden md:flex items-center gap-4">
-            <ContactButton className="!px-5 !py-2 !text-[11px]" />
+          <div className="hidden md:flex items-center gap-4 lg:gap-5">
+            <ContactButton className="!px-6 !py-2.5 !text-xs lg:!px-7 lg:!py-3 lg:!text-sm" />
             <LangToggle />
           </div>
 
