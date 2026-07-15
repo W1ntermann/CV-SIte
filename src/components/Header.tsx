@@ -46,13 +46,22 @@ export function Header() {
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="flex-shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
+          className="flex-shrink-0 flex items-center gap-3 sm:gap-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded group"
         >
           <img
             src="/logo.png"
-            alt="Bohdan Hembatiuk"
+            alt=""
             className="h-8 sm:h-10 lg:h-11 w-auto"
           />
+          <span
+            className="hidden sm:inline text-sm md:text-base lg:text-lg font-bold uppercase tracking-[0.25em] transition-colors duration-200"
+            style={{
+              color: "#D7E2EA",
+              letterSpacing: "0.3em",
+            }}
+          >
+            Bohdan
+          </span>
         </button>
 
         {/* Desktop navigation */}
