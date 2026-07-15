@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Mail, Camera, Send, GitBranch } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -25,7 +24,7 @@ export function Footer() {
 
   return (
     <footer
-      className="relative z-10 px-6 md:px-10 py-14 sm:py-18 md:py-24 lg:py-28 overflow-hidden"
+      className="relative z-10 px-6 md:px-10 py-14 sm:py-16 md:py-24 lg:py-28 overflow-hidden"
       style={{ backgroundColor: "#090909" }}
     >
       {/* Subtle gradient glow behind the logo */}
@@ -56,13 +55,10 @@ export function Footer() {
             className="group transition-all duration-300 hover:scale-105 lg:justify-start"
             aria-label="Home"
           >
-            <Image
+            <img
               src="/logo.png"
-              alt="Logo"
-              width={56}
-              height={56}
-              className="w-[56px] h-[56px] transition-all duration-300"
-              priority
+              alt=""
+              className="h-20 sm:h-28 lg:h-32 w-auto"
             />
           </a>
           <p

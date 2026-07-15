@@ -81,17 +81,8 @@ export function Header() {
             <img
               src="/logo.png"
               alt=""
-              className="h-8 sm:h-10 lg:h-11 w-auto"
+              className="h-20 sm:h-30 lg:h-31 w-auto"
             />
-            <span
-              className="hidden sm:inline text-sm md:text-base lg:text-lg font-bold uppercase tracking-[0.25em] transition-colors duration-200"
-              style={{
-                color: "#D7E2EA",
-                letterSpacing: "0.3em",
-              }}
-            >
-              Bohdan
-            </span>
           </button>
 
           {/* Desktop navigation */}
