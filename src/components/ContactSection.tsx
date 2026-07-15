@@ -1,17 +1,88 @@
 "use client";
 
-import { Mail, Camera, Send, GitBranch } from "lucide-react";
 import { FadeIn } from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+/* ---------- SVG icons ---------- */
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
+}
+
+function TelegramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+    </svg>
+  );
+}
+
+function EmailIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 3v18h24V3H0zm6.623 7.929L2 16.141V6.1l4.623 4.829zm2.244 2.346 3.119 3.256 3.122-3.256L21 18H3l5.867-4.725zm4.51-2.346L22 6.1v10.041l-4.623-4.829zm-2.75 1.104L3.685 6h16.63l-6.984 6.033z" />
+    </svg>
+  );
+}
+
+function GithubIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+    </svg>
+  );
+}
+
+/* ---------- social data ---------- */
+
+type SocialEntry = {
+  icon: React.FC<{ className?: string }>;
+  label: string;
+  href: string;
+  brandBg: string;
+  brandShadow: string;
+};
+
+/* ---------- component ---------- */
+
 export function ContactSection() {
   const { t } = useLanguage();
-  const socials = [
-    { icon: Mail, label: t.contact.labels.email, value: "bogdangembatyuk@gmail.com", href: "mailto:bogdangembatyuk@gmail.com" },
-    { icon: Camera, label: t.contact.labels.instagram, value: "@bohdan_codes", href: "https://instagram.com/bohdan_codes" },
-    { icon: Send, label: t.contact.labels.telegram, value: "@badan_badanowycz", href: "https://t.me/badan_badanowycz" },
-    { icon: GitBranch, label: t.contact.labels.github, value: "@W1ntermann", href: "https://github.com/W1ntermann" },
+
+  const socials: SocialEntry[] = [
+    {
+      icon: EmailIcon,
+      label: t.contact.labels.email,
+      href: "mailto:bogdangembatyuk@gmail.com",
+      brandBg: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
+      brandShadow: "0 0 20px rgba(168,85,247,0.5)",
+    },
+    {
+      icon: InstagramIcon,
+      label: t.contact.labels.instagram,
+      href: "https://instagram.com/bohdan_codes",
+      brandBg: "radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
+      brandShadow: "0 0 20px rgba(225,48,108,0.6)",
+    },
+    {
+      icon: TelegramIcon,
+      label: t.contact.labels.telegram,
+      href: "https://t.me/badan_badanowycz",
+      brandBg: "linear-gradient(135deg, #1E96C8 0%, #37AEE2 100%)",
+      brandShadow: "0 0 20px rgba(30,150,200,0.5)",
+    },
+    {
+      icon: GithubIcon,
+      label: t.contact.labels.github,
+      href: "https://github.com/W1ntermann",
+      brandBg: "#333",
+      brandShadow: "0 0 20px rgba(51,51,51,0.6)",
+    },
   ];
+
   return (
     <section
       id="contact"
@@ -19,61 +90,99 @@ export function ContactSection() {
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-12 sm:gap-16">
+        {/* ---------- heading ---------- */}
         <FadeIn y={40}>
           <h2
-            className="hero-heading font-black uppercase leading-none tracking-tight text-center"
-            style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+            className="font-black uppercase leading-none tracking-tight text-center"
+            style={{
+              fontSize: "clamp(3rem, 12vw, 160px)",
+              background: "linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f87171 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
           >
             {t.contact.title}
           </h2>
         </FadeIn>
+
+        {/* ---------- subtitle ---------- */}
         <FadeIn delay={0.15} y={30}>
           <p
             className="font-light uppercase tracking-wide text-center max-w-[560px]"
-            style={{ color: "#D7E2EA", fontSize: "clamp(0.95rem, 1.6vw, 1.25rem)" }}
+            style={{
+              color: "#D7E2EA",
+              fontSize: "clamp(0.95rem, 1.6vw, 1.25rem)",
+            }}
           >
             {t.contact.intro}
           </p>
         </FadeIn>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 mt-4">
-          {socials.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <FadeIn key={s.label} delay={0.1 + i * 0.08} y={30}>
+        {/* ---------- glass container with icons ---------- */}
+        <FadeIn delay={0.25} y={40}>
+          <div
+            className="rounded-3xl border border-white/10 backdrop-blur-3xl overflow-hidden px-6 sm:px-10 py-8 sm:py-12 transition-all duration-500 hover:scale-[1.02]"
+            style={{
+              background: "linear-gradient(135deg, rgba(31,31,31,0.8) 0%, rgba(17,17,17,0.9) 100%)",
+              boxShadow:
+                "0 0 50px rgba(139,92,246,0.6), 0 0 80px rgba(124,58,237,0.4)",
+            }}
+          >
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-16">
+              {socials.map((s, i) => (
                 <a
+                  key={s.label}
                   href={s.href}
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex flex-col items-center gap-3 sm:gap-4 rounded-2xl border-2 px-5 sm:px-6 py-6 sm:py-7 transition-all duration-300 hover:bg-white/5 hover:-translate-y-1"
-                  style={{ borderColor: "rgba(215,226,234,0.2)" }}
+                  className="group flex flex-col items-center no-underline transition-all duration-300"
                 >
+                  {/* circle */}
                   <span
-                    className="flex items-center justify-center rounded-full w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
-                    style={{ backgroundColor: "rgba(215,226,234,0.08)" }}
+                    className="relative inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full transition-all duration-300 group-hover:translate-y-[-10px] group-hover:scale-110"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+                      backdropFilter: "blur(4px)",
+                      WebkitBackdropFilter: "blur(4px)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                    }}
                   >
-                    <Icon size={22} color="#D7E2EA" />
+                    {/* glow overlay */}
+                    <span
+                      className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      style={{
+                        background: s.brandBg,
+                        boxShadow: s.brandShadow,
+                      }}
+                    />
+                    {/* icon */}
+                    <span className="relative z-10 w-7 h-7 sm:w-8 sm:h-8 text-white group-hover:animate-[shake_0.5s_ease]">
+                      <s.icon />
+                    </span>
                   </span>
-                  <span className="flex flex-col items-center text-center min-w-0">
-                    <span
-                      className="uppercase tracking-widest text-xs sm:text-sm font-light"
-                      style={{ color: "#D7E2EA", opacity: 0.6 }}
-                    >
-                      {s.label}
-                    </span>
-                    <span
-                      className="font-medium truncate max-w-full"
-                      style={{ color: "#D7E2EA", fontSize: "clamp(0.85rem, 1.2vw, 1.05rem)" }}
-                    >
-                      {s.value}
-                    </span>
+                  {/* label */}
+                  <span className="mt-3 text-white font-medium opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-1">
+                    {s.label}
                   </span>
                 </a>
-              </FadeIn>
-            );
-          })}
-        </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
       </div>
+
+      {/* ---------- keyframes for shake ---------- */}
+      <style>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0) rotate(0); }
+          20% { transform: translateX(-5px) rotate(-5deg); }
+          40% { transform: translateX(5px) rotate(5deg); }
+          60% { transform: translateX(-5px) rotate(-5deg); }
+          80% { transform: translateX(5px) rotate(5deg); }
+        }
+      `}</style>
     </section>
   );
 }
