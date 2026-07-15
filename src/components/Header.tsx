@@ -87,7 +87,7 @@ export function Header() {
             <img
               src="/logo.png"
               alt=""
-              className="h-22 sm:h-24 lg:h-26 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
+              className="h-20 sm:h-28 lg:h-32 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
             />
           </button>
 
