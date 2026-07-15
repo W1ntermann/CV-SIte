@@ -9,7 +9,7 @@ export function ContactButton({ className = "" }: { className?: string }) {
   return (
     <button
       type="button"
-      className={`rounded-full font-medium uppercase tracking-widest px-6 py-2.5 text-xs lg:px-7 lg:py-3 lg:text-sm transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] ${className}`}
+      className={`rounded-full font-medium uppercase tracking-widest px-5 py-2 text-xs sm:px-6 sm:py-2.5 sm:text-xs lg:px-7 lg:py-3 lg:text-sm transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] ${className}`}
       style={{
         background: "rgba(215, 226, 234, 0.08)",
         border: "1px solid rgba(215, 226, 234, 0.25)",
@@ -35,9 +35,17 @@ export function ContactButton({ className = "" }: { className?: string }) {
 
 export function LiveProjectButton({ href }: { href?: string }) {
   const { t } = useLanguage();
-  const className =
-    "inline-flex items-center justify-center rounded-full border-2 font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]";
-  const style = { borderColor: "#D7E2EA", color: "#D7E2EA" } as React.CSSProperties;
+  const className = `inline-flex items-center justify-center rounded-full font-medium uppercase tracking-widest transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] ${
+    href
+      ? "px-5 py-2 text-xs sm:px-7 sm:py-3 sm:text-sm lg:px-8 lg:py-3.5 lg:text-base"
+      : "px-5 py-2 text-xs sm:px-7 sm:py-3 sm:text-sm lg:px-8 lg:py-3.5 lg:text-base opacity-40 cursor-not-allowed"
+  }`;
+  const style = {
+    borderColor: "rgba(215, 226, 234, 0.25)",
+    color: "#D7E2EA",
+    border: "1px solid rgba(215, 226, 234, 0.25)",
+    background: "rgba(215, 226, 234, 0.08)",
+  } as React.CSSProperties;
 
   if (href) {
     return (
@@ -47,8 +55,14 @@ export function LiveProjectButton({ href }: { href?: string }) {
         rel="noopener noreferrer"
         className={className}
         style={style}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(215,226,234,0.1)")}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = "rgba(215,226,234,0.15)";
+          e.currentTarget.style.borderColor = "rgba(215,226,234,0.4)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = "rgba(215,226,234,0.08)";
+          e.currentTarget.style.borderColor = "rgba(215,226,234,0.25)";
+        }}
       >
         {t.projects.live}
       </a>
@@ -58,10 +72,10 @@ export function LiveProjectButton({ href }: { href?: string }) {
   return (
     <button
       type="button"
+      disabled
       className={className}
       style={style}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(215,226,234,0.1)")}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+      aria-disabled="true"
     >
       {t.projects.live}
     </button>
@@ -73,7 +87,7 @@ export function ViewProjectButton({ slug }: { slug: string }) {
   return (
     <Link
       href={`/projects/${slug}`}
-      className="group inline-flex items-center justify-center gap-2 rounded-full font-medium uppercase tracking-widest px-6 py-3 sm:px-8 sm:py-3.5 text-sm sm:text-base transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
+      className="group inline-flex items-center justify-center gap-2 rounded-full font-medium uppercase tracking-widest px-5 py-2 text-xs sm:px-7 sm:py-3 sm:text-sm lg:px-8 lg:py-3.5 lg:text-base transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
       style={{
         background: "rgba(215, 226, 234, 0.08)",
         border: "1px solid rgba(215, 226, 234, 0.25)",
