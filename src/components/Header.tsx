@@ -62,86 +62,95 @@ export function Header() {
   return (
     <>
       <motion.header
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.15, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 md:py-5 transition-all duration-500 ${
-          scrolled
-            ? "bg-[rgba(12,12,12,0.85)] backdrop-blur-[20px] border-b border-[rgba(215,226,234,0.06)]"
-            : "bg-[rgba(12,12,12,0)] backdrop-blur-[0px] border-b border-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-6 md:pt-5"
       >
-        {/* Scroll progress bar */}
-        <motion.div
-          className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500"
-          style={{ width: `${scrollProgress * 100}%` }}
-          transition={{ duration: 0.1 }}
-        />
-
-        <nav className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Left: logo */}
-          <div className="flex items-center gap-8 md:gap-12 lg:gap-16">
-            <a
-              href="#"
-              className="text-xl md:text-2xl font-bold tracking-tight text-[#D7E2EA] select-none transition-all duration-300 hover:text-white hover:scale-105"
-              aria-label="Home"
-            >
-              BH
-            </a>
-
-            {/* Desktop navigation links */}
-            <ul className="hidden md:flex items-center gap-6 md:gap-8 lg:gap-10">
-              {navLinks.map((l) => {
-                const isActive = activeSection === l.href;
-                return (
-                  <li key={l.href}>
-                    <button
-                      onClick={() => handleNavClick(l.href)}
-                      className="relative font-medium uppercase tracking-wider text-sm lg:text-base transition-colors duration-300 cursor-pointer"
-                      style={{
-                        color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.85)";
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.5)";
-                      }}
-                    >
-                      {l.label}
-                      {isActive && (
-                        <motion.span
-                          layoutId="activeNav"
-                          className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                        />
-                      )}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+        {/* Floating glass pill */}
+        <div
+          className={`relative mx-auto flex max-w-5xl items-center justify-between rounded-full px-5 py-3 transition-all duration-500 md:px-7 md:py-3.5 ${
+            scrolled
+              ? "border border-[rgba(215,226,234,0.10)] bg-[rgba(18,18,20,0.7)] shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-[20px]"
+              : "border border-[rgba(215,226,234,0.07)] bg-[rgba(18,18,20,0.45)] shadow-[0_4px_24px_rgba(0,0,0,0.25)] backdrop-blur-[14px]"
+          }`}
+        >
+          {/* Scroll progress track */}
+          <div className="absolute bottom-[5px] left-6 right-6 h-[2px] overflow-hidden rounded-full bg-[rgba(215,226,234,0.06)]">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500"
+              style={{ width: `${scrollProgress * 100}%` }}
+              transition={{ duration: 0.1 }}
+            />
           </div>
 
-          {/* Right: CTA + LangToggle (desktop) */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-5">
-            <ContactButton className="!px-6 !py-2.5 !text-xs lg:!px-7 lg:!py-3 lg:!text-sm" />
-            <LangToggle />
-          </div>
+          <nav className="flex w-full items-center justify-between">
+            {/* Left: logo */}
+            <div className="flex items-center gap-6 md:gap-8">
+              <a
+                href="#"
+                className="group relative text-xl font-bold tracking-tight text-[#D7E2EA] transition-all duration-300 hover:scale-105 md:text-2xl"
+                aria-label="Home"
+              >
+                <span className="bg-gradient-to-r from-[#D7E2EA] to-[#9fb0bd] bg-clip-text transition-all duration-300 group-hover:from-white group-hover:to-[#cfe0ec]">
+                  BH
+                </span>
+              </a>
 
-          {/* Mobile: hamburger */}
-          <div className="flex md:hidden items-center gap-3">
-            <LangToggle />
-            <button
-              type="button"
-              onClick={() => setMobileOpen(true)}
-              className="text-[#D7E2EA] p-1"
-              aria-label="Open menu"
-            >
-              <Menu className="size-6" />
-            </button>
-          </div>
-        </nav>
+              {/* Desktop navigation links */}
+              <ul className="hidden items-center gap-6 md:gap-8 lg:gap-10 md:flex">
+                {navLinks.map((l) => {
+                  const isActive = activeSection === l.href;
+                  return (
+                    <li key={l.href}>
+                      <button
+                        onClick={() => handleNavClick(l.href)}
+                        className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base"
+                        style={{
+                          color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.85)";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.5)";
+                        }}
+                      >
+                        {l.label}
+                        {isActive && (
+                          <motion.span
+                            layoutId="activeNav"
+                            className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
+                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          />
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* Right: CTA + LangToggle (desktop) */}
+            <div className="hidden items-center gap-4 md:flex lg:gap-5">
+              <ContactButton className="!px-6 !py-2.5 !text-xs lg:!px-7 lg:!py-3 lg:!text-sm" />
+              <LangToggle />
+            </div>
+
+            {/* Mobile: hamburger */}
+            <div className="flex items-center gap-3 md:hidden">
+              <LangToggle />
+              <button
+                type="button"
+                onClick={() => setMobileOpen(true)}
+                className="p-1 text-[#D7E2EA]"
+                aria-label="Open menu"
+              >
+                <Menu className="size-6" />
+              </button>
+            </div>
+          </nav>
+        </div>
       </motion.header>
 
       {/* Mobile overlay menu */}
@@ -160,7 +169,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                className="text-[#D7E2EA] p-1"
+                className="p-1 text-[#D7E2EA]"
                 aria-label="Close menu"
               >
                 <X className="size-6" />
@@ -168,7 +177,7 @@ export function Header() {
             </div>
 
             {/* Nav links */}
-            <div className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
+            <div className="flex flex-1 flex-col items-center justify-center gap-6 px-6">
               {navLinks.map((l, idx) => {
                 const isActive = activeSection === l.href;
                 return (
@@ -180,7 +189,7 @@ export function Header() {
                   >
                     <button
                       onClick={() => handleNavClick(l.href)}
-                      className="text-2xl sm:text-3xl font-bold uppercase tracking-[0.08em] transition-colors duration-200 cursor-pointer"
+                      className="cursor-pointer text-2xl font-bold uppercase tracking-[0.08em] transition-colors duration-200 sm:text-3xl"
                       style={{
                         color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
                       }}
