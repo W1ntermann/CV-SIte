@@ -62,7 +62,7 @@ export function ProjectsSection() {
     <section
       id="projects"
       ref={containerRef}
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10"
+      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 scroll-mt-24"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <h2
