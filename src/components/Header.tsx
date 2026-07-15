@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, useMotionValueEvent, useScroll, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -89,12 +90,17 @@ export function Header() {
             <div className="flex items-center gap-6 md:gap-8">
               <a
                 href="#"
-                className="group relative text-xl font-bold tracking-tight text-[#D7E2EA] transition-all duration-300 hover:scale-105 md:text-2xl"
+                className="group relative transition-all duration-300 hover:scale-105"
                 aria-label="Home"
               >
-                <span className="bg-gradient-to-r from-[#D7E2EA] to-[#9fb0bd] bg-clip-text transition-all duration-300 group-hover:from-white group-hover:to-[#cfe0ec]">
-                  BH
-                </span>
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={40}
+                  height={40}
+                  className="h-auto w-auto transition-all duration-300"
+                  priority
+                />
               </a>
 
               {/* Desktop navigation links */}

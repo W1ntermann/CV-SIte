@@ -2,98 +2,104 @@
 
 import { FadeIn } from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
-
-/* ---------- SVG icons ---------- */
-
-function InstagramIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-    </svg>
-  );
-}
-
-function TelegramIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-    </svg>
-  );
-}
-
-function EmailIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 3v18h24V3H0zm6.623 7.929L2 16.141V6.1l4.623 4.829zm2.244 2.346 3.119 3.256 3.122-3.256L21 18H3l5.867-4.725zm4.51-2.346L22 6.1v10.041l-4.623-4.829zm-2.75 1.104L3.685 6h16.63l-6.984 6.033z" />
-    </svg>
-  );
-}
-
-function GithubIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-    </svg>
-  );
-}
+import { Mail, Camera, Send, GitBranch, Copy, Check } from "lucide-react";
+import { useState } from "react";
 
 /* ---------- social data ---------- */
 
 type SocialEntry = {
-  icon: React.FC<{ className?: string }>;
+  icon: React.FC<{ className?: string; size?: number }>;
   label: string;
   href: string;
-  brandBg: string;
-  brandShadow: string;
+  brandGlow: string;
 };
 
 /* ---------- component ---------- */
 
 export function ContactSection() {
   const { t } = useLanguage();
+  const [copied, setCopied] = useState(false);
+
+  const emailAddress = "bogdangembatyuk@gmail.com";
 
   const socials: SocialEntry[] = [
     {
-      icon: EmailIcon,
+      icon: Mail,
       label: t.contact.labels.email,
-      href: "mailto:bogdangembatyuk@gmail.com",
-      brandBg: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-      brandShadow: "0 0 16px rgba(168,85,247,0.3)",
+      href: `mailto:${emailAddress}`,
+      brandGlow: "0 0 20px rgba(168,85,247,0.4)",
     },
     {
-      icon: InstagramIcon,
+      icon: Camera,
       label: t.contact.labels.instagram,
       href: "https://instagram.com/bohdan_codes",
-      brandBg: "radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
-      brandShadow: "0 0 16px rgba(225,48,108,0.3)",
+      brandGlow: "0 0 20px rgba(225,48,108,0.4)",
     },
     {
-      icon: TelegramIcon,
+      icon: Send,
       label: t.contact.labels.telegram,
       href: "https://t.me/badan_badanowycz",
-      brandBg: "linear-gradient(135deg, #1E96C8 0%, #37AEE2 100%)",
-      brandShadow: "0 0 16px rgba(30,150,200,0.3)",
+      brandGlow: "0 0 20px rgba(30,150,200,0.4)",
     },
     {
-      icon: GithubIcon,
+      icon: GitBranch,
       label: t.contact.labels.github,
       href: "https://github.com/W1ntermann",
-      brandBg: "#333",
-      brandShadow: "0 0 16px rgba(51,51,51,0.3)",
+      brandGlow: "0 0 20px rgba(100,100,100,0.4)",
     },
   ];
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // fallback
+      const input = document.createElement("input");
+      input.value = emailAddress;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
     <section
       id="contact"
-      className="relative z-10 px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 overflow-x-hidden scroll-mt-24"
+      className="relative z-10 px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-20 sm:pb-24 md:pb-32 overflow-x-hidden scroll-mt-24"
       style={{ backgroundColor: "#0C0C0C" }}
     >
-      <div className="max-w-4xl mx-auto flex flex-col items-center w-full">
+      {/* ---------- decorative background glow ---------- */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full opacity-[0.05] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, #a855f7 0%, #ec4899 35%, transparent 70%)",
+        }}
+      />
+
+      <div className="max-w-5xl mx-auto flex flex-col items-center w-full">
+        {/* ---------- top gradient divider ---------- */}
+        <FadeIn y={20} className="w-full max-w-4xl">
+          <div
+            className="mx-auto mb-12 sm:mb-16"
+            style={{
+              height: "2px",
+              background:
+                "linear-gradient(90deg, transparent 0%, rgba(168,85,247,0.5) 25%, rgba(236,72,153,0.5) 50%, rgba(248,113,113,0.5) 75%, transparent 100%)",
+              boxShadow: "0 0 20px rgba(168,85,247,0.25), 0 0 40px rgba(236,72,153,0.15)",
+            }}
+          />
+        </FadeIn>
+
         {/* ---------- heading ---------- */}
         <FadeIn y={40} className="w-full">
           <h2
-            className="font-black uppercase leading-none tracking-tight text-center text-balance w-full mb-10 sm:mb-12 md:mb-16"
+            className="font-black uppercase leading-none tracking-tight text-center text-balance w-full mb-6 sm:mb-8"
             style={{
               fontSize: "clamp(2.5rem, 8vw, 5.5rem)",
               background: "linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f87171 100%)",
@@ -107,11 +113,11 @@ export function ContactSection() {
         </FadeIn>
 
         {/* ---------- subtitle ---------- */}
-        <FadeIn delay={0.15} y={30} className="w-full">
+        <FadeIn delay={0.15} y={25} className="w-full">
           <p
-            className="font-light uppercase tracking-wide text-center max-w-[480px] mx-auto mb-10 sm:mb-14"
+            className="font-light uppercase tracking-wide text-center max-w-[520px] mx-auto mb-12 sm:mb-16"
             style={{
-              color: "rgba(215, 226, 234, 0.6)",
+              color: "rgba(215, 226, 234, 0.5)",
               fontSize: "clamp(0.9rem, 1.4vw, 1.1rem)",
             }}
           >
@@ -119,54 +125,162 @@ export function ContactSection() {
           </p>
         </FadeIn>
 
-        {/* ---------- glass container with icons ---------- */}
+        {/* ---------- main email CTA card ---------- */}
         <FadeIn delay={0.25} y={40} className="w-full">
           <div
-            className="rounded-2xl border border-[rgba(215,226,234,0.08)] backdrop-blur-xl overflow-hidden px-6 sm:px-10 py-8 sm:py-10 w-full max-w-3xl mx-auto"
+            className="relative rounded-2xl border border-[rgba(215,226,234,0.08)] backdrop-blur-xl overflow-hidden px-6 sm:px-10 md:px-14 py-8 sm:py-10 md:py-12 w-full max-w-2xl mx-auto mb-8 sm:mb-10 group/cta cursor-pointer transition-all duration-500"
             style={{
-              background: "linear-gradient(135deg, rgba(31,31,31,0.6) 0%, rgba(17,17,17,0.7) 100%)",
-              boxShadow: "0 0 30px rgba(139,92,246,0.08), 0 8px 32px rgba(0,0,0,0.3)",
+              background: "linear-gradient(135deg, rgba(31,31,31,0.7) 0%, rgba(17,17,17,0.8) 100%)",
+              boxShadow:
+                "0 0 40px rgba(139,92,246,0.06), 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(215,226,234,0.03)",
+            }}
+            onClick={handleCopy}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(168,85,247,0.3)";
+              e.currentTarget.style.boxShadow =
+                "0 0 60px rgba(139,92,246,0.12), 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(168,85,247,0.06)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(215,226,234,0.08)";
+              e.currentTarget.style.boxShadow =
+                "0 0 40px rgba(139,92,246,0.06), 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(215,226,234,0.03)";
             }}
           >
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 md:gap-10 place-items-center">
-              {socials.map((s) => (
+            {/* Subtle top glow line */}
+            <div
+              className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(168,85,247,0.6) 25%, rgba(236,72,153,0.6) 50%, rgba(248,113,113,0.6) 75%, transparent 100%)",
+              }}
+            />
+
+            <div className="flex flex-col items-center gap-4 sm:gap-5">
+              {/* Email icon ring */}
+              <span
+                className="relative inline-flex items-center justify-center w-16 h-16 sm:w-18 sm:h-18 rounded-full transition-all duration-500 group-hover/cta:scale-110"
+                style={{
+                  background: "rgba(215, 226, 234, 0.04)",
+                  border: "1px solid rgba(215, 226, 234, 0.08)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+                }}
+              >
+                <Mail
+                  size={28}
+                  className="relative z-10 text-[#D7E2EA] transition-all duration-500 group-hover/cta:text-[#a855f7]"
+                />
+                {/* Glow on hover */}
+                <span
+                  className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-500 group-hover/cta:opacity-100"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(236,72,153,0.15) 100%)",
+                    boxShadow: "0 0 24px rgba(168,85,247,0.2)",
+                  }}
+                />
+              </span>
+
+              {/* Email address */}
+              <div className="flex items-center gap-3 sm:gap-4">
+                <span
+                  className="font-semibold tracking-wide text-center transition-all duration-500 group-hover/cta:text-[#a855f7]"
+                  style={{
+                    color: "#D7E2EA",
+                    fontSize: "clamp(1.05rem, 2.5vw, 1.5rem)",
+                  }}
+                >
+                  {emailAddress}
+                </span>
+                {/* Copy button */}
+                <span
+                  className="relative inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full transition-all duration-300 shrink-0"
+                  style={{
+                    background: copied
+                      ? "rgba(168,85,247,0.15)"
+                      : "rgba(215,226,234,0.06)",
+                    border: copied
+                      ? "1px solid rgba(168,85,247,0.3)"
+                      : "1px solid rgba(215,226,234,0.1)",
+                  }}
+                >
+                  {copied ? (
+                    <Check size={16} className="text-[#a855f7]" />
+                  ) : (
+                    <Copy size={15} className="text-[rgba(215,226,234,0.5)] group-hover/cta:text-[#D7E2EA] transition-colors duration-300" />
+                  )}
+                </span>
+              </div>
+
+              {/* CTA hint */}
+              <p
+                className="text-xs sm:text-sm font-light uppercase tracking-[0.15em] transition-all duration-500"
+                style={{ color: "rgba(215,226,234,0.35)" }}
+              >
+                {copied ? "✓ Copied" : "Click to copy"}
+              </p>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* ---------- social links row ---------- */}
+        <FadeIn delay={0.35} y={30} className="w-full">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto">
+            {socials.map((s) => {
+              const Icon = s.icon;
+              const isEmail = s.href.startsWith("mailto:");
+              return (
                 <a
                   key={s.label}
                   href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex flex-col items-center no-underline transition-all duration-300"
+                  target={isEmail ? undefined : "_blank"}
+                  rel={isEmail ? undefined : "noopener noreferrer"}
+                  className="group/social relative inline-flex items-center gap-2.5 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full no-underline transition-all duration-400"
+                  style={{
+                    background: "rgba(215,226,234,0.04)",
+                    border: "1px solid rgba(215,226,234,0.07)",
+                    boxShadow: "0 2px 12px rgba(0,0,0,0.15)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(215,226,234,0.08)";
+                    e.currentTarget.style.borderColor = "rgba(168,85,247,0.3)";
+                    e.currentTarget.style.boxShadow = s.brandGlow;
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(215,226,234,0.04)";
+                    e.currentTarget.style.borderColor = "rgba(215,226,234,0.07)";
+                    e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.15)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
                 >
-                  {/* circle */}
-                  <span
-                    className="relative inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      background: "rgba(215, 226, 234, 0.05)",
-                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
-                      border: "1px solid rgba(215, 226, 234, 0.08)",
-                    }}
-                  >
-                    {/* glow overlay */}
-                    <span
-                      className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      style={{
-                        background: s.brandBg,
-                        boxShadow: s.brandShadow,
-                      }}
+                  {/* Icon */}
+                  <span className="relative shrink-0">
+                    <Icon
+                      size={16}
+                      className="transition-all duration-400 text-[rgba(215,226,234,0.55)] group-hover/social:text-[#D7E2EA] sm:size-[18px]"
                     />
-                    {/* icon */}
-                    <span className="relative z-10 w-6 h-6 sm:w-7 sm:h-7 text-white transition-transform duration-300 group-hover:scale-110">
-                      <s.icon />
-                    </span>
                   </span>
-                  {/* label */}
-                  <span className="mt-3 text-xs sm:text-sm font-medium text-[rgba(215,226,234,0.5)] transition-all duration-300 group-hover:text-[#D7E2EA]">
+                  {/* Label */}
+                  <span
+                    className="text-xs sm:text-sm font-medium transition-all duration-400 group-hover/social:text-[#D7E2EA] whitespace-nowrap"
+                    style={{ color: "rgba(215,226,234,0.55)" }}
+                  >
                     {s.label}
                   </span>
                 </a>
-              ))}
-            </div>
+              );
+            })}
           </div>
+        </FadeIn>
+
+        {/* ---------- bottom subtle note ---------- */}
+        <FadeIn delay={0.5} y={20} className="w-full">
+          <p
+            className="text-center mt-10 sm:mt-12 text-[10px] sm:text-xs font-light uppercase tracking-[0.15em]"
+            style={{ color: "rgba(215,226,234,0.2)" }}
+          >
+            &mdash; {t.contact.title} &mdash;
+          </p>
         </FadeIn>
       </div>
     </section>
