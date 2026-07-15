@@ -86,14 +86,14 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-10 -mt-6 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-28 sm:pb-36 md:pb-44 overflow-x-hidden"
+      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 overflow-x-hidden"
       style={{ backgroundColor: "#0C0C0C" }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col items-center gap-12 sm:gap-16 w-full">
+      <div className="max-w-6xl mx-auto flex flex-col items-center w-full">
         {/* ---------- heading ---------- */}
         <FadeIn y={40}>
           <h2
-            className="font-black uppercase leading-none tracking-tight text-center text-balance w-full"
+            className="font-black uppercase leading-none tracking-tight text-center text-balance w-full mb-16 sm:mb-20 md:mb-24"
             style={{
               fontSize: "clamp(3rem, 12vw, 160px)",
               background: "linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f87171 100%)",
@@ -109,7 +109,7 @@ export function ContactSection() {
         {/* ---------- subtitle ---------- */}
         <FadeIn delay={0.15} y={30}>
           <p
-            className="font-light uppercase tracking-wide text-center max-w-[560px]"
+            className="font-light uppercase tracking-wide text-center max-w-[560px] mx-auto mb-12 sm:mb-16"
             style={{
               color: "#D7E2EA",
               fontSize: "clamp(0.95rem, 1.6vw, 1.25rem)",
@@ -122,14 +122,14 @@ export function ContactSection() {
         {/* ---------- glass container with icons ---------- */}
         <FadeIn delay={0.25} y={40}>
           <div
-            className="rounded-3xl border border-white/10 backdrop-blur-3xl overflow-hidden px-8 sm:px-14 py-10 sm:py-14 w-full max-w-xl mx-auto transition-all duration-500 hover:scale-[1.02]"
+            className="rounded-3xl border border-white/10 backdrop-blur-3xl overflow-hidden px-8 sm:px-14 py-10 sm:py-14 w-full max-w-6xl mx-auto transition-all duration-500 hover:scale-[1.02]"
             style={{
               background: "linear-gradient(135deg, rgba(31,31,31,0.8) 0%, rgba(17,17,17,0.9) 100%)",
               boxShadow:
                 "0 0 50px rgba(139,92,246,0.6), 0 0 80px rgba(124,58,237,0.4)",
             }}
           >
-            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-14">
+            <div className="flex flex-wrap justify-between gap-8 sm:gap-12 md:gap-14">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -172,15 +172,6 @@ export function ContactSection() {
           </div>
         </FadeIn>
       </div>
-
-      {/* ---------- bottom fade-out gradient ---------- */}
-      <div
-        className="absolute bottom-0 left-0 w-full h-32 sm:h-40 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent 0%, #0C0C0C 100%)",
-        }}
-      />
 
       {/* ---------- keyframes for shake ---------- */}
       <style>{`
