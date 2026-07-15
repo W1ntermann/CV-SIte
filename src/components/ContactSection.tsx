@@ -41,19 +41,6 @@ export function ContactSection() {
     >
       {/* Decorative images — same as AboutSection for visual consistency */}
       <FadeIn
-        delay={0.1}
-        x={-80}
-        y={0}
-        duration={0.9}
-        className="hidden sm:block absolute top-[4%] left-[1%] sm:left-[2%] lg:left-[4%] w-[120px] sm:w-[160px] md:w-[210px] lg:w-[260px] xl:w-[300px]"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
-          alt=""
-          className="w-full h-auto"
-        />
-      </FadeIn>
-      <FadeIn
         delay={0.25}
         x={-80}
         y={0}
@@ -62,19 +49,6 @@ export function ContactSection() {
       >
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
-          alt=""
-          className="w-full h-auto"
-        />
-      </FadeIn>
-      <FadeIn
-        delay={0.15}
-        x={80}
-        y={0}
-        duration={0.9}
-        className="hidden sm:block absolute top-[4%] right-[1%] sm:right-[2%] lg:right-[4%] w-[120px] sm:w-[160px] md:w-[210px] lg:w-[260px] xl:w-[300px]"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
           alt=""
           className="w-full h-auto"
         />
