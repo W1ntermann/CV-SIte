@@ -1,198 +1,251 @@
 "use client";
-import { Mail, Camera, Send, GitFork, ArrowUpRight, MapPin, Clock, Sparkles } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+
+import { Mail, Camera, Send, GitBranch } from "lucide-react";
 import { FadeIn } from "./FadeIn";
+import { AnimatedText } from "./AnimatedText";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const EMAIL = "bogdangembatyuk@gmail.com";
-
 export function ContactSection() {
-  const { t } = useLanguage();
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-  const titleX = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
+  const { t, lang } = useLanguage();
 
-  const socials = [
-    { icon: Mail, label: t.contact.labels.email, value: EMAIL, href: `mailto:${EMAIL}` },
-    { icon: Camera, label: t.contact.labels.instagram, value: "@bohdan_codes", href: "https://instagram.com/bohdan_codes" },
-    { icon: Send, label: t.contact.labels.telegram, value: "@badan_badanowycz", href: "https://t.me/badan_badanowycz" },
-    { icon: GitFork, label: t.contact.labels.github, value: "@W1ntermann", href: "https://github.com/W1ntermann" },
+  const contactLinks = [
+    {
+      icon: Mail,
+      name: t.contact.labels.email,
+      href: "mailto:bogdangembatyuk@gmail.com",
+    },
+    {
+      icon: Camera,
+      name: t.contact.labels.instagram,
+      href: "https://instagram.com/bohdan_codes",
+      external: true,
+    },
+    {
+      icon: Send,
+      name: t.contact.labels.telegram,
+      href: "https://t.me/badan_badanowycz",
+      external: true,
+    },
+    {
+      icon: GitBranch,
+      name: t.contact.labels.github,
+      href: "https://github.com/W1ntermann",
+      external: true,
+    },
   ];
 
   return (
     <section
-      ref={ref}
       id="contact"
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-12 pt-20 sm:pt-28 md:pt-36 pb-16 sm:pb-20 md:pb-24 overflow-hidden"
-      style={{ backgroundColor: "#0C0C0C" }}
+      className="min-h-screen relative px-5 sm:px-8 md:px-10 py-20 flex flex-col items-center justify-center gap-12 sm:gap-16 md:gap-20 overflow-hidden scroll-mt-24"
     >
-      {/* Ambient glow */}
-      <motion.div
-        aria-hidden
-        style={{ y: bgY }}
-        className="pointer-events-none absolute inset-0 opacity-60"
+      {/* Decorative images — same as AboutSection for visual consistency */}
+      <FadeIn
+        delay={0.1}
+        x={-80}
+        y={0}
+        duration={0.9}
+        className="hidden sm:block absolute top-[4%] left-[1%] sm:left-[2%] lg:left-[4%] w-[120px] sm:w-[160px] md:w-[210px] lg:w-[260px] xl:w-[300px]"
       >
-        <div
-          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, rgba(215,226,234,0.10) 0%, rgba(215,226,234,0) 60%)" }}
+        <img
+          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
+          alt=""
+          className="w-full h-auto"
         />
-      </motion.div>
+      </FadeIn>
+      <FadeIn
+        delay={0.25}
+        x={-80}
+        y={0}
+        duration={0.9}
+        className="hidden sm:block absolute bottom-[8%] left-[3%] sm:left-[6%] lg:left-[10%] w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px]"
+      >
+        <img
+          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
+          alt=""
+          className="w-full h-auto"
+        />
+      </FadeIn>
+      <FadeIn
+        delay={0.15}
+        x={80}
+        y={0}
+        duration={0.9}
+        className="hidden sm:block absolute top-[4%] right-[1%] sm:right-[2%] lg:right-[4%] w-[120px] sm:w-[160px] md:w-[210px] lg:w-[260px] xl:w-[300px]"
+      >
+        <img
+          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
+          alt=""
+          className="w-full h-auto"
+        />
+      </FadeIn>
+      <FadeIn
+        delay={0.3}
+        x={80}
+        y={0}
+        duration={0.9}
+        className="hidden sm:block absolute bottom-[8%] right-[3%] sm:right-[6%] lg:right-[10%] w-[130px] sm:w-[170px] md:w-[220px] lg:w-[260px] xl:w-[300px]"
+      >
+        <img
+          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
+          alt=""
+          className="w-full h-auto"
+        />
+      </FadeIn>
 
-      <div className="relative max-w-6xl mx-auto">
-        {/* Eyebrow + availability */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-10 sm:mb-14">
-          <FadeIn y={20}>
-            <span
-              className="uppercase tracking-[0.3em] text-xs sm:text-sm font-light"
-              style={{ color: "#D7E2EA", opacity: 0.55 }}
-            >
-              — {t.contact.eyebrow}
+      <div className="flex flex-col items-center gap-8 sm:gap-12 md:gap-14 relative z-10 w-full max-w-[720px]">
+        {/* Eyebrow */}
+        <FadeIn delay={0} y={20}>
+          <span
+            className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-medium"
+            style={{ color: "rgba(215,226,234,0.45)" }}
+          >
+            {t.contact.eyebrow}
+          </span>
+        </FadeIn>
+
+        {/* Availability badge */}
+        <FadeIn delay={0.05} y={20}>
+          <span
+            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-wider"
+            style={{
+              background: "rgba(34,197,94,0.08)",
+              border: "1px solid rgba(34,197,94,0.2)",
+              color: "#4ade80",
+            }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
             </span>
-          </FadeIn>
-          <FadeIn y={20} delay={0.1}>
-            <span
-              className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs sm:text-sm uppercase tracking-widest"
-              style={{ borderColor: "rgba(215,226,234,0.25)", color: "#D7E2EA" }}
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style={{ backgroundColor: "#4ade80" }} />
-                <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: "#4ade80" }} />
-              </span>
-              {t.contact.availability}
-            </span>
-          </FadeIn>
-        </div>
+            {t.contact.availability}
+          </span>
+        </FadeIn>
 
         {/* Title */}
-        <motion.div style={{ x: titleX }} className="mb-10 sm:mb-14">
-          <FadeIn y={40}>
-            <h2
-              className="hero-heading font-black uppercase leading-[0.9] tracking-tight"
-              style={{ fontSize: "clamp(3rem, 11vw, 180px)" }}
-            >
-              {t.contact.title}
-            </h2>
-          </FadeIn>
-        </motion.div>
+        <FadeIn delay={0.1} y={40}>
+          <h2
+            className="hero-heading font-black uppercase leading-none tracking-tight text-center"
+            style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+          >
+            {t.contact.title}
+          </h2>
+        </FadeIn>
 
-        {/* Intro + primary CTA */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 items-end mb-16 sm:mb-20">
-          <FadeIn y={30} delay={0.1}>
-            <p
-              className="font-light max-w-[560px]"
-              style={{ color: "#D7E2EA", opacity: 0.75, fontSize: "clamp(1rem, 1.5vw, 1.25rem)", lineHeight: 1.5 }}
-            >
-              {t.contact.intro}
-            </p>
-          </FadeIn>
-          <FadeIn y={30} delay={0.2}>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="group relative flex items-center justify-between gap-4 rounded-full border-2 pl-6 pr-2 py-2 overflow-hidden w-full lg:w-auto"
-              style={{ borderColor: "#D7E2EA" }}
-            >
-              <span
-                className="absolute inset-0 rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"
-                style={{ backgroundColor: "#D7E2EA" }}
-              />
-              <span
-                className="relative uppercase tracking-widest text-sm sm:text-base font-medium transition-colors duration-500"
-                style={{ color: "#D7E2EA" }}
-              >
-                <span className="group-hover:text-[#0C0C0C] transition-colors duration-500">{t.contact.cta}</span>
-              </span>
-              <span
-                className="relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full transition-transform duration-500 group-hover:rotate-45"
-                style={{ backgroundColor: "#D7E2EA" }}
-              >
-                <ArrowUpRight size={20} color="#0C0C0C" />
-              </span>
-            </a>
-          </FadeIn>
-        </div>
+        {/* Intro */}
+        <AnimatedText
+          key={lang}
+          text={t.contact.intro}
+          className="font-medium text-center leading-relaxed max-w-[520px]"
+          style={{ color: "#D7E2EA", fontSize: "clamp(1rem, 2vw, 1.35rem)" }}
+        />
 
-        {/* Meta strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 border-t border-b py-6 sm:py-8 mb-14 sm:mb-20 gap-6 sm:gap-4" style={{ borderColor: "rgba(215,226,234,0.15)" }}>
-          {[
-            { icon: MapPin, label: t.contact.location, value: t.contact.locationValue },
-            { icon: Clock, label: t.contact.responseTime, value: t.contact.responseValue },
-            { icon: Sparkles, label: t.contact.labels.email, value: EMAIL },
-          ].map((m, i) => {
-            const Icon = m.icon;
-            return (
-              <FadeIn key={m.label} delay={i * 0.08} y={20}>
-                <div className="flex items-start gap-3">
-                  <Icon size={18} color="#D7E2EA" className="mt-1 opacity-60" />
-                  <div className="flex flex-col min-w-0">
-                    <span
-                      className="uppercase tracking-widest text-[10px] sm:text-xs font-light"
-                      style={{ color: "#D7E2EA", opacity: 0.55 }}
-                    >
-                      {m.label}
-                    </span>
-                    <span className="font-medium truncate" style={{ color: "#D7E2EA", fontSize: "clamp(0.9rem, 1.2vw, 1.05rem)" }}>
-                      {m.value}
-                    </span>
-                  </div>
-                </div>
-              </FadeIn>
-            );
-          })}
-        </div>
-
-        {/* Socials */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {socials.map((s, i) => {
-            const Icon = s.icon;
-            const external = s.href.startsWith("http");
-            return (
-              <FadeIn key={s.label} delay={0.05 + i * 0.06} y={30}>
+        {/* Contact links */}
+        <FadeIn delay={0.4} y={30}>
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10">
+            {contactLinks.map((link) => {
+              const Icon = link.icon;
+              return (
                 <a
-                  href={s.href}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noopener noreferrer" : undefined}
-                  className="group relative flex items-center gap-4 sm:gap-5 rounded-2xl border px-5 sm:px-6 py-4 sm:py-5 overflow-hidden transition-colors"
-                  style={{ borderColor: "rgba(215,226,234,0.18)" }}
+                  key={link.name}
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  className="group flex flex-col items-center gap-2.5 transition-all duration-200 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7E2EA] rounded-lg"
+                  style={{ color: "rgba(215,226,234,0.55)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#D7E2EA";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(215,226,234,0.55)";
+                  }}
                 >
                   <span
-                    className="absolute inset-0 origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-out"
-                    style={{ backgroundColor: "rgba(215,226,234,0.06)" }}
-                  />
-                  <span
-                    className="relative flex items-center justify-center rounded-xl w-11 h-11 flex-shrink-0 transition-transform duration-500 group-hover:-rotate-6"
-                    style={{ backgroundColor: "rgba(215,226,234,0.08)" }}
+                    className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full transition-all duration-200"
+                    style={{
+                      background: "rgba(215,226,234,0.06)",
+                      border: "1px solid rgba(215,226,234,0.12)",
+                    }}
                   >
-                    <Icon size={20} color="#D7E2EA" />
+                    <Icon size={18} className="sm:size-5" />
                   </span>
-                  <span className="relative flex flex-col min-w-0 flex-1">
-                    <span
-                      className="uppercase tracking-widest text-[10px] sm:text-xs font-light"
-                      style={{ color: "#D7E2EA", opacity: 0.55 }}
-                    >
-                      {s.label}
-                    </span>
-                    <span
-                      className="font-medium truncate"
-                      style={{ color: "#D7E2EA", fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)" }}
-                    >
-                      {s.value}
-                    </span>
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-wider font-medium">
+                    {link.name}
                   </span>
-                  <ArrowUpRight
-                    size={18}
-                    color="#D7E2EA"
-                    className="relative opacity-40 group-hover:opacity-100 transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"
-                  />
                 </a>
-              </FadeIn>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </FadeIn>
+
+        {/* Info cards */}
+        <FadeIn delay={0.5} y={30}>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+            <div
+              className="flex flex-col items-center gap-1 rounded-2xl px-6 py-4 sm:px-8 sm:py-5"
+              style={{
+                background: "rgba(215,226,234,0.04)",
+                border: "1px solid rgba(215,226,234,0.08)",
+              }}
+            >
+              <span
+                className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-medium"
+                style={{ color: "rgba(215,226,234,0.35)" }}
+              >
+                {t.contact.location}
+              </span>
+              <span
+                className="text-sm sm:text-base font-medium"
+                style={{ color: "#D7E2EA" }}
+              >
+                {t.contact.locationValue}
+              </span>
+            </div>
+            <div
+              className="flex flex-col items-center gap-1 rounded-2xl px-6 py-4 sm:px-8 sm:py-5"
+              style={{
+                background: "rgba(215,226,234,0.04)",
+                border: "1px solid rgba(215,226,234,0.08)",
+              }}
+            >
+              <span
+                className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-medium"
+                style={{ color: "rgba(215,226,234,0.35)" }}
+              >
+                {t.contact.responseTime}
+              </span>
+              <span
+                className="text-sm sm:text-base font-medium"
+                style={{ color: "#D7E2EA" }}
+              >
+                {t.contact.responseValue}
+              </span>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* CTA Button */}
+        <FadeIn delay={0.6} y={30}>
+          <a
+            href="mailto:bogdangembatyuk@gmail.com"
+            className="inline-flex rounded-full font-medium uppercase tracking-widest px-7 py-3 text-xs lg:px-8 lg:py-3.5 lg:text-sm transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
+            style={{
+              background: "rgba(215, 226, 234, 0.08)",
+              border: "1px solid rgba(215, 226, 234, 0.25)",
+              color: "#D7E2EA",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(215, 226, 234, 0.15)";
+              e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(215, 226, 234, 0.08)";
+              e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.25)";
+            }}
+          >
+            {t.contact.cta}
+          </a>
+        </FadeIn>
       </div>
     </section>
   );
