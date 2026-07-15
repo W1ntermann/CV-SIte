@@ -7,7 +7,7 @@ export function ContactButton({ className = "" }: { className?: string }) {
   return (
     <button
       type="button"
-      className={`rounded-full text-white font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base transition-transform duration-200 hover:scale-[1.02] ${className}`}
+      className={`rounded-full text-white font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${className}`}
       style={{
         background:
           "linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)",
@@ -26,13 +26,33 @@ export function ContactButton({ className = "" }: { className?: string }) {
   );
 }
 
-export function LiveProjectButton() {
+export function LiveProjectButton({ href }: { href?: string }) {
   const { t } = useLanguage();
+  const className =
+    "inline-flex items-center justify-center rounded-full border-2 font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]";
+  const style = { borderColor: "#D7E2EA", color: "#D7E2EA" } as React.CSSProperties;
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        style={style}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(215,226,234,0.1)")}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+      >
+        {t.projects.live}
+      </a>
+    );
+  }
+
   return (
     <button
       type="button"
-      className="rounded-full border-2 font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base transition-colors"
-      style={{ borderColor: "#D7E2EA", color: "#D7E2EA" }}
+      className={className}
+      style={style}
       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(215,226,234,0.1)")}
       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
     >

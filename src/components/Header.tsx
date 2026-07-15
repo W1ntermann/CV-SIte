@@ -103,9 +103,9 @@ export function Header() {
                   const isActive = activeSection === l.href;
                   return (
                     <li key={l.href}>
-                      <button
-                        onClick={() => handleNavClick(l.href)}
-                        className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base"
+                       <button
+                         onClick={() => handleNavClick(l.href)}
+                         className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
                         style={{
                           color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
                         }}
@@ -143,7 +143,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
-                className="p-1 text-[#D7E2EA]"
+                className="p-1 text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
                 aria-label="Open menu"
               >
                 <Menu className="size-6" />
@@ -169,7 +169,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                className="p-1 text-[#D7E2EA]"
+                className="p-1 text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
                 aria-label="Close menu"
               >
                 <X className="size-6" />
@@ -189,7 +189,7 @@ export function Header() {
                   >
                     <button
                       onClick={() => handleNavClick(l.href)}
-                      className="cursor-pointer text-2xl font-bold uppercase tracking-[0.08em] transition-colors duration-200 sm:text-3xl"
+                      className="cursor-pointer text-2xl font-bold uppercase tracking-[0.08em] transition-colors duration-200 sm:text-3xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
                       style={{
                         color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
                       }}

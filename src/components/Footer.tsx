@@ -81,7 +81,7 @@ export function Footer() {
                 <li key={linkIdx}>
                   <a
                     href={link.href}
-                    className="relative inline-block font-medium uppercase tracking-wider transition-all duration-200 w-fit group text-[rgba(215,226,234,0.65)] hover:text-[#D7E2EA]"
+                    className="relative inline-block font-medium uppercase tracking-wider transition-all duration-200 w-fit group text-[rgba(215,226,234,0.65)] hover:text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
                   >
                     {link.label}
                     <span className="absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-200 group-hover:w-full bg-[#D7E2EA]" />
@@ -105,7 +105,7 @@ export function Footer() {
                       href={social.href}
                       target={social.href.startsWith("http") ? "_blank" : undefined}
                       rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group inline-flex items-center gap-3 uppercase tracking-wider transition-all duration-200 text-[rgba(215,226,234,0.65)] hover:text-[#D7E2EA]"
+                      className="group inline-flex items-center gap-3 uppercase tracking-wider transition-all duration-200 text-[rgba(215,226,234,0.65)] hover:text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
                     >
                       <Icon
                         size={14}

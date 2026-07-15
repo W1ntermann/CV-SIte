@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
 const IMAGES = [
   "https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif",
   "https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif",
@@ -29,56 +27,53 @@ const IMAGES = [
 const row1 = IMAGES.slice(0, 11);
 const row2 = IMAGES.slice(11);
 
+const CARD_W = "clamp(280px, 30vw, 520px)";
+const CARD_H = "clamp(180px, 19vw, 340px)";
+
+function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }) {
+  // Duplicate the set so the CSS animation can loop seamlessly.
+  const loop = [...images, ...images];
+  return (
+    <div className="overflow-hidden w-full">
+      <div
+        className="flex gap-3 w-max"
+        style={{
+          animation: `marquee-scroll ${reverse ? "55s" : "45s"} linear infinite`,
+          animationDirection: reverse ? "reverse" : "normal",
+        }}
+      >
+        {loop.map((src, i) => (
+          <img
+            key={`${reverse ? "r2" : "r1"}-${i}`}
+            src={src}
+            alt=""
+            loading="lazy"
+            className="rounded-2xl object-cover flex-shrink-0"
+            style={{ width: CARD_W, height: CARD_H }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function MarqueeSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const el = sectionRef.current;
-      if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      const raw = (window.scrollY - top + window.innerHeight) * 0.3;
-      setOffset(raw - 200);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const tripled1 = [...row1, ...row1, ...row1];
-  const tripled2 = [...row2, ...row2, ...row2];
-
   return (
     <section
-      ref={sectionRef}
       className="pt-24 sm:pt-32 md:pt-40 pb-10 flex flex-col gap-3 overflow-hidden"
       style={{ backgroundColor: "#0C0C0C" }}
     >
-      <div className="flex gap-3" style={{ transform: `translateX(${offset}px)`, willChange: "transform" }}>
-        {tripled1.map((src, i) => (
-          <img
-            key={`r1-${i}`}
-            src={src}
-            alt=""
-            loading="lazy"
-            className="rounded-2xl object-cover flex-shrink-0"
-            style={{ width: "clamp(280px, 30vw, 520px)", height: "clamp(180px, 19vw, 340px)" }}
-          />
-        ))}
-      </div>
-      <div className="flex gap-3" style={{ transform: `translateX(${-offset}px)`, willChange: "transform" }}>
-        {tripled2.map((src, i) => (
-          <img
-            key={`r2-${i}`}
-            src={src}
-            alt=""
-            loading="lazy"
-            className="rounded-2xl object-cover flex-shrink-0"
-            style={{ width: "clamp(280px, 30vw, 520px)", height: "clamp(180px, 19vw, 340px)" }}
-          />
-        ))}
-      </div>
+      <MarqueeRow images={row1} />
+      <MarqueeRow images={row2} reverse />
+      <style>{`
+        @keyframes marquee-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .flex.gap-3[style*="marquee-scroll"] { animation: none !important; }
+        }
+      `}</style>
     </section>
   );
 }

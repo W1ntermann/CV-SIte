@@ -30,7 +30,7 @@ function Char({
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
   range: [number, number];
 }) {
-  const opacity = useTransform(progress, range, [0.2, 1]);
+  const opacity = useTransform(progress, range, [0.55, 1]);
   return (
     <span style={{ position: "relative", display: "inline" }}>
       <span style={{ opacity: 0 }}>{char}</span>

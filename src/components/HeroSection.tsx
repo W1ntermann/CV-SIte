@@ -9,7 +9,7 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="min-h-dvh flex flex-col relative pt-28 sm:pt-32 lg:pt-28" style={{ overflowX: "clip" }}>
+    <section className="min-h-dvh flex flex-col relative pt-28 sm:pt-32 lg:pt-36" style={{ overflowX: "clip" }}>
 
       <div className="flex-1 flex flex-col justify-between px-6 md:px-10 relative">
         <div
@@ -21,7 +21,7 @@ export function HeroSection() {
           strength={3}
           activeTransition="transform 0.3s ease-out"
           inactiveTransition="transform 0.6s ease-in-out"
-          className="w-[55vw] max-w-[300px] sm:max-w-[380px] md:w-[46vw] lg:max-w-[480px] pointer-events-auto"
+          className="w-[60vw] max-w-[300px] sm:w-[42vw] sm:max-w-[380px] md:w-[40vw] lg:w-[34vw] lg:max-w-[480px] pointer-events-auto"
         >
           <FadeIn delay={0.6} y={30}>
             <img

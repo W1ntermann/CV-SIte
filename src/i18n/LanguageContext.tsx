@@ -114,6 +114,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLangState(l);
     try {
       window.localStorage.setItem("lang", l);
+      document.documentElement.lang = l === "ua" ? "uk" : "en";
     } catch {
       /* ignore */
     }

@@ -24,28 +24,36 @@ export function Magnet({
   const ref = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState("translate3d(0,0,0)");
   const [active, setActive] = useState(false);
+  const frame = useRef<number | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
-      const withinX = Math.abs(dx) < rect.width / 2 + padding;
-      const withinY = Math.abs(dy) < rect.height / 2 + padding;
-      if (withinX && withinY) {
-        setActive(true);
-        setTransform(`translate3d(${dx / strength}px, ${dy / strength}px, 0)`);
-      } else {
-        setActive(false);
-        setTransform("translate3d(0,0,0)");
-      }
+      if (frame.current !== null) return;
+      frame.current = requestAnimationFrame(() => {
+        frame.current = null;
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const withinX = Math.abs(dx) < rect.width / 2 + padding;
+        const withinY = Math.abs(dy) < rect.height / 2 + padding;
+        if (withinX && withinY) {
+          setActive(true);
+          setTransform(`translate3d(${dx / strength}px, ${dy / strength}px, 0)`);
+        } else {
+          setActive(false);
+          setTransform("translate3d(0,0,0)");
+        }
+      });
     };
     window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (frame.current !== null) cancelAnimationFrame(frame.current);
+    };
   }, [padding, strength]);
 
   return (

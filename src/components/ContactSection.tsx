@@ -86,7 +86,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 overflow-x-hidden"
+      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 overflow-x-hidden scroll-mt-24"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <div className="max-w-6xl mx-auto flex flex-col items-center w-full">
@@ -129,7 +129,7 @@ export function ContactSection() {
                 "0 0 50px rgba(139,92,246,0.6), 0 0 80px rgba(124,58,237,0.4)",
             }}
           >
-            <div className="flex flex-wrap justify-between gap-8 sm:gap-12 md:gap-14">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12 md:gap-14 place-items-center">
               {socials.map((s) => (
                 <a
                   key={s.label}
