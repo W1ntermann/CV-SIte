@@ -1,210 +1,110 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { motion, useMotionValueEvent, useScroll, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { useLanguage } from "@/i18n/LanguageContext";
-import { LangToggle } from "./LangToggle";
-import { ContactButton } from "./Buttons";
+import React, { useState, useEffect } from "react"
+import { Menu, X } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
+import { useLanguage } from "@/i18n/LanguageContext"
+import { LangToggle } from "@/components/LangToggle"
 
-export function Header() {
-  const { t } = useLanguage();
-  const { scrollY } = useScroll();
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+const NAV_ITEMS = ["about", "services", "projects", "contact"] as const
 
-  const navLinks = [
-    { label: t.nav.about, href: "#about" },
-    { label: t.nav.services, href: "#services" },
-    { label: t.nav.projects, href: "#projects" },
-    { label: t.nav.contact, href: "#contact" },
-  ];
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 40);
-
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? Math.min(latest / docHeight, 1) : 0;
-    setScrollProgress(progress);
-  });
+export const Header: React.FC = () => {
+  const { t } = useLanguage()
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "-80px 0px 0px 0px" }
-    );
-
-    const sections = navLinks
-      .map((l) => document.getElementById(l.href.slice(1)))
-      .filter(Boolean);
-
-    sections.forEach((s) => s && observer.observe(s));
-    return () => observer.disconnect();
-  }, [navLinks]);
-
-  const handleNavClick = (href: string) => {
-    setMobileOpen(false);
-    const el = document.getElementById(href.slice(1));
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
     }
-  };
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Nav items from i18n
+  const navItems = NAV_ITEMS.map((key) => ({
+    label: t.nav[key],
+    href: key === "about" ? "#about" : key === "services" ? "#services" : key === "projects" ? "#projects" : "#contact",
+  }))
 
   return (
-    <>
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.15, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-6 md:pt-5"
+    <nav className="fixed top-0 left-0 right-0 z-50 p-2 sm:p-4">
+      <div
+        className={`max-w-7xl mx-auto transition-all duration-500 ease-out rounded-full px-4 sm:px-8 py-3 sm:py-4 ${
+          scrolled
+            ? "bg-[#0C0C0C]/95 backdrop-blur-xl shadow-2xl shadow-black/40 border border-[#D7E2EA]/[0.08]"
+            : "bg-[#0C0C0C]/80 backdrop-blur-lg shadow-xl shadow-black/20 border border-[#D7E2EA]/[0.06]"
+        }`}
       >
-        <div
-          className={`relative mx-auto grid max-w-5xl grid-cols-[1fr_auto_1fr] items-center rounded-full px-5 py-3 transition-all duration-500 md:px-7 md:py-3.5 ${
-            scrolled
-              ? "border border-[rgba(215,226,234,0.10)] bg-[rgba(18,18,20,0.7)] shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-[20px]"
-              : "border border-[rgba(215,226,234,0.07)] bg-[rgba(18,18,20,0.45)] shadow-[0_4px_24px_rgba(0,0,0,0.25)] backdrop-blur-[14px]"
-          }`}
-        >
-          <div className="absolute bottom-[5px] left-5 right-5 md:left-7 md:right-7 h-[1.5px] overflow-hidden rounded-full bg-[rgba(215,226,234,0.05)]">
-            <motion.div
-              className="h-full rounded-full bg-[rgba(215,226,234,0.3)]"
-              style={{ width: `${scrollProgress * 100}%` }}
-              transition={{ duration: 0.1 }}
-            />
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center shrink-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg shadow-[#2a6553]/20 ring-1 ring-[#D7E2EA]/10 hover:scale-105 transition-transform duration-300 cursor-pointer overflow-hidden">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={100}
+                height={100}
+                className="object-cover w-full h-full"
+                priority
+              />
+            </div>
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-[#D7E2EA]/70 hover:text-[#D7E2EA] transition-all duration-300 font-medium text-sm px-4 py-2 rounded-full hover:bg-[#D7E2EA]/[0.06] hover:shadow-[0_0_20px_rgba(215,226,234,0.03)]"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Логотип — ліва секція grid */}
-          <a
-            href="#"
-            className="group transition-all duration-300 hover:scale-105 z-10"
-            aria-label="Home"
-          >
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={72}
-              height={72}
-              className="w-[72px] h-[72px] transition-all duration-300"
-              priority
-            />
-          </a>
-
-          {/* Десктопна навігація по центру */}
-          <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-10">
-            {navLinks.map((l) => {
-              const isActive = activeSection === l.href;
-              return (
-                <li key={l.href}>
-                  <button
-                    onClick={() => handleNavClick(l.href)}
-                    className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
-                    style={{
-                      color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.85)";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.5)";
-                    }}
-                  >
-                    {l.label}
-                    {isActive && (
-                      <motion.span
-                        layoutId="activeNav"
-                        className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* Права частина: десктоп (CTA + LangToggle) / мобільна (LangToggle + бургер) */}
-          <div className="flex items-center justify-end gap-3 md:gap-4 lg:gap-5">
-            <span className="hidden md:contents">
-              <ContactButton />
-            </span>
+          {/* Desktop Right Side */}
+          <div className="hidden lg:flex items-center gap-3">
             <LangToggle />
-            <button
-              type="button"
-              onClick={() => setMobileOpen(true)}
-              className="p-1 text-[#D7E2EA] md:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
-              aria-label="Open menu"
-            >
-              <Menu className="size-6" />
-            </button>
           </div>
-        </div>
-      </motion.header>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[60] flex flex-col"
-            style={{ backgroundColor: "#0C0C0C" }}
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2.5 rounded-full hover:bg-[#D7E2EA]/[0.08] transition-all duration-200"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            <div className="flex items-center justify-end px-6 pt-3 pb-2">
-              <button
-                type="button"
-                onClick={() => setMobileOpen(false)}
-                className="p-1 text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
-                aria-label="Close menu"
-              >
-                <X className="size-6" />
-              </button>
-            </div>
+            {mobileMenuOpen ? (
+              <X size={22} className="text-[#D7E2EA]" />
+            ) : (
+              <Menu size={22} className="text-[#D7E2EA]" />
+            )}
+          </button>
+        </div>
 
-            <div className="flex flex-1 flex-col items-center justify-center gap-6 px-6">
-              {navLinks.map((l, idx) => {
-                const isActive = activeSection === l.href;
-                return (
-                  <motion.div
-                    key={l.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.08, duration: 0.3 }}
-                  >
-                    <button
-                      onClick={() => handleNavClick(l.href)}
-                      className="cursor-pointer text-2xl font-bold uppercase tracking-[0.08em] transition-colors duration-200 sm:text-3xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
-                      style={{
-                        color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
-                      }}
-                    >
-                      {l.label}
-                    </button>
-                  </motion.div>
-                );
-              })}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.08 + 0.1, duration: 0.3 }}
-                className="mt-6"
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden mt-4 sm:mt-6 pb-4 space-y-1 border-t border-[#D7E2EA]/[0.08] pt-4 max-h-[70vh] overflow-y-auto">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block w-full text-left px-5 py-3 text-[#D7E2EA]/80 hover:text-[#D7E2EA] hover:bg-[#D7E2EA]/[0.06] rounded-full transition-all duration-200 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
               >
-                <ContactButton className="text-sm px-10 py-4" />
-              </motion.div>
+                {item.label}
+              </Link>
+            ))}
+
+            {/* Mobile Language Switcher */}
+            <div className="flex items-center justify-center mt-4 pt-4 border-t border-[#D7E2EA]/[0.08]">
+              <LangToggle />
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
-    </>
-  );
+      </div>
+    </nav>
+  )
 }
