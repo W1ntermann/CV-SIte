@@ -86,14 +86,14 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-10 -mt-6 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-20 sm:pb-24 md:pb-32 overflow-x-hidden"
+      className="relative z-10 -mt-6 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-28 sm:pb-36 md:pb-44 overflow-x-hidden"
       style={{ backgroundColor: "#0C0C0C" }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col items-center gap-12 sm:gap-16">
+      <div className="max-w-6xl mx-auto flex flex-col items-center gap-12 sm:gap-16 w-full">
         {/* ---------- heading ---------- */}
         <FadeIn y={40}>
           <h2
-            className="font-black uppercase leading-none tracking-tight text-center"
+            className="font-black uppercase leading-none tracking-tight text-center text-balance w-full"
             style={{
               fontSize: "clamp(3rem, 12vw, 160px)",
               background: "linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f87171 100%)",
@@ -172,6 +172,15 @@ export function ContactSection() {
           </div>
         </FadeIn>
       </div>
+
+      {/* ---------- bottom fade-out gradient ---------- */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-32 sm:h-40 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 0%, #0C0C0C 100%)",
+        }}
+      />
 
       {/* ---------- keyframes for shake ---------- */}
       <style>{`

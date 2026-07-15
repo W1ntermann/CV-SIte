@@ -25,7 +25,7 @@ export function Footer() {
   return (
     <footer
       className="relative z-10 px-6 md:px-10 py-14 sm:py-18 md:py-24 lg:py-28 overflow-hidden"
-      style={{ backgroundColor: "#0C0C0C" }}
+      style={{ backgroundColor: "#090909" }}
     >
       {/* Subtle gradient glow behind the logo */}
       <div
@@ -36,12 +36,14 @@ export function Footer() {
         }}
       />
 
-      {/* Top gradient divider */}
+      {/* Top gradient divider — thicker, brighter glow for separation */}
       <div
-        className="max-w-7xl mx-auto mb-10 sm:mb-14 h-px"
+        className="max-w-7xl mx-auto mb-10 sm:mb-14"
         style={{
+          height: "2px",
           background:
-            "linear-gradient(90deg, transparent 0%, rgba(168,85,247,0.3) 25%, rgba(236,72,153,0.3) 50%, rgba(248,113,113,0.3) 75%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, rgba(168,85,247,0.5) 25%, rgba(236,72,153,0.5) 50%, rgba(248,113,113,0.5) 75%, transparent 100%)",
+          boxShadow: "0 0 20px rgba(168,85,247,0.25), 0 0 40px rgba(236,72,153,0.15)",
         }}
       />
 
