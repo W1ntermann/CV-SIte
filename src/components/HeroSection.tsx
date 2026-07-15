@@ -13,15 +13,15 @@ export function HeroSection() {
 
       <div className="flex-1 flex flex-col justify-between lg:justify-center px-6 md:px-10 relative">
         <div
-          className="absolute left-0 right-0 z-10 flex justify-center pointer-events-none"
-          style={{ top: "clamp(20%, 28%, 34%)", bottom: "auto" }}
+          className="relative md:absolute left-0 right-0 z-10 flex justify-center pointer-events-none mb-8 md:mb-0"
+          style={{ top: "auto", bottom: "auto" }}
         >
         <Magnet
           padding={150}
           strength={3}
           activeTransition="transform 0.3s ease-out"
           inactiveTransition="transform 0.6s ease-in-out"
-          className="w-[46vw] max-w-[400px] sm:max-w-[380px] lg:max-w-[480px] pointer-events-auto"
+          className="w-[55vw] max-w-[300px] sm:max-w-[380px] md:w-[46vw] lg:max-w-[480px] pointer-events-auto"
         >
           <FadeIn delay={0.6} y={30}>
             <img
@@ -33,7 +33,7 @@ export function HeroSection() {
         </Magnet>
         </div>
 
-        <div className="overflow-hidden relative z-20">
+        <div className="overflow-hidden relative z-20 pt-8 md:pt-0">
           <FadeIn delay={0.15} y={40}>
             <h1 className="hero-heading font-black uppercase tracking-tight leading-none w-full text-[clamp(2.5rem,10vw,6rem)] sm:text-[clamp(3rem,11vw,7rem)] md:text-[clamp(3.5rem,12vw,8rem)] text-balance mt-0">
               {t.hero.greeting}

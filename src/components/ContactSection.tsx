@@ -15,7 +15,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-20 sm:pb-24 md:pb-32"
+      className="relative z-10 -mt-6 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-20 sm:pb-24 md:pb-32 overflow-x-hidden"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-12 sm:gap-16">
@@ -36,7 +36,7 @@ export function ContactSection() {
           </p>
         </FadeIn>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-4">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 mt-4">
           {socials.map((s, i) => {
             const Icon = s.icon;
             return (
