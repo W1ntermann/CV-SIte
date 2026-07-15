@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Mail, Camera, Send, GitBranch } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -50,14 +51,20 @@ export function Footer() {
       <div className="max-w-7xl mx-auto flex w-full flex-col justify-between gap-12 lg:flex-row lg:items-start lg:text-left">
         {/* Brand column */}
         <div className="flex w-full flex-col justify-between gap-6 lg:items-start lg:max-w-[420px] xl:max-w-[480px]">
-          <div className="flex items-center gap-2 lg:justify-start">
-            <span className="text-lg sm:text-xl lg:text-2xl font-bold uppercase tracking-tight text-[#D7E2EA]">
-              Bohdan
-            </span>
-            <span className="text-lg sm:text-xl lg:text-2xl font-bold text-[rgba(215,226,234,0.4)]">
-              .
-            </span>
-          </div>
+          <a
+            href="#"
+            className="group transition-all duration-300 hover:scale-105 lg:justify-start"
+            aria-label="Home"
+          >
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={56}
+              height={56}
+              className="w-[56px] h-[56px] transition-all duration-300"
+              priority
+            />
+          </a>
           <p
             className="text-sm lg:text-base leading-relaxed max-w-[300px]"
             style={{ color: "rgba(215,226,234,0.5)" }}

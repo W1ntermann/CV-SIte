@@ -91,9 +91,9 @@ export function Header() {
             <Image
               src="/logo.png"
               alt="Logo"
-              width={48}
-              height={48}
-              className="h-auto w-auto transition-all duration-300"
+              width={72}
+              height={72}
+              className="w-[72px] h-[72px] transition-all duration-300"
               priority
             />
           </a>
