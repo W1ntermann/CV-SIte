@@ -25,7 +25,7 @@ export function HeroSection() {
         >
           <FadeIn delay={0.6} y={30}>
             <img
-              src="/hero-portrait.jpg"
+              src="/hero.png"
               alt="Bohdan Hembatiuk portrait"
               className="w-full h-auto"
             />
