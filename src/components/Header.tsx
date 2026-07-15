@@ -51,7 +51,7 @@ export function Header() {
           <img
             src="/logo.png"
             alt="Bohdan Hembatiuk"
-            className="h-7 sm:h-8 lg:h-9 w-auto"
+            className="h-8 sm:h-10 lg:h-11 w-auto"
           />
         </button>
 
@@ -78,7 +78,7 @@ export function Header() {
         </ul>
 
         {/* Right side: LangToggle + mobile menu placeholder */}
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-4 sm:gap-5">
           <LangToggle />
 
           {/* Mobile hamburger — simple button, can be expanded later */}
