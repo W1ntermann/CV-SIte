@@ -5,54 +5,57 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 export function LangToggle({ className = "" }: { className?: string }) {
   const { lang, setLang } = useLanguage();
-  const isEn = lang === "en";
 
-  const toggle = () => setLang(isEn ? "ua" : "en");
+  const setEn = () => setLang("en");
+  const setUa = () => setLang("ua");
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      className={`relative flex items-center justify-between w-[68px] sm:w-[72px] h-[32px] sm:h-[34px] rounded-full cursor-pointer select-none transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] hover:border-[rgba(215,226,234,0.35)] ${className}`}
+    <div
+      className={`relative flex items-center w-[84px] sm:w-[92px] h-[34px] sm:h-[38px] rounded-full p-[3px] select-none ${className}`}
       style={{
-        backgroundColor: "rgba(215, 226, 234, 0.03)",
-        border: "1px solid rgba(215, 226, 234, 0.25)",
+        backgroundColor: "rgba(215, 226, 234, 0.04)",
+        border: "1px solid rgba(215, 226, 234, 0.18)",
       }}
-      role="switch"
-      aria-checked={isEn}
+      role="group"
       aria-label="Switch language"
     >
       {/* Active pill background */}
       <motion.span
         layoutId="langPill"
-        className="absolute top-[2px] bottom-[2px] rounded-full"
+        className="absolute top-[3px] bottom-[3px] rounded-full"
         style={{
-          left: isEn ? "2px" : "calc(50% + 0px)",
-          width: "calc(50% - 2px)",
+          left: lang === "en" ? "3px" : "calc(50% - 1px)",
+          width: "calc(50% + 1px)",
           backgroundColor: "#D7E2EA",
         }}
         transition={{ type: "spring", stiffness: 500, damping: 35 }}
       />
 
       {/* EN */}
-      <span
-        className="relative z-10 w-1/2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-center transition-colors duration-200"
+      <button
+        type="button"
+        onClick={setEn}
+        className="relative z-10 flex-1 h-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider rounded-full transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
         style={{
-          color: isEn ? "#0C0C0C" : "rgba(215, 226, 234, 0.5)",
+          color: lang === "en" ? "#0C0C0C" : "rgba(215, 226, 234, 0.55)",
         }}
+        aria-pressed={lang === "en"}
       >
         en
-      </span>
+      </button>
 
       {/* UA */}
-      <span
-        className="relative z-10 w-1/2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-center transition-colors duration-200"
+      <button
+        type="button"
+        onClick={setUa}
+        className="relative z-10 flex-1 h-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider rounded-full transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
         style={{
-          color: !isEn ? "#0C0C0C" : "rgba(215, 226, 234, 0.5)",
+          color: lang === "ua" ? "#0C0C0C" : "rgba(215, 226, 234, 0.55)",
         }}
+        aria-pressed={lang === "ua"}
       >
         ua
-      </span>
-    </button>
+      </button>
+    </div>
   );
 }
