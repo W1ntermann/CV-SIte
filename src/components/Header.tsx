@@ -82,76 +82,72 @@ export function Header() {
             />
           </div>
 
-          {/* Головний контейнер навігації - використовуємо grid для точного контролю */}
-          <div className="flex w-full items-center justify-between">
-            {/* Ліва частина: логотип + десктопна навігація */}
-            <div className="flex items-center gap-6 md:gap-8">
-              <a
-                href="#"
-                className="group relative transition-all duration-300 hover:scale-105 flex-shrink-0"
-                aria-label="Home"
-              >
-                <Image
-                  src="/logo.png"
-                  alt="Logo"
-                  width={40}
-                  height={40}
-                  className="h-auto w-auto transition-all duration-300"
-                  priority
-                />
-              </a>
+          {/* Логотип - абсолютне позиціонування зліва */}
+          <a
+            href="#"
+            className="absolute left-5 md:left-7 top-1/2 -translate-y-1/2 group transition-all duration-300 hover:scale-105 z-10"
+            aria-label="Home"
+          >
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={40}
+              height={40}
+              className="h-auto w-auto transition-all duration-300"
+              priority
+            />
+          </a>
 
-              <ul className="hidden items-center gap-6 md:gap-8 lg:gap-10 md:flex">
-                {navLinks.map((l) => {
-                  const isActive = activeSection === l.href;
-                  return (
-                    <li key={l.href}>
-                      <button
-                        onClick={() => handleNavClick(l.href)}
-                        className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
-                        style={{
-                          color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.85)";
-                        }}
-                        onMouseLeave={(e) => {
-                          if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.5)";
-                        }}
-                      >
-                        {l.label}
-                        {isActive && (
-                          <motion.span
-                            layoutId="activeNav"
-                            className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
-                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                          />
-                        )}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+          {/* Десктопна навігація по центру */}
+          <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-10 w-full">
+            {navLinks.map((l) => {
+              const isActive = activeSection === l.href;
+              return (
+                <li key={l.href}>
+                  <button
+                    onClick={() => handleNavClick(l.href)}
+                    className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
+                    style={{
+                      color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.85)";
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.5)";
+                    }}
+                  >
+                    {l.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="activeNav"
+                        className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
 
-            {/* Права частина: CTA + LangToggle (десктоп) */}
-            <div className="hidden items-center gap-4 md:flex lg:gap-5 flex-shrink-0">
-              <ContactButton />
-              <LangToggle />
-            </div>
+          {/* Права частина: CTA + LangToggle (десктоп) */}
+          <div className="hidden md:flex items-center gap-4 lg:gap-5 flex-shrink-0 ml-auto">
+            <ContactButton />
+            <LangToggle />
+          </div>
 
-            {/* Мобільна частина: LangToggle + бургер */}
-            <div className="flex items-center gap-3 md:hidden flex-shrink-0">
-              <LangToggle />
-              <button
-                type="button"
-                onClick={() => setMobileOpen(true)}
-                className="p-1 text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
-                aria-label="Open menu"
-              >
-                <Menu className="size-6" />
-              </button>
-            </div>
+          {/* Мобільна частина: LangToggle + бургер */}
+          <div className="flex md:hidden items-center gap-3 ml-auto">
+            <LangToggle />
+            <button
+              type="button"
+              onClick={() => setMobileOpen(true)}
+              className="p-1 text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
+              aria-label="Open menu"
+            >
+              <Menu className="size-6" />
+            </button>
           </div>
         </div>
       </motion.header>
