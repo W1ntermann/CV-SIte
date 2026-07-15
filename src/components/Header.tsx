@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { LangToggle } from "./LangToggle";
 import { X, Mail, Camera, Send, GitBranch, ArrowRight } from "lucide-react";
@@ -17,6 +18,8 @@ const SOCIALS = [
 
 export function Header() {
   const { t, lang } = useLanguage();
+  const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -60,9 +63,13 @@ export function Header() {
   }, []);
 
   const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/");
+    }
     setMobileMenuOpen(false);
-  }, []);
+  }, [pathname, router]);
 
   return (
     <>

@@ -15,7 +15,23 @@ type Dict = {
     title: string;
     items: { name: string; desc: string }[];
   };
-  projects: { title: string; live: string; categories: { client: string; personal: string } };
+  projects: {
+    title: string;
+    live: string;
+    viewMore: string;
+    backToProjects: string;
+    categories: { client: string; personal: string };
+    detail: {
+      overview: string;
+      techStack: string;
+      year: string;
+      role: string;
+      category: string;
+      gallery: string;
+      visitLive: string;
+      notFound: string;
+    };
+  };
   contact: {
     eyebrow: string;
     availability: string;
@@ -55,7 +71,19 @@ const en: Dict = {
   projects: {
     title: "Project",
     live: "Live Project",
+    viewMore: "View Details",
+    backToProjects: "Back to Projects",
     categories: { client: "Client", personal: "Personal" },
+    detail: {
+      overview: "Overview",
+      techStack: "Tech Stack",
+      year: "Year",
+      role: "Role",
+      category: "Category",
+      gallery: "Gallery",
+      visitLive: "Visit Live Site",
+      notFound: "Project not found",
+    },
   },
   contact: {
     eyebrow: "Get in Touch",
@@ -96,7 +124,19 @@ const ua: Dict = {
   projects: {
     title: "Проєкти",
     live: "Переглянути",
+    viewMore: "Детальніше",
+    backToProjects: "Назад до проєктів",
     categories: { client: "Клієнт", personal: "Особистий" },
+    detail: {
+      overview: "Опис",
+      techStack: "Технології",
+      year: "Рік",
+      role: "Роль",
+      category: "Категорія",
+      gallery: "Галерея",
+      visitLive: "Відкрити сайт",
+      notFound: "Проєкт не знайдено",
+    },
   },
   contact: {
     eyebrow: "Зв'язок",

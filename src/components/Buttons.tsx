@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { ArrowRight } from "lucide-react";
 
 export function ContactButton({ className = "" }: { className?: string }) {
   const { t } = useLanguage();
@@ -63,5 +65,34 @@ export function LiveProjectButton({ href }: { href?: string }) {
     >
       {t.projects.live}
     </button>
+  );
+}
+
+export function ViewProjectButton({ slug }: { slug: string }) {
+  const { t } = useLanguage();
+  return (
+    <Link
+      href={`/projects/${slug}`}
+      className="group inline-flex items-center justify-center gap-2 rounded-full font-medium uppercase tracking-widest px-6 py-3 sm:px-8 sm:py-3.5 text-sm sm:text-base transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
+      style={{
+        background: "rgba(215, 226, 234, 0.08)",
+        border: "1px solid rgba(215, 226, 234, 0.25)",
+        color: "#D7E2EA",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = "rgba(215, 226, 234, 0.15)";
+        e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.4)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = "rgba(215, 226, 234, 0.08)";
+        e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.25)";
+      }}
+    >
+      {t.projects.viewMore}
+      <ArrowRight
+        size={16}
+        className="transition-transform duration-300 group-hover:translate-x-0.5"
+      />
+    </Link>
   );
 }

@@ -2,53 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { LiveProjectButton } from "./Buttons";
+import { LiveProjectButton, ViewProjectButton } from "./Buttons";
 import { useLanguage } from "@/i18n/LanguageContext";
-
-interface Project {
-  n: string;
-  name: string;
-  category: string;
-  href?: string;
-  col1: [string, string];
-  col2: string;
-}
-
-const projects: Project[] = [
-  {
-    n: "01",
-    name: "Nextlevel Studio",
-    category: "Client",
-    href: "https://example.com/nextlevel-studio",
-    col1: [
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85",
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85",
-    ],
-    col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85",
-  },
-  {
-    n: "02",
-    name: "Aura Brand Identity",
-    category: "Personal",
-    href: "https://example.com/aura-brand-identity",
-    col1: [
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85",
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85",
-    ],
-    col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85",
-  },
-  {
-    n: "03",
-    name: "Solaris Digital",
-    category: "Client",
-    href: "https://example.com/solaris-digital",
-    col1: [
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85",
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85",
-    ],
-    col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85",
-  },
-];
+import { projects, type Project } from "@/lib/projects";
 
 export function ProjectsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -73,7 +29,7 @@ export function ProjectsSection() {
       </h2>
       <div>
         {projects.map((p, i) => {
-          const targetScale = 1 - (projects.length - 1 - i) * 0.03;
+          const targetScale = 1 - (projects.length - 1 - i) * 0.05;
           const range = [i / projects.length, 1];
           return (
             <ProjectCard
@@ -104,49 +60,67 @@ function ProjectCard({
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
   range: [number, number];
 }) {
+  const { t } = useLanguage();
   const scale = useTransform(progress, range, [1, targetScale]);
   return (
-    <div className="h-[78vh] sm:h-[82vh] lg:h-[90vh] sticky flex items-start justify-center" style={{ top: `clamp(80px, ${80 + index * 22}px, ${80 + index * 16}px)` }}>
+    <div
+      className="h-[78vh] sm:h-[82vh] lg:h-[90vh] sticky flex items-start justify-center"
+      style={{ top: `${80 + index * 50}px` }}
+    >
       <motion.div
-        style={{ scale, backgroundColor: "#0C0C0C" }}
-        className="w-full rounded-[28px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px] border-2 p-3 sm:p-5 md:p-7 lg:p-8 flex flex-col gap-3 sm:gap-5 md:gap-8"
+        style={{ scale, backgroundColor: "#0C0C0C", transformOrigin: "top center" }}
+        className="w-full max-h-[calc(78vh-16px)] sm:max-h-[calc(82vh-16px)] lg:max-h-[calc(90vh-16px)] overflow-hidden rounded-[28px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px] border-2 p-3 sm:p-5 md:p-7 lg:p-8 flex flex-col gap-3 sm:gap-5 md:gap-6"
       >
-        <div className="flex items-start sm:items-center justify-between gap-4 flex-col sm:flex-row">
+        {/* Header: number, category, name + buttons */}
+        <div className="flex items-start sm:items-center justify-between gap-4 flex-col sm:flex-row flex-shrink-0">
           <div className="flex items-center gap-3 sm:gap-5 md:gap-8">
-            <span className="font-black" style={{ color: "#D7E2EA", fontSize: "clamp(2.5rem, 8vw, 120px)", lineHeight: 1 }}>
+            <span
+              className="font-black"
+              style={{ color: "#D7E2EA", fontSize: "clamp(2.5rem, 8vw, 120px)", lineHeight: 1 }}
+            >
               {project.n}
             </span>
             <div className="flex flex-col gap-0.5 sm:gap-2">
-              <span className="uppercase tracking-widest font-light text-[10px] sm:text-xs md:text-sm" style={{ color: "#D7E2EA", opacity: 0.6 }}>
-                {project.category}
+              <span
+                className="uppercase tracking-widest font-light text-[10px] sm:text-xs md:text-sm"
+                style={{ color: "#D7E2EA", opacity: 0.6 }}
+              >
+                {project.category === "client"
+                  ? t.projects.categories.client
+                  : t.projects.categories.personal}
               </span>
-              <h3 className="font-medium uppercase" style={{ color: "#D7E2EA", fontSize: "clamp(0.9rem, 2vw, 2rem)", lineHeight: 1.1 }}>
+              <h3
+                className="font-medium uppercase"
+                style={{ color: "#D7E2EA", fontSize: "clamp(0.9rem, 2vw, 2rem)", lineHeight: 1.1 }}
+              >
                 {project.name}
               </h3>
             </div>
           </div>
-          <LiveProjectButton href={project.href} />
+          <div className="flex items-center gap-3 flex-wrap">
+            <ViewProjectButton slug={project.slug} />
+            <LiveProjectButton href={project.href} />
+          </div>
         </div>
+        {/* Images grid — flex-1 + min-h-0 so it fills remaining space without overflow */}
         <div className="flex items-stretch gap-2 sm:gap-3 md:gap-5 lg:gap-6 flex-1 min-h-0">
-          <div className="flex flex-col gap-2 sm:gap-3 md:gap-5 lg:gap-6" style={{ width: "40%" }}>
+          <div className="flex flex-col gap-2 sm:gap-3 md:gap-5 lg:gap-6 min-h-0" style={{ width: "40%" }}>
             <img
               src={project.col1[0]}
               alt=""
               loading="lazy"
               decoding="async"
-              className="w-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
-              style={{ height: "clamp(110px, 14vw, 230px)" }}
+              className="w-full flex-1 min-h-0 object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
             />
             <img
               src={project.col1[1]}
               alt=""
               loading="lazy"
               decoding="async"
-              className="w-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
-              style={{ height: "clamp(130px, 20vw, 340px)" }}
+              className="w-full flex-1 min-h-0 object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
             />
           </div>
-          <div className="flex" style={{ width: "60%" }}>
+          <div className="flex min-h-0" style={{ width: "60%" }}>
             <img
               src={project.col2}
               alt=""
