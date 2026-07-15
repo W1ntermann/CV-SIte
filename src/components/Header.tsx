@@ -26,7 +26,6 @@ export function Header() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 40);
 
-    // Calculate scroll progress (0 to 1)
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? Math.min(latest / docHeight, 1) : 0;
     setScrollProgress(progress);
@@ -68,7 +67,6 @@ export function Header() {
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.15, 1] }}
         className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-6 md:pt-5"
       >
-        {/* Floating glass pill */}
         <div
           className={`relative mx-auto flex max-w-5xl items-center justify-between rounded-full px-5 py-3 transition-all duration-500 md:px-7 md:py-3.5 ${
             scrolled
@@ -76,7 +74,6 @@ export function Header() {
               : "border border-[rgba(215,226,234,0.07)] bg-[rgba(18,18,20,0.45)] shadow-[0_4px_24px_rgba(0,0,0,0.25)] backdrop-blur-[14px]"
           }`}
         >
-          {/* Scroll progress track */}
           <div className="absolute bottom-[5px] left-6 right-6 h-[1.5px] overflow-hidden rounded-full bg-[rgba(215,226,234,0.05)]">
             <motion.div
               className="h-full rounded-full bg-[rgba(215,226,234,0.3)]"
@@ -85,12 +82,13 @@ export function Header() {
             />
           </div>
 
-          <nav className="flex w-full items-center justify-between">
-            {/* Left: logo */}
+          {/* Головний контейнер навігації - використовуємо grid для точного контролю */}
+          <div className="flex w-full items-center justify-between">
+            {/* Ліва частина: логотип + десктопна навігація */}
             <div className="flex items-center gap-6 md:gap-8">
               <a
                 href="#"
-                className="group relative transition-all duration-300 hover:scale-105"
+                className="group relative transition-all duration-300 hover:scale-105 flex-shrink-0"
                 aria-label="Home"
               >
                 <Image
@@ -103,15 +101,14 @@ export function Header() {
                 />
               </a>
 
-              {/* Desktop navigation links */}
               <ul className="hidden items-center gap-6 md:gap-8 lg:gap-10 md:flex">
                 {navLinks.map((l) => {
                   const isActive = activeSection === l.href;
                   return (
                     <li key={l.href}>
-                       <button
-                         onClick={() => handleNavClick(l.href)}
-                         className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
+                      <button
+                        onClick={() => handleNavClick(l.href)}
+                        className="relative cursor-pointer font-medium uppercase tracking-wider text-sm transition-colors duration-300 lg:text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
                         style={{
                           color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
                         }}
@@ -137,14 +134,14 @@ export function Header() {
               </ul>
             </div>
 
-            {/* Right: CTA + LangToggle (desktop) */}
-            <div className="hidden items-center gap-4 md:flex lg:gap-5">
+            {/* Права частина: CTA + LangToggle (десктоп) */}
+            <div className="hidden items-center gap-4 md:flex lg:gap-5 flex-shrink-0">
               <ContactButton />
               <LangToggle />
             </div>
 
-            {/* Mobile: hamburger */}
-            <div className="flex items-center gap-3 md:hidden">
+            {/* Мобільна частина: LangToggle + бургер */}
+            <div className="flex items-center gap-3 md:hidden flex-shrink-0">
               <LangToggle />
               <button
                 type="button"
@@ -155,11 +152,10 @@ export function Header() {
                 <Menu className="size-6" />
               </button>
             </div>
-          </nav>
+          </div>
         </div>
       </motion.header>
 
-      {/* Mobile overlay menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -170,7 +166,6 @@ export function Header() {
             className="fixed inset-0 z-[60] flex flex-col"
             style={{ backgroundColor: "#0C0C0C" }}
           >
-            {/* Close button */}
             <div className="flex items-center justify-end px-6 pt-3 pb-2">
               <button
                 type="button"
@@ -182,7 +177,6 @@ export function Header() {
               </button>
             </div>
 
-            {/* Nav links */}
             <div className="flex flex-1 flex-col items-center justify-center gap-6 px-6">
               {navLinks.map((l, idx) => {
                 const isActive = activeSection === l.href;
@@ -206,7 +200,6 @@ export function Header() {
                 );
               })}
 
-              {/* CTA in mobile */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -17,8 +17,15 @@ type Dict = {
   };
   projects: { title: string; live: string; categories: { client: string; personal: string } };
   contact: {
+    eyebrow: string;
+    availability: string;
     title: string;
     intro: string;
+    cta: string;
+    location: string;
+    locationValue: string;
+    responseTime: string;
+    responseValue: string;
     labels: { email: string; instagram: string; telegram: string; github: string };
   };
   buttons: { contact: string };
@@ -51,8 +58,15 @@ const en: Dict = {
     categories: { client: "Client", personal: "Personal" },
   },
   contact: {
+    eyebrow: "Get in Touch",
+    availability: "Available for work",
     title: "Let's talk",
     intro: "Got a project in mind or just want to say hi? Reach out on any of the channels below.",
+    cta: "Send an Email",
+    location: "Location",
+    locationValue: "Ukraine, Worldwide",
+    responseTime: "Response Time",
+    responseValue: "Within 24 hours",
     labels: { email: "Email", instagram: "Instagram", telegram: "Telegram", github: "GitHub" },
   },
   buttons: { contact: "Contact Me" },
@@ -85,8 +99,15 @@ const ua: Dict = {
     categories: { client: "Клієнт", personal: "Особистий" },
   },
   contact: {
+    eyebrow: "Зв'язок",
+    availability: "Доступний для роботи",
     title: "Зв'язатись",
     intro: "Маєте ідею для проєкту чи просто хочете привітатися? Пишіть будь-де нижче.",
+    cta: "Написати на пошту",
+    location: "Локація",
+    locationValue: "Україна, Worldwide",
+    responseTime: "Час відповіді",
+    responseValue: "Протягом 24 годин",
     labels: { email: "Пошта", instagram: "Instagram", telegram: "Telegram", github: "GitHub" },
   },
   buttons: { contact: "Написати" },
