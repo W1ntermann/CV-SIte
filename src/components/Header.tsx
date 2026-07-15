@@ -87,7 +87,7 @@ export function Header() {
             <img
               src="/logo.png"
               alt=""
-              className="h-12 sm:h-14 lg:h-16 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
+              className="h-22 sm:h-24 lg:h-26 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
             />
           </button>
 
@@ -137,7 +137,7 @@ export function Header() {
               {t.buttons.contact}
             </button>
 
-            {/* Mobile hamburger */}
+            {/* Mobile menu toggle: hamburger / close */}
             <button
               type="button"
               className="md:hidden relative flex items-center justify-center w-11 h-11 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] transition-colors duration-200 hover:bg-white/5"
@@ -145,10 +145,14 @@ export function Header() {
                 border: "1px solid rgba(215, 226, 234, 0.2)",
                 backgroundColor: "transparent",
               }}
-              aria-label="Toggle menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <HamburgerIcon open={mobileMenuOpen} />
+              {mobileMenuOpen ? (
+                <X size={20} color="#D7E2EA" />
+              ) : (
+                <HamburgerIcon />
+              )}
             </button>
           </div>
         </nav>
@@ -257,30 +261,12 @@ export function Header() {
   );
 }
 
-function HamburgerIcon({ open }: { open: boolean }) {
+function HamburgerIcon() {
   return (
     <div className="relative w-5 h-4 flex flex-col justify-between">
-      <span
-        className="block h-[2px] w-full rounded-full transition-all duration-300 origin-center"
-        style={{
-          backgroundColor: "#D7E2EA",
-          transform: open ? "translateY(7px) rotate(45deg)" : "none",
-        }}
-      />
-      <span
-        className="block h-[2px] w-full rounded-full transition-all duration-300"
-        style={{
-          backgroundColor: "#D7E2EA",
-          opacity: open ? 0 : 1,
-        }}
-      />
-      <span
-        className="block h-[2px] w-full rounded-full transition-all duration-300 origin-center"
-        style={{
-          backgroundColor: "#D7E2EA",
-          transform: open ? "translateY(-7px) rotate(-45deg)" : "none",
-        }}
-      />
+      <span className="block h-[2px] w-full rounded-full bg-[#D7E2EA]" />
+      <span className="block h-[2px] w-full rounded-full bg-[#D7E2EA]" />
+      <span className="block h-[2px] w-full rounded-full bg-[#D7E2EA]" />
     </div>
   );
 }
