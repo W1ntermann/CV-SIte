@@ -41,7 +41,7 @@ export function Header() {
           : "1px solid transparent",
       }}
     >
-      <nav className="mx-auto flex h-full max-w-[1400px] items-center justify-between px-6 md:px-10">
+      <nav className="mx-auto flex h-full max-w-[1400px] items-center justify-between px-8 md:px-12 lg:px-16">
         {/* Logo */}
         <button
           type="button"
@@ -78,7 +78,7 @@ export function Header() {
         </ul>
 
         {/* Right side: LangToggle + mobile menu placeholder */}
-        <div className="flex items-center gap-4 sm:gap-5">
+        <div className="flex items-center gap-5 sm:gap-6">
           <LangToggle />
 
           {/* Mobile hamburger — simple button, can be expanded later */}
