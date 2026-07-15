@@ -68,13 +68,13 @@ export function Header() {
         className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 md:px-6 md:pt-5"
       >
         <div
-          className={`relative mx-auto flex max-w-5xl items-center justify-between rounded-full px-5 py-3 transition-all duration-500 md:px-7 md:py-3.5 ${
+          className={`relative mx-auto grid max-w-5xl grid-cols-[1fr_auto_1fr] items-center rounded-full px-5 py-3 transition-all duration-500 md:px-7 md:py-3.5 ${
             scrolled
               ? "border border-[rgba(215,226,234,0.10)] bg-[rgba(18,18,20,0.7)] shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-[20px]"
               : "border border-[rgba(215,226,234,0.07)] bg-[rgba(18,18,20,0.45)] shadow-[0_4px_24px_rgba(0,0,0,0.25)] backdrop-blur-[14px]"
           }`}
         >
-          <div className="absolute bottom-[5px] left-6 right-6 h-[1.5px] overflow-hidden rounded-full bg-[rgba(215,226,234,0.05)]">
+          <div className="absolute bottom-[5px] left-5 right-5 md:left-7 md:right-7 h-[1.5px] overflow-hidden rounded-full bg-[rgba(215,226,234,0.05)]">
             <motion.div
               className="h-full rounded-full bg-[rgba(215,226,234,0.3)]"
               style={{ width: `${scrollProgress * 100}%` }}
@@ -82,24 +82,24 @@ export function Header() {
             />
           </div>
 
-          {/* Логотип - абсолютне позиціонування зліва */}
+          {/* Логотип — ліва секція grid */}
           <a
             href="#"
-            className="absolute left-5 md:left-7 top-1/2 -translate-y-1/2 group transition-all duration-300 hover:scale-105 z-10"
+            className="group transition-all duration-300 hover:scale-105 z-10"
             aria-label="Home"
           >
             <Image
               src="/logo.png"
               alt="Logo"
-              width={40}
-              height={40}
+              width={48}
+              height={48}
               className="h-auto w-auto transition-all duration-300"
               priority
             />
           </a>
 
           {/* Десктопна навігація по центру */}
-          <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-10 w-full">
+          <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-10">
             {navLinks.map((l) => {
               const isActive = activeSection === l.href;
               return (
@@ -131,19 +131,16 @@ export function Header() {
             })}
           </ul>
 
-          {/* Права частина: CTA + LangToggle (десктоп) */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-5 flex-shrink-0 ml-auto">
-            <ContactButton />
-            <LangToggle />
-          </div>
-
-          {/* Мобільна частина: LangToggle + бургер */}
-          <div className="flex md:hidden items-center gap-3 ml-auto">
+          {/* Права частина: десктоп (CTA + LangToggle) / мобільна (LangToggle + бургер) */}
+          <div className="flex items-center justify-end gap-3 md:gap-4 lg:gap-5">
+            <span className="hidden md:contents">
+              <ContactButton />
+            </span>
             <LangToggle />
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="p-1 text-[#D7E2EA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
+              className="p-1 text-[#D7E2EA] md:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded"
               aria-label="Open menu"
             >
               <Menu className="size-6" />
