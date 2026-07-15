@@ -50,6 +50,8 @@ export function ContactSection() {
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
           alt=""
+          loading="lazy"
+          decoding="async"
           className="w-full h-auto"
         />
       </FadeIn>
@@ -63,6 +65,8 @@ export function ContactSection() {
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
           alt=""
+          loading="lazy"
+          decoding="async"
           className="w-full h-auto"
         />
       </FadeIn>

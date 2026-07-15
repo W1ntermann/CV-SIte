@@ -132,12 +132,16 @@ function ProjectCard({
             <img
               src={project.col1[0]}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="w-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
               style={{ height: "clamp(110px, 14vw, 230px)" }}
             />
             <img
               src={project.col1[1]}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="w-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
               style={{ height: "clamp(130px, 20vw, 340px)" }}
             />
@@ -146,6 +150,8 @@ function ProjectCard({
             <img
               src={project.col2}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
             />
           </div>

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { LangToggle } from "./LangToggle";
-import { X, Mail, Camera, Send, GitBranch } from "lucide-react";
+import { X, Mail, Camera, Send, GitBranch, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_ITEMS = ["about", "services", "projects", "contact"] as const;
@@ -79,26 +79,35 @@ export function Header() {
       >
         <nav className="mx-auto flex h-full max-w-[1400px] items-center justify-between px-6 md:px-10 lg:px-16">
           {/* Logo */}
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="flex-shrink-0 flex items-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] group"
+          <a
+            href="#top"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToTop();
+            }}
+            className="flex-shrink-0 flex items-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] group cursor-pointer relative z-10"
           >
             <img
               src="/logo.png"
               alt=""
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
               className="h-20 sm:h-28 lg:h-32 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
             />
-          </button>
+          </a>
 
           {/* Desktop navigation */}
           <ul className="hidden md:flex items-center gap-1 lg:gap-2">
             {NAV_ITEMS.map((key) => (
               <li key={key}>
-                <button
-                  type="button"
-                  onClick={() => scrollTo(key)}
-                  className="relative px-4 lg:px-5 py-2.5 text-sm font-medium tracking-wide rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] hover:bg-white/[0.06]"
+                <a
+                  href={`#${key}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(key);
+                  }}
+                  className="relative px-4 lg:px-5 py-2.5 text-sm font-medium tracking-wide rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] hover:bg-white/[0.06] cursor-pointer"
                   style={{ color: "rgba(215, 226, 234, 0.75)" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "#D7E2EA";
@@ -108,34 +117,52 @@ export function Header() {
                   }}
                 >
                   {t.nav[key]}
-                </button>
+                </a>
               </li>
             ))}
           </ul>
 
-          {/* Right side: LangToggle + CTA + mobile menu button */}
-          <div className="flex items-center gap-3 sm:gap-5">
+          {/* Center: LangToggle + CTA closer to navigation */}
+          <div className="hidden md:flex items-center gap-5 lg:gap-6">
             <LangToggle />
 
             {/* Desktop CTA */}
-            <button
-              type="button"
-              onClick={() => scrollTo("contact")}
-              className="hidden md:inline-flex items-center rounded-full px-6 py-2.5 text-sm font-medium tracking-wide transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] hover:bg-white/[0.08] active:scale-[0.98]"
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo("contact");
+              }}
+              className="group inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold tracking-wide transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] active:scale-[0.98] cursor-pointer"
               style={{
-                background: "transparent",
+                background: "linear-gradient(135deg, rgba(215, 226, 234, 0.12) 0%, rgba(215, 226, 234, 0.04) 100%)",
                 color: "#D7E2EA",
                 border: "1px solid rgba(215, 226, 234, 0.35)",
+                boxShadow: "0 4px 14px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.06)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.6)";
+                e.currentTarget.style.background = "linear-gradient(135deg, #D7E2EA 0%, #B8C8D4 100%)";
+                e.currentTarget.style.color = "#0C0C0C";
+                e.currentTarget.style.borderColor = "#D7E2EA";
+                e.currentTarget.style.boxShadow = "0 8px 28px rgba(215, 226, 234, 0.28), inset 0 1px 0 rgba(255,255,255,0.25)";
               }}
               onMouseLeave={(e) => {
+                e.currentTarget.style.background = "linear-gradient(135deg, rgba(215, 226, 234, 0.12) 0%, rgba(215, 226, 234, 0.04) 100%)";
+                e.currentTarget.style.color = "#D7E2EA";
                 e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.35)";
+                e.currentTarget.style.boxShadow = "0 4px 14px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.06)";
               }}
             >
               {t.buttons.contact}
-            </button>
+              <ArrowRight
+                size={15}
+                className="transition-transform duration-300 group-hover:translate-x-0.5"
+              />
+            </a>
+          </div>
+
+          {/* Right side: mobile menu button */}
+          <div className="flex items-center gap-1 sm:gap-2">
 
             {/* Mobile menu toggle: hamburger / close */}
             <button
@@ -172,13 +199,23 @@ export function Header() {
           >
             {/* Top bar inside menu */}
             <div className="flex items-center justify-between px-6 h-20 sm:h-24">
-              <button
-                type="button"
-                onClick={scrollToTop}
-                className="flex items-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
+              <a
+                href="#top"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTop();
+                }}
+                className="flex items-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] cursor-pointer"
               >
-                <img src="/logo.png" alt="" className="h-12 sm:h-14 w-auto" />
-              </button>
+                <img
+                  src="/logo.png"
+                  alt=""
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="h-12 sm:h-14 w-auto"
+                />
+              </a>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
@@ -193,15 +230,18 @@ export function Header() {
             {/* Menu items */}
             <div className="flex-1 flex flex-col items-start justify-center px-8 sm:px-12 gap-2">
               {NAV_ITEMS.map((key, i) => (
-                <motion.button
+                <motion.a
                   key={key}
-                  type="button"
-                  onClick={() => scrollTo(key)}
+                  href={`#${key}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(key);
+                  }}
                   initial={{ opacity: 0, x: -40 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.4, delay: 0.1 + i * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="group flex items-center gap-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded-xl"
+                  className="group flex items-center gap-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] rounded-xl cursor-pointer"
                 >
                   <span
                     className="text-xs font-medium uppercase tracking-widest transition-colors duration-200"
@@ -215,7 +255,7 @@ export function Header() {
                   >
                     {t.nav[key]}
                   </span>
-                </motion.button>
+                </motion.a>
               ))}
             </div>
 

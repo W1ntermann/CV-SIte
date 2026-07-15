@@ -28,6 +28,9 @@ export function HeroSection() {
               <img
                 src="/hero.png"
                 alt="Bohdan Hembatiuk portrait"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="w-full h-auto"
               />
             </FadeIn>
@@ -37,6 +40,9 @@ export function HeroSection() {
               <img
                 src="/hero.png"
                 alt="Bohdan Hembatiuk portrait"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="w-full h-auto"
               />
             </FadeIn>
