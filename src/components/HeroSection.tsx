@@ -11,9 +11,9 @@ export function HeroSection() {
   return (
     <section className="min-h-dvh flex flex-col relative pt-28 sm:pt-32 lg:pt-28" style={{ overflowX: "clip" }}>
 
-      <div className="flex-1 flex flex-col justify-between lg:justify-center px-6 md:px-10 relative">
+      <div className="flex-1 flex flex-col justify-between px-6 md:px-10 relative">
         <div
-          className="relative md:absolute left-0 right-0 z-10 flex justify-center pointer-events-none mb-8 md:mb-0"
+          className="relative left-0 right-0 z-10 flex justify-center pointer-events-none mb-8 md:mb-12"
           style={{ top: "auto", bottom: "auto" }}
         >
         <Magnet

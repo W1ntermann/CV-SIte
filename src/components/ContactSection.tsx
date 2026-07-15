@@ -122,15 +122,15 @@ export function ContactSection() {
         {/* ---------- glass container with icons ---------- */}
         <FadeIn delay={0.25} y={40}>
           <div
-            className="rounded-3xl border border-white/10 backdrop-blur-3xl overflow-hidden px-6 sm:px-10 py-8 sm:py-12 transition-all duration-500 hover:scale-[1.02]"
+            className="rounded-3xl border border-white/10 backdrop-blur-3xl overflow-hidden px-8 sm:px-14 py-10 sm:py-14 w-full max-w-xl mx-auto transition-all duration-500 hover:scale-[1.02]"
             style={{
               background: "linear-gradient(135deg, rgba(31,31,31,0.8) 0%, rgba(17,17,17,0.9) 100%)",
               boxShadow:
                 "0 0 50px rgba(139,92,246,0.6), 0 0 80px rgba(124,58,237,0.4)",
             }}
           >
-            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-16">
-              {socials.map((s, i) => (
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-14">
+              {socials.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}

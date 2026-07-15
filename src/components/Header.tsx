@@ -13,6 +13,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navLinks = [
     { label: t.nav.about, href: "#about" },
@@ -23,6 +24,11 @@ export function Header() {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 40);
+
+    // Calculate scroll progress (0 to 1)
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min(latest / docHeight, 1) : 0;
+    setScrollProgress(progress);
   });
 
   useEffect(() => {
@@ -58,19 +64,26 @@ export function Header() {
       <motion.header
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 md:py-5 transition-all duration-300 ${
+        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.15, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 md:py-5 transition-all duration-500 ${
           scrolled
-            ? "bg-[rgba(12,12,12,0.85)] backdrop-blur-[16px] border-b border-[rgba(215,226,234,0.08)]"
-            : "bg-transparent border-b border-transparent"
+            ? "bg-[rgba(12,12,12,0.85)] backdrop-blur-[20px] border-b border-[rgba(215,226,234,0.06)]"
+            : "bg-[rgba(12,12,12,0)] backdrop-blur-[0px] border-b border-transparent"
         }`}
       >
+        {/* Scroll progress bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500"
+          style={{ width: `${scrollProgress * 100}%` }}
+          transition={{ duration: 0.1 }}
+        />
+
         <nav className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Left: logo */}
           <div className="flex items-center gap-8 md:gap-12 lg:gap-16">
             <a
               href="#"
-              className="text-xl md:text-2xl font-bold tracking-tight text-[#D7E2EA] select-none"
+              className="text-xl md:text-2xl font-bold tracking-tight text-[#D7E2EA] select-none transition-all duration-300 hover:text-white hover:scale-105"
               aria-label="Home"
             >
               BH
@@ -86,20 +99,20 @@ export function Header() {
                       onClick={() => handleNavClick(l.href)}
                       className="relative font-medium uppercase tracking-wider text-sm lg:text-base transition-colors duration-300 cursor-pointer"
                       style={{
-                        color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.6)",
+                        color: isActive ? "#FFFFFF" : "rgba(215,226,234,0.5)",
                       }}
                       onMouseEnter={(e) => {
                         if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.85)";
                       }}
                       onMouseLeave={(e) => {
-                        if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.6)";
+                        if (!isActive) e.currentTarget.style.color = "rgba(215,226,234,0.5)";
                       }}
                     >
                       {l.label}
                       {isActive && (
                         <motion.span
                           layoutId="activeNav"
-                          className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-[#D7E2EA]"
+                          className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
                           transition={{ type: "spring", stiffness: 380, damping: 30 }}
                         />
                       )}
