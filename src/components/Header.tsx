@@ -76,9 +76,9 @@ export function Header() {
           }`}
         >
           {/* Scroll progress track */}
-          <div className="absolute bottom-[5px] left-6 right-6 h-[2px] overflow-hidden rounded-full bg-[rgba(215,226,234,0.06)]">
+          <div className="absolute bottom-[5px] left-6 right-6 h-[1.5px] overflow-hidden rounded-full bg-[rgba(215,226,234,0.05)]">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500"
+              className="h-full rounded-full bg-[rgba(215,226,234,0.3)]"
               style={{ width: `${scrollProgress * 100}%` }}
               transition={{ duration: 0.1 }}
             />
@@ -133,7 +133,7 @@ export function Header() {
 
             {/* Right: CTA + LangToggle (desktop) */}
             <div className="hidden items-center gap-4 md:flex lg:gap-5">
-              <ContactButton className="!px-6 !py-2.5 !text-xs lg:!px-7 lg:!py-3 lg:!text-sm" />
+              <ContactButton />
               <LangToggle />
             </div>
 
@@ -207,7 +207,7 @@ export function Header() {
                 transition={{ delay: navLinks.length * 0.08 + 0.1, duration: 0.3 }}
                 className="mt-6"
               >
-                <ContactButton className="!text-sm !px-10 !py-4" />
+                <ContactButton className="text-sm px-10 py-4" />
               </motion.div>
             </div>
           </motion.div>

@@ -58,44 +58,44 @@ export function ContactSection() {
       label: t.contact.labels.email,
       href: "mailto:bogdangembatyuk@gmail.com",
       brandBg: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-      brandShadow: "0 0 20px rgba(168,85,247,0.5)",
+      brandShadow: "0 0 16px rgba(168,85,247,0.3)",
     },
     {
       icon: InstagramIcon,
       label: t.contact.labels.instagram,
       href: "https://instagram.com/bohdan_codes",
       brandBg: "radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
-      brandShadow: "0 0 20px rgba(225,48,108,0.6)",
+      brandShadow: "0 0 16px rgba(225,48,108,0.3)",
     },
     {
       icon: TelegramIcon,
       label: t.contact.labels.telegram,
       href: "https://t.me/badan_badanowycz",
       brandBg: "linear-gradient(135deg, #1E96C8 0%, #37AEE2 100%)",
-      brandShadow: "0 0 20px rgba(30,150,200,0.5)",
+      brandShadow: "0 0 16px rgba(30,150,200,0.3)",
     },
     {
       icon: GithubIcon,
       label: t.contact.labels.github,
       href: "https://github.com/W1ntermann",
       brandBg: "#333",
-      brandShadow: "0 0 20px rgba(51,51,51,0.6)",
+      brandShadow: "0 0 16px rgba(51,51,51,0.3)",
     },
   ];
 
   return (
     <section
       id="contact"
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 overflow-x-hidden scroll-mt-24"
+      className="relative z-10 px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 overflow-x-hidden scroll-mt-24"
       style={{ backgroundColor: "#0C0C0C" }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col items-center w-full">
+      <div className="max-w-4xl mx-auto flex flex-col items-center w-full">
         {/* ---------- heading ---------- */}
         <FadeIn y={40}>
           <h2
-            className="font-black uppercase leading-none tracking-tight text-center text-balance w-full mb-16 sm:mb-20 md:mb-24"
+            className="font-black uppercase leading-none tracking-tight text-center text-balance w-full mb-10 sm:mb-12 md:mb-16"
             style={{
-              fontSize: "clamp(3rem, 12vw, 160px)",
+              fontSize: "clamp(2.5rem, 8vw, 5.5rem)",
               background: "linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f87171 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -109,10 +109,10 @@ export function ContactSection() {
         {/* ---------- subtitle ---------- */}
         <FadeIn delay={0.15} y={30}>
           <p
-            className="font-light uppercase tracking-wide text-center max-w-[560px] mx-auto mb-12 sm:mb-16"
+            className="font-light uppercase tracking-wide text-center max-w-[480px] mx-auto mb-10 sm:mb-14"
             style={{
-              color: "#D7E2EA",
-              fontSize: "clamp(0.95rem, 1.6vw, 1.25rem)",
+              color: "rgba(215, 226, 234, 0.6)",
+              fontSize: "clamp(0.9rem, 1.4vw, 1.1rem)",
             }}
           >
             {t.contact.intro}
@@ -122,14 +122,13 @@ export function ContactSection() {
         {/* ---------- glass container with icons ---------- */}
         <FadeIn delay={0.25} y={40}>
           <div
-            className="rounded-3xl border border-white/10 backdrop-blur-3xl overflow-hidden px-8 sm:px-14 py-10 sm:py-14 w-full max-w-6xl mx-auto transition-all duration-500 hover:scale-[1.02]"
+            className="rounded-2xl border border-[rgba(215,226,234,0.08)] backdrop-blur-xl overflow-hidden px-6 sm:px-10 py-8 sm:py-10 w-full max-w-3xl mx-auto"
             style={{
-              background: "linear-gradient(135deg, rgba(31,31,31,0.8) 0%, rgba(17,17,17,0.9) 100%)",
-              boxShadow:
-                "0 0 50px rgba(139,92,246,0.6), 0 0 80px rgba(124,58,237,0.4)",
+              background: "linear-gradient(135deg, rgba(31,31,31,0.6) 0%, rgba(17,17,17,0.7) 100%)",
+              boxShadow: "0 0 30px rgba(139,92,246,0.08), 0 8px 32px rgba(0,0,0,0.3)",
             }}
           >
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12 md:gap-14 place-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 md:gap-10 place-items-center">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -140,13 +139,11 @@ export function ContactSection() {
                 >
                   {/* circle */}
                   <span
-                    className="relative inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full transition-all duration-300 group-hover:translate-y-[-10px] group-hover:scale-110"
+                    className="relative inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full transition-all duration-300 group-hover:scale-110"
                     style={{
-                      background: "rgba(255,255,255,0.05)",
-                      boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
-                      backdropFilter: "blur(4px)",
-                      WebkitBackdropFilter: "blur(4px)",
-                      border: "1px solid rgba(255,255,255,0.1)",
+                      background: "rgba(215, 226, 234, 0.05)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+                      border: "1px solid rgba(215, 226, 234, 0.08)",
                     }}
                   >
                     {/* glow overlay */}
@@ -158,12 +155,12 @@ export function ContactSection() {
                       }}
                     />
                     {/* icon */}
-                    <span className="relative z-10 w-7 h-7 sm:w-8 sm:h-8 text-white group-hover:animate-[shake_0.5s_ease]">
+                    <span className="relative z-10 w-6 h-6 sm:w-7 sm:h-7 text-white transition-transform duration-300 group-hover:scale-110">
                       <s.icon />
                     </span>
                   </span>
                   {/* label */}
-                  <span className="mt-3 text-white font-medium opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-1">
+                  <span className="mt-3 text-xs sm:text-sm font-medium text-[rgba(215,226,234,0.5)] transition-all duration-300 group-hover:text-[#D7E2EA]">
                     {s.label}
                   </span>
                 </a>
@@ -172,17 +169,6 @@ export function ContactSection() {
           </div>
         </FadeIn>
       </div>
-
-      {/* ---------- keyframes for shake ---------- */}
-      <style>{`
-        @keyframes shake {
-          0%, 100% { transform: translateX(0) rotate(0); }
-          20% { transform: translateX(-5px) rotate(-5deg); }
-          40% { transform: translateX(5px) rotate(5deg); }
-          60% { transform: translateX(-5px) rotate(-5deg); }
-          80% { transform: translateX(5px) rotate(5deg); }
-        }
-      `}</style>
     </section>
   );
 }
