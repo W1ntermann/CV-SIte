@@ -91,7 +91,7 @@ export function ContactSection() {
     >
       <div className="max-w-4xl mx-auto flex flex-col items-center w-full">
         {/* ---------- heading ---------- */}
-        <FadeIn y={40}>
+        <FadeIn y={40} className="w-full">
           <h2
             className="font-black uppercase leading-none tracking-tight text-center text-balance w-full mb-10 sm:mb-12 md:mb-16"
             style={{
@@ -107,7 +107,7 @@ export function ContactSection() {
         </FadeIn>
 
         {/* ---------- subtitle ---------- */}
-        <FadeIn delay={0.15} y={30}>
+        <FadeIn delay={0.15} y={30} className="w-full">
           <p
             className="font-light uppercase tracking-wide text-center max-w-[480px] mx-auto mb-10 sm:mb-14"
             style={{
@@ -120,7 +120,7 @@ export function ContactSection() {
         </FadeIn>
 
         {/* ---------- glass container with icons ---------- */}
-        <FadeIn delay={0.25} y={40}>
+        <FadeIn delay={0.25} y={40} className="w-full">
           <div
             className="rounded-2xl border border-[rgba(215,226,234,0.08)] backdrop-blur-xl overflow-hidden px-6 sm:px-10 py-8 sm:py-10 w-full max-w-3xl mx-auto"
             style={{
