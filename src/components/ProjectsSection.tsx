@@ -64,12 +64,12 @@ function ProjectCard({
   const scale = useTransform(progress, range, [1, targetScale]);
   return (
     <div
-      className="h-auto md:h-[82vh] lg:h-[90vh] md:sticky md:flex md:items-start md:justify-center"
+      className="h-[75vh] md:h-[82vh] lg:h-[90vh] sticky flex items-start justify-center"
       style={{ top: `${80 + index * 50}px` }}
     >
       <motion.div
         style={{ scale, backgroundColor: "#0C0C0C", transformOrigin: "top center" }}
-        className="w-full md:max-h-[calc(82vh-16px)] lg:max-h-[calc(90vh-16px)] overflow-hidden rounded-[20px] sm:rounded-[28px] md:rounded-[40px] lg:rounded-[50px] border-2 p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col gap-3 sm:gap-4 md:gap-5 lg:gap-6"
+        className="w-full max-h-[calc(75vh-16px)] md:max-h-[calc(82vh-16px)] lg:max-h-[calc(90vh-16px)] overflow-hidden rounded-[20px] sm:rounded-[28px] md:rounded-[40px] lg:rounded-[50px] border-2 p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col gap-3 sm:gap-4 md:gap-5 lg:gap-6"
       >
         {/* Header: number, category, name + buttons */}
         <div className="flex items-start sm:items-center justify-between gap-3 sm:gap-4 flex-col sm:flex-row flex-shrink-0">
