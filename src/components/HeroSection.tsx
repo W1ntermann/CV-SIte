@@ -9,19 +9,19 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="min-h-dvh flex flex-col relative pt-28 sm:pt-32 lg:pt-36" style={{ overflowX: "clip" }}>
+    <section className="min-h-dvh flex flex-col relative pt-24 sm:pt-28 md:pt-32 lg:pt-36" style={{ overflowX: "clip" }}>
 
-      <div className="flex-1 flex flex-col justify-between px-6 md:px-10 relative">
+      <div className="flex-1 flex flex-col justify-between px-5 sm:px-6 md:px-10 relative">
         <div
-          className="relative left-0 right-0 z-10 flex justify-center pointer-events-none mb-8 md:mb-12"
+          className="relative left-0 right-0 z-10 flex justify-center pointer-events-none mb-6 sm:mb-8 md:mb-12"
           style={{ top: "auto", bottom: "auto" }}
         >
         <Magnet
-          padding={150}
-          strength={3}
+          padding={80}
+          strength={4}
           activeTransition="transform 0.3s ease-out"
           inactiveTransition="transform 0.6s ease-in-out"
-          className="w-[60vw] max-w-[300px] sm:w-[42vw] sm:max-w-[380px] md:w-[40vw] lg:w-[34vw] lg:max-w-[480px] pointer-events-auto"
+          className="w-[55vw] max-w-[260px] sm:w-[42vw] sm:max-w-[340px] md:w-[36vw] md:max-w-[400px] lg:w-[30vw] lg:max-w-[460px] pointer-events-auto"
         >
           <FadeIn delay={0.6} y={30}>
             <img

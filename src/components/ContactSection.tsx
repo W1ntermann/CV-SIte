@@ -37,7 +37,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="min-h-screen relative px-5 sm:px-8 md:px-10 py-20 flex flex-col items-center justify-center gap-12 sm:gap-16 md:gap-20 overflow-hidden scroll-mt-24"
+      className="min-h-screen relative px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-20 md:py-24 flex flex-col items-center justify-center gap-10 sm:gap-14 md:gap-18 overflow-hidden scroll-mt-24"
     >
       {/* Decorative images — same as AboutSection for visual consistency */}
       <FadeIn
@@ -45,7 +45,7 @@ export function ContactSection() {
         x={-80}
         y={0}
         duration={0.9}
-        className="hidden sm:block absolute bottom-[8%] left-[3%] sm:left-[6%] lg:left-[10%] w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px]"
+        className="hidden sm:block absolute bottom-[8%] left-[3%] sm:left-[6%] lg:left-[10%] w-[80px] sm:w-[110px] md:w-[150px] lg:w-[190px] xl:w-[230px] opacity-90 pointer-events-none"
       >
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
@@ -58,7 +58,7 @@ export function ContactSection() {
         x={80}
         y={0}
         duration={0.9}
-        className="hidden sm:block absolute bottom-[8%] right-[3%] sm:right-[6%] lg:right-[10%] w-[130px] sm:w-[170px] md:w-[220px] lg:w-[260px] xl:w-[300px]"
+        className="hidden sm:block absolute bottom-[8%] right-[3%] sm:right-[6%] lg:right-[10%] w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] opacity-90 pointer-events-none"
       >
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
@@ -67,7 +67,7 @@ export function ContactSection() {
         />
       </FadeIn>
 
-      <div className="flex flex-col items-center gap-8 sm:gap-12 md:gap-14 relative z-10 w-full max-w-[720px]">
+      <div className="flex flex-col items-center gap-6 sm:gap-10 md:gap-12 relative z-10 w-full max-w-[720px]">
         {/* Eyebrow */}
         <FadeIn delay={0} y={20}>
           <span
@@ -110,13 +110,13 @@ export function ContactSection() {
         <AnimatedText
           key={lang}
           text={t.contact.intro}
-          className="font-medium text-center leading-relaxed max-w-[520px]"
-          style={{ color: "#D7E2EA", fontSize: "clamp(1rem, 2vw, 1.35rem)" }}
+          className="font-medium text-center leading-relaxed max-w-[90%] sm:max-w-[480px] md:max-w-[520px]"
+          style={{ color: "#D7E2EA", fontSize: "clamp(0.95rem, 1.9vw, 1.35rem)" }}
         />
 
         {/* Contact links */}
         <FadeIn delay={0.4} y={30}>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 md:gap-9">
             {contactLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -154,7 +154,7 @@ export function ContactSection() {
 
         {/* Info cards */}
         <FadeIn delay={0.5} y={30}>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5">
             <div
               className="flex flex-col items-center gap-1 rounded-2xl px-6 py-4 sm:px-8 sm:py-5"
               style={{

@@ -62,7 +62,7 @@ export function ProjectsSection() {
     <section
       id="projects"
       ref={containerRef}
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 scroll-mt-24"
+      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[50px] lg:rounded-t-[60px] px-3 sm:px-5 md:px-8 lg:px-10 pt-16 sm:pt-20 md:pt-28 lg:pt-32 pb-6 sm:pb-8 md:pb-10 scroll-mt-24"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <h2
@@ -106,47 +106,47 @@ function ProjectCard({
 }) {
   const scale = useTransform(progress, range, [1, targetScale]);
   return (
-    <div className="h-[85vh] lg:h-[90vh] sticky flex items-start justify-center" style={{ top: `clamp(96px, ${96 + index * 28}px, ${96 + index * 20}px)` }}>
+    <div className="h-[78vh] sm:h-[82vh] lg:h-[90vh] sticky flex items-start justify-center" style={{ top: `clamp(80px, ${80 + index * 22}px, ${80 + index * 16}px)` }}>
       <motion.div
         style={{ scale, backgroundColor: "#0C0C0C" }}
-        className="w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 p-4 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-6 md:gap-8"
+        className="w-full rounded-[28px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px] border-2 p-3 sm:p-5 md:p-7 lg:p-8 flex flex-col gap-3 sm:gap-5 md:gap-8"
       >
-        <div className="flex items-center justify-between gap-4 flex-wrap">
-          <div className="flex items-center gap-4 sm:gap-6 md:gap-8">
-            <span className="font-black" style={{ color: "#D7E2EA", fontSize: "clamp(3rem, 10vw, 140px)", lineHeight: 1 }}>
+        <div className="flex items-start sm:items-center justify-between gap-4 flex-col sm:flex-row">
+          <div className="flex items-center gap-3 sm:gap-5 md:gap-8">
+            <span className="font-black" style={{ color: "#D7E2EA", fontSize: "clamp(2.5rem, 8vw, 120px)", lineHeight: 1 }}>
               {project.n}
             </span>
-            <div className="flex flex-col gap-1 sm:gap-2">
-              <span className="uppercase tracking-widest font-light text-xs sm:text-sm" style={{ color: "#D7E2EA", opacity: 0.6 }}>
+            <div className="flex flex-col gap-0.5 sm:gap-2">
+              <span className="uppercase tracking-widest font-light text-[10px] sm:text-xs md:text-sm" style={{ color: "#D7E2EA", opacity: 0.6 }}>
                 {project.category}
               </span>
-              <h3 className="font-medium uppercase" style={{ color: "#D7E2EA", fontSize: "clamp(1rem, 2.2vw, 2rem)", lineHeight: 1.1 }}>
+              <h3 className="font-medium uppercase" style={{ color: "#D7E2EA", fontSize: "clamp(0.9rem, 2vw, 2rem)", lineHeight: 1.1 }}>
                 {project.name}
               </h3>
             </div>
           </div>
           <LiveProjectButton href={project.href} />
         </div>
-        <div className="flex items-stretch gap-3 sm:gap-4 md:gap-6">
-          <div className="flex flex-col gap-3 sm:gap-4 md:gap-6" style={{ width: "40%" }}>
+        <div className="flex items-stretch gap-2 sm:gap-3 md:gap-5 lg:gap-6 flex-1 min-h-0">
+          <div className="flex flex-col gap-2 sm:gap-3 md:gap-5 lg:gap-6" style={{ width: "40%" }}>
             <img
               src={project.col1[0]}
               alt=""
-              className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-              style={{ height: "clamp(130px, 16vw, 230px)" }}
+              className="w-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
+              style={{ height: "clamp(110px, 14vw, 230px)" }}
             />
             <img
               src={project.col1[1]}
               alt=""
-              className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-              style={{ height: "clamp(160px, 22vw, 340px)" }}
+              className="w-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
+              style={{ height: "clamp(130px, 20vw, 340px)" }}
             />
           </div>
           <div className="flex" style={{ width: "60%" }}>
             <img
               src={project.col2}
               alt=""
-              className="w-full h-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
+              className="w-full h-full object-cover rounded-[24px] sm:rounded-[36px] md:rounded-[48px] lg:rounded-[60px]"
             />
           </div>
         </div>

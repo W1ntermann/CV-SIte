@@ -40,7 +40,7 @@ export function ServicesSection() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] overflow-hidden scroll-mt-24"
+      className="relative px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-32 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[50px] lg:rounded-t-[60px] overflow-hidden scroll-mt-24"
       style={{ backgroundColor: "#FFFFFF", color: "#0C0C0C" }}
     >
       {/* Parallax decorative gradient balls (subtle) */}
@@ -65,8 +65,8 @@ export function ServicesSection() {
 
       {/* Title */}
       <motion.h2
-        className="font-black uppercase text-center mb-16 sm:mb-20 md:mb-28 relative z-10"
-        style={{ color: "#0C0C0C", fontSize: "clamp(3rem, 12vw, 160px)", lineHeight: 1 }}
+        className="font-black uppercase text-center mb-12 sm:mb-16 md:mb-24 lg:mb-28 relative z-10"
+        style={{ color: "#0C0C0C", fontSize: "clamp(2.5rem, 11vw, 150px)", lineHeight: 1 }}
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
@@ -111,22 +111,22 @@ export function ServicesSection() {
                 />
 
                 <motion.div
-                  className="relative flex items-start gap-6 sm:gap-10 md:gap-14 py-8 sm:py-10 md:py-12"
+                  className="relative flex items-start gap-4 sm:gap-8 md:gap-12 lg:gap-14 py-6 sm:py-8 md:py-10 lg:py-12"
                   animate={{
                     color: isHovered ? "#FFFFFF" : "#0C0C0C",
-                    paddingLeft: isHovered ? 32 : 0,
-                    paddingRight: isHovered ? 32 : 0,
+                    paddingLeft: isHovered ? 16 : 0,
+                    paddingRight: isHovered ? 16 : 0,
                   }}
                   transition={{ duration: 0.4, ease: [0.65, 0, 0.35, 1] }}
                 >
                   {/* Number — scale up and shift on hover */}
                   <motion.span
                     className="font-black flex-shrink-0 select-none"
-                    style={{ fontSize: "clamp(3rem, 10vw, 140px)", lineHeight: 1 }}
+                    style={{ fontSize: "clamp(2.2rem, 8vw, 120px)", lineHeight: 1 }}
                     animate={{
                       opacity: isHovered ? 0.3 : 1,
-                      scale: isHovered ? 1.15 : 1,
-                      x: isHovered ? 8 : 0,
+                      scale: isHovered ? 1.1 : 1,
+                      x: isHovered ? 6 : 0,
                     }}
                     transition={{ duration: 0.4, ease: [0.65, 0, 0.35, 1] }}
                   >
@@ -134,12 +134,12 @@ export function ServicesSection() {
                   </motion.span>
 
                   {/* Title + description */}
-                  <div className="flex flex-col gap-3 sm:gap-4 pt-2 flex-1 min-w-0">
+                  <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 pt-1 sm:pt-2 flex-1 min-w-0">
                     <motion.h3
                       className="font-medium uppercase"
-                      style={{ fontSize: "clamp(1rem, 2.2vw, 2.1rem)", lineHeight: 1.1 }}
+                      style={{ fontSize: "clamp(0.9rem, 2vw, 2rem)", lineHeight: 1.15 }}
                       animate={{
-                        x: isHovered ? 4 : 0,
+                        x: isHovered ? 3 : 0,
                       }}
                       transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] }}
                     >
@@ -151,10 +151,10 @@ export function ServicesSection() {
                         <motion.p
                           key="desc"
                           className="font-light leading-relaxed max-w-2xl"
-                          style={{ fontSize: "clamp(0.85rem, 1.6vw, 1.25rem)" }}
-                          initial={{ opacity: 0, y: 12, x: -8 }}
+                          style={{ fontSize: "clamp(0.8rem, 1.5vw, 1.2rem)" }}
+                          initial={{ opacity: 0, y: 10, x: -6 }}
                           animate={{ opacity: 0.85, y: 0, x: 0 }}
-                          exit={{ opacity: 0, y: 12, x: -8 }}
+                          exit={{ opacity: 0, y: 10, x: -6 }}
                           transition={{ duration: 0.3, delay: 0.1 }}
                         >
                           {s.desc}
@@ -162,8 +162,8 @@ export function ServicesSection() {
                       ) : (
                         <motion.p
                           key="desc-idle"
-                          className="font-light leading-relaxed max-w-2xl"
-                          style={{ fontSize: "clamp(0.85rem, 1.6vw, 1.25rem)", opacity: 0.6 }}
+                          className="font-light leading-relaxed max-w-2xl hidden sm:block"
+                          style={{ fontSize: "clamp(0.8rem, 1.5vw, 1.2rem)", opacity: 0.6 }}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 0.6 }}
                           exit={{ opacity: 0 }}
@@ -182,14 +182,14 @@ export function ServicesSection() {
                     initial={false}
                     animate={{
                       opacity: isHovered ? 1 : 0,
-                      x: isHovered ? 0 : -24,
-                      y: isHovered ? 0 : -8,
+                      x: isHovered ? 0 : -20,
+                      y: isHovered ? 0 : -6,
                       rotate: isHovered ? 0 : -45,
                       scale: isHovered ? 1 : 0.6,
                     }}
                     transition={{ duration: 0.4, ease: [0.65, 0, 0.35, 1] }}
                   >
-                    <ArrowUpRight size={44} strokeWidth={1.5} />
+                    <ArrowUpRight size={32} className="sm:w-9 md:w-10 lg:w-11" strokeWidth={1.5} />
                   </motion.span>
                 </motion.div>
               </div>

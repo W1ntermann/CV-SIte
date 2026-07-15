@@ -27,8 +27,8 @@ const IMAGES = [
 const row1 = IMAGES.slice(0, 11);
 const row2 = IMAGES.slice(11);
 
-const CARD_W = "clamp(280px, 30vw, 520px)";
-const CARD_H = "clamp(180px, 19vw, 340px)";
+const CARD_W = "clamp(220px, 26vw, 480px)";
+const CARD_H = "clamp(140px, 16vw, 300px)";
 
 function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }) {
   // Duplicate the set so the CSS animation can loop seamlessly.
@@ -36,9 +36,9 @@ function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }
   return (
     <div className="overflow-hidden w-full">
       <div
-        className="flex gap-3 w-max"
+        className="flex gap-2 sm:gap-3 w-max"
         style={{
-          animation: `marquee-scroll ${reverse ? "55s" : "45s"} linear infinite`,
+          animation: `marquee-scroll ${reverse ? "60s" : "50s"} linear infinite`,
           animationDirection: reverse ? "reverse" : "normal",
         }}
       >
@@ -48,7 +48,7 @@ function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }
             src={src}
             alt=""
             loading="lazy"
-            className="rounded-2xl object-cover flex-shrink-0"
+            className="rounded-xl sm:rounded-2xl object-cover flex-shrink-0"
             style={{ width: CARD_W, height: CARD_H }}
           />
         ))}
@@ -60,7 +60,7 @@ function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }
 export function MarqueeSection() {
   return (
     <section
-      className="pt-24 sm:pt-32 md:pt-40 pb-10 flex flex-col gap-3 overflow-hidden"
+      className="pt-20 sm:pt-28 md:pt-36 pb-8 sm:pb-10 flex flex-col gap-2 sm:gap-3 overflow-hidden"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <MarqueeRow images={row1} />
@@ -71,6 +71,7 @@ export function MarqueeSection() {
           to { transform: translateX(-50%); }
         }
         @media (prefers-reduced-motion: reduce) {
+          .flex.gap-2[style*="marquee-scroll"],
           .flex.gap-3[style*="marquee-scroll"] { animation: none !important; }
         }
       `}</style>
