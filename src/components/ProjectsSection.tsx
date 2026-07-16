@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { LiveProjectButton, ViewProjectButton } from "./Buttons";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -14,20 +14,30 @@ export function ProjectsSection() {
     offset: ["start start", "end end"],
   });
 
+  // Detect mobile to disable sticky/scale animation on small screens
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   return (
     <section
       id="projects"
       ref={containerRef}
-      className="relative z-10 -mt-8 sm:-mt-10 md:-mt-14 rounded-t-[24px] sm:rounded-t-[32px] md:rounded-t-[40px] lg:rounded-t-[50px] px-3 sm:px-5 md:px-8 lg:px-10 pt-12 sm:pt-16 md:pt-24 lg:pt-28 pb-6 sm:pb-8 md:pb-10 scroll-mt-24"
+      className="relative z-10 -mt-8 sm:-mt-10 md:-mt-14 rounded-t-[24px] sm:rounded-t-[32px] md:rounded-t-[40px] lg:rounded-t-[50px] px-3 sm:px-5 md:px-8 lg:px-10 pt-8 sm:pt-12 md:pt-24 lg:pt-28 pb-4 sm:pb-6 md:pb-10 scroll-mt-24"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <h2
-        className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-10 sm:mb-16 md:mb-20 lg:mb-24"
+        className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-8 sm:mb-12 md:mb-20 lg:mb-24"
         style={{ fontSize: "clamp(2.5rem, 12vw, 160px)" }}
       >
         {t.projects.title}
       </h2>
-      <div>
+      <div className="flex flex-col gap-4 sm:gap-6 md:gap-0">
         {projects.map((p, i) => {
           const targetScale = 1 - (projects.length - 1 - i) * 0.05;
           const range = [i / projects.length, 1];
@@ -39,6 +49,7 @@ export function ProjectsSection() {
               targetScale={targetScale}
               progress={scrollYProgress}
               range={range as [number, number]}
+              isMobile={isMobile}
             />
           );
         })}
@@ -53,23 +64,37 @@ function ProjectCard({
   targetScale,
   progress,
   range,
+  isMobile,
 }: {
   project: Project;
   index: number;
   targetScale: number;
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
   range: [number, number];
+  isMobile: boolean;
 }) {
   const { t } = useLanguage();
   const scale = useTransform(progress, range, [1, targetScale]);
   return (
     <div
-      className="h-[75vh] md:h-[82vh] lg:h-[90vh] sticky flex items-start justify-center"
-      style={{ top: `${80 + index * 50}px` }}
+      className={
+        isMobile
+          ? "h-auto flex items-start justify-center"
+          : "h-[75vh] md:h-[82vh] lg:h-[90vh] sticky flex items-start justify-center"
+      }
+      style={isMobile ? undefined : { top: `${80 + index * 50}px` }}
     >
       <motion.div
-        style={{ scale, backgroundColor: "#0C0C0C", transformOrigin: "top center" }}
-        className="w-full max-h-[calc(75vh-16px)] md:max-h-[calc(82vh-16px)] lg:max-h-[calc(90vh-16px)] overflow-hidden rounded-[20px] sm:rounded-[28px] md:rounded-[40px] lg:rounded-[50px] border-2 p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col gap-3 sm:gap-4 md:gap-5 lg:gap-6"
+        style={
+          isMobile
+            ? { backgroundColor: "#0C0C0C" }
+            : { scale, backgroundColor: "#0C0C0C", transformOrigin: "top center" }
+        }
+        className={
+          isMobile
+            ? "w-full overflow-hidden rounded-[20px] sm:rounded-[28px] md:rounded-[40px] lg:rounded-[50px] border-2 p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col gap-3 sm:gap-4 md:gap-5 lg:gap-6"
+            : "w-full max-h-[calc(75vh-16px)] md:max-h-[calc(82vh-16px)] lg:max-h-[calc(90vh-16px)] overflow-hidden rounded-[20px] sm:rounded-[28px] md:rounded-[40px] lg:rounded-[50px] border-2 p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col gap-3 sm:gap-4 md:gap-5 lg:gap-6"
+        }
       >
         {/* Header: number, category, name + buttons */}
         <div className="flex items-start sm:items-center justify-between gap-3 sm:gap-4 flex-col sm:flex-row flex-shrink-0">

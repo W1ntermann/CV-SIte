@@ -60,7 +60,7 @@ function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }
 export function MarqueeSection() {
   return (
     <section
-      className="pt-20 sm:pt-28 md:pt-36 pb-8 sm:pb-10 flex flex-col gap-2 sm:gap-3 overflow-hidden"
+      className="pt-12 sm:pt-20 md:pt-36 pb-8 sm:pb-10 flex flex-col gap-2 sm:gap-3 overflow-hidden"
       style={{ backgroundColor: "#0C0C0C" }}
     >
       <MarqueeRow images={row1} />

@@ -40,7 +40,7 @@ export function ServicesSection() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-32 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[50px] lg:rounded-t-[60px] overflow-hidden scroll-mt-24"
+      className="relative px-4 sm:px-6 md:px-8 lg:px-10 py-12 sm:py-16 md:py-28 lg:py-32 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[50px] lg:rounded-t-[60px] overflow-hidden scroll-mt-24"
       style={{ backgroundColor: "#FFFFFF", color: "#0C0C0C" }}
     >
       {/* Parallax decorative gradient balls (subtle) */}

@@ -37,7 +37,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="min-h-screen relative px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-20 md:py-24 flex flex-col items-center justify-center gap-10 sm:gap-14 md:gap-18 overflow-hidden scroll-mt-24"
+      className="min-h-[auto] md:min-h-screen relative px-4 sm:px-6 md:px-8 lg:px-10 py-12 sm:py-16 md:py-24 flex flex-col items-center justify-start md:justify-center gap-8 sm:gap-12 md:gap-16 overflow-hidden scroll-mt-24"
     >
       {/* Decorative images — same as AboutSection for visual consistency */}
       <FadeIn
