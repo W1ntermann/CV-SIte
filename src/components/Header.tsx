@@ -1,8 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { LangToggle } from "./LangToggle";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,11 +19,14 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Projects", href: "#projects" },
-  ];
+  const navItems = useMemo(
+    () => [
+      { label: t.nav.about, href: "#about" },
+      { label: t.nav.services, href: "#services" },
+      { label: t.nav.projects, href: "#projects" },
+    ],
+    [t.nav.about, t.nav.services, t.nav.projects],
+  );
 
   const menuVariants: Variants = {
     hidden: { opacity: 0, x: 300 },
@@ -57,11 +61,16 @@ export default function Header() {
           {/* Logo */}
           <motion.a
             href="/"
-            className="text-sm font-light tracking-[0.2em] text-white uppercase transition-opacity duration-300 hover:opacity-70 md:text-base cursor-pointer"
+            className="group transition-all duration-300 hover:scale-105 cursor-pointer"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            aria-label="Home"
           >
-            BOHDAN
+            <img
+              src="/logo.png"
+              alt=""
+              className="h-20 sm:h-28 lg:h-32 w-auto"
+            />
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -85,8 +94,9 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Right section - Contact button & Mobile menu toggle */}
+          {/* Right section - LangToggle, Contact button & Mobile menu toggle */}
           <div className="flex items-center gap-4">
+            <LangToggle className="hidden md:flex" />
             <motion.a
               href="#contact"
               className="group hidden items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm text-white transition-all duration-300 hover:border-white/50 hover:bg-white/5 sm:flex"
@@ -122,13 +132,13 @@ export default function Header() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
+              {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-20 bg-black/40 backdrop-blur-sm md:hidden"
             />
 
             {/* Mobile menu */}
@@ -168,9 +178,19 @@ export default function Header() {
                   className="group flex items-center gap-2 rounded-full border border-white/20 px-4 py-3 text-white transition-all duration-300 hover:border-white/50 hover:bg-white/5 w-fit"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <span>Contact</span>
+                  <span>{t.nav.contact}</span>
                   <ArrowUpRight size={16} strokeWidth={1.5} />
                 </a>
+              </motion.div>
+
+              <motion.div
+                custom={4}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                className="mt-6"
+              >
+                <LangToggle />
               </motion.div>
             </motion.nav>
           </>

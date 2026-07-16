@@ -11,6 +11,22 @@ export default function HeroSection() {
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-black px-4 pt-24 pb-16 md:px-6 md:pt-28">
+      {/* Background image */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: "url('/forHero.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.18,
+          mixBlendMode: "screen" as React.CSSProperties["mixBlendMode"],
+        }}
+      />
+      {/* Subtle overlay to maintain readability */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+
       {/* Animated background elements */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.12),transparent_55%)]" />
       <div

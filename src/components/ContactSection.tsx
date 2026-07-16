@@ -5,6 +5,7 @@ import { Mail, Camera, Send, GitBranch, ArrowUpRight } from "lucide-react";
 import { FadeIn } from "./FadeIn";
 import { AnimatedText } from "./AnimatedText";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { Button } from "@/components/ui/button";
 
 export function ContactSection() {
   const { t, lang } = useLanguage();
@@ -40,6 +41,22 @@ export function ContactSection() {
       id="contact"
       className="relative min-h-screen px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-20 md:py-32 flex flex-col items-center justify-center gap-12 md:gap-16 overflow-hidden scroll-mt-24"
     >
+      {/* Background image */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: "url('/ForContact.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.15,
+          mixBlendMode: "screen" as React.CSSProperties["mixBlendMode"],
+        }}
+      />
+      {/* Subtle overlay to maintain readability */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60" />
+
       {/* Enhanced decorative background elements */}
       {/* Top-right gradient blob */}
       <motion.div
@@ -252,28 +269,19 @@ export function ContactSection() {
 
         {/* Primary CTA Button */}
         <FadeIn delay={0.6} y={30} duration={0.6}>
-          <motion.a
-            href="mailto:bogdangembatyuk@gmail.com"
-            className="inline-flex items-center gap-2 rounded-full font-semibold uppercase tracking-widest px-8 py-4 text-xs sm:px-10 sm:py-4.5 sm:text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] mt-4 md:mt-8"
-            style={{
-              background: "#D7E2EA",
-              color: "#0C0C0C",
-              border: "1px solid #D7E2EA",
-            }}
-            whileHover={{
-              background: "#C8D4DD",
-              borderColor: "#C8D4DD",
-              scale: 1.08,
-              boxShadow: "0 8px 40px rgba(215,226,234,0.15)",
-            }}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
+            className="mt-4 md:mt-8"
           >
-            {t.contact.cta}
-            <motion.div whileHover={{ x: 2, y: -1 }} transition={{ duration: 0.2 }}>
-              <ArrowUpRight size={16} strokeWidth={1.5} />
-            </motion.div>
-          </motion.a>
+            <Button asChild variant="gradient" size="lg">
+              <a href="mailto:bogdangembatyuk@gmail.com">
+                {t.contact.cta}
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </Button>
+          </motion.div>
         </FadeIn>
 
         {/* Secondary CTA */}

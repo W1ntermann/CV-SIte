@@ -3,23 +3,10 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink, Send, Eye, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-/* ── Base button styles (Tailwind-based, high-contrast) ─────────── */
-
-const BASE_BTN =
-  "inline-flex items-center justify-center gap-2 sm:gap-3 rounded-md font-semibold tracking-wide transition transform duration-150 disabled:opacity-40 disabled:cursor-not-allowed min-w-0 max-w-[8rem] sm:max-w-[14rem] truncate";
-
-const SIZES = "px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base lg:px-10 lg:py-4";
-
-const PRIMARY_CLASSES =
-  "bg-blue-600 text-white border border-transparent hover:bg-blue-700 active:bg-blue-800 shadow-sm sm:shadow-lg sm:hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500";
-
-const SECONDARY_CLASSES =
-  "bg-white text-blue-600 border border-blue-600/20 hover:bg-blue-50 shadow-sm sm:hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-300";
-
-/* ── ContactButton (primary CTA, scrolls to #contact) ────────────── */
+/* ── ContactButton (gradient CTA, scrolls to #contact) ──────────── */
 
 export function ContactButton({ className = "" }: { className?: string }) {
   const { t } = useLanguage();
@@ -29,16 +16,22 @@ export function ContactButton({ className = "" }: { className?: string }) {
         const el = document.getElementById("contact");
         if (el) el.scrollIntoView({ behavior: "smooth" });
       }}
-      variant="primary"
-      size="default"
+      variant="gradient"
+      size="lg"
       className={className}
     >
-      {t.buttons.contact}
+      <span>{t.buttons.contact}</span>
+      <motion.span
+        animate={{ y: [0, 3, 0] }}
+        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ChevronDown className="h-4 w-4" />
+      </motion.span>
     </Button>
   );
 }
 
-/* ── PrimaryLinkButton (solid, for href-based CTAs) ───────────────── */
+/* ── PrimaryLinkButton (gradient, for href-based CTAs) ───────────── */
 
 export function PrimaryLinkButton({
   href,
@@ -52,27 +45,44 @@ export function PrimaryLinkButton({
   onClick?: () => void;
 }) {
   const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+  const icon = isExternal ? (
+    <motion.span
+      whileHover={{ x: 2, y: -2 }}
+      transition={{ duration: 0.2 }}
+    >
+      <ExternalLink className="h-4 w-4" />
+    </motion.span>
+  ) : (
+    <motion.span
+      whileHover={{ x: 4 }}
+      transition={{ duration: 0.2 }}
+    >
+      <ArrowRight className="h-4 w-4" />
+    </motion.span>
+  );
 
   if (isExternal) {
     return (
-      <Button asChild variant="primary" size="default" className={className}>
+      <Button asChild variant="gradient" size="default" className={className}>
         <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClick}>
           {children}
+          {icon}
         </a>
       </Button>
     );
   }
 
   return (
-    <Button asChild variant="primary" size="default" className={className}>
+    <Button asChild variant="gradient" size="default" className={className}>
       <Link href={href} onClick={onClick}>
         {children}
+        {icon}
       </Link>
     </Button>
   );
 }
 
-/* ── SecondaryLinkButton (outline, for href-based secondary CTAs) ──── */
+/* ── SecondaryLinkButton (outline, for href-based secondary CTAs) ─── */
 
 export function SecondaryLinkButton({
   href,
@@ -84,68 +94,82 @@ export function SecondaryLinkButton({
   className?: string;
 }) {
   const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+  const icon = isExternal ? (
+    <ExternalLink className="h-3.5 w-3.5" />
+  ) : (
+    <ArrowRight className="h-3.5 w-3.5" />
+  );
 
   if (isExternal) {
     return (
-      <Button asChild variant="secondary" size="sm" className={className}>
+      <Button asChild variant="outline" size="sm" className={className}>
         <a href={href} target="_blank" rel="noopener noreferrer">
           {children}
+          {icon}
         </a>
       </Button>
     );
   }
 
   return (
-    <Button asChild variant="secondary" size="sm" className={className}>
-      <Link href={href}>{children}</Link>
+    <Button asChild variant="outline" size="sm" className={className}>
+      <Link href={href}>
+        {children}
+        {icon}
+      </Link>
     </Button>
   );
 }
 
-/* ── LiveProjectButton (secondary, external link) ─────────────────── */
+/* ── LiveProjectButton (glass for dark sections, outline for light) ── */
 
-export function LiveProjectButton({ href }: { href?: string }) {
+export function LiveProjectButton({
+  href,
+  variant = "outline",
+}: {
+  href?: string;
+  variant?: "outline" | "glass";
+}) {
   const { t } = useLanguage();
-  const className = `${BASE_BTN} ${SIZES}`;
-  
+
   if (href) {
     return (
-      <Button asChild size="sm" variant="secondary" className={className}>
+      <Button asChild size="sm" variant={variant}>
         <a href={href} target="_blank" rel="noopener noreferrer" aria-label={t.projects.live}>
-          <span className="flex items-center gap-2">
-            {t.projects.live}
-            <motion.span whileHover={{ x: 2, y: -1 }} transition={{ duration: 0.2 }}>
-              <ExternalLink size={14} strokeWidth={1.5} />
-            </motion.span>
-          </span>
+          <span>{t.projects.live}</span>
+          <motion.span
+            whileHover={{ x: 2, y: -1 }}
+            transition={{ duration: 0.15 }}
+          >
+            <ExternalLink className="h-3.5 w-3.5" />
+          </motion.span>
         </a>
       </Button>
     );
   }
 
   return (
-    <Button size="sm" variant="secondary" isDisabled>
-      <span className="flex items-center gap-2">
-        {t.projects.live}
-        <ExternalLink size={14} strokeWidth={1.5} />
-      </span>
+    <Button size="sm" variant={variant} isDisabled>
+      <span>{t.projects.live}</span>
+      <ExternalLink className="h-3.5 w-3.5" />
     </Button>
   );
 }
 
-/* ── ViewProjectButton (secondary, internal link) ──────────────────── */
+/* ── ViewProjectButton (ghost, internal link to project detail) ───── */
 
 export function ViewProjectButton({ slug }: { slug: string }) {
   const { t } = useLanguage();
   return (
-    <Button asChild size="sm" variant="secondary">
+    <Button asChild size="sm" variant="ghost">
       <Link href={`/projects/${slug}`} aria-label={t.projects.viewMore}>
-        <span className="flex items-center gap-2">
-          {t.projects.viewMore}
-          <motion.span whileHover={{ x: 3 }} transition={{ duration: 0.2 }}>
-            <ArrowRight size={14} strokeWidth={1.5} />
-          </motion.span>
-        </span>
+        <span>{t.projects.viewMore}</span>
+        <motion.span
+          whileHover={{ x: 4 }}
+          transition={{ duration: 0.15 }}
+        >
+          <Eye className="h-3.5 w-3.5" />
+        </motion.span>
       </Link>
     </Button>
   );

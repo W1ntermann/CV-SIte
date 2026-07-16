@@ -20,6 +20,22 @@ export function AboutSection() {
       id="about"
       className="relative min-h-screen flex flex-col items-center justify-center gap-10 sm:gap-14 md:gap-20 overflow-hidden scroll-mt-24 px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-20 md:py-28"
     >
+      {/* Background image */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: "url('/forServices.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.15,
+          mixBlendMode: "screen" as React.CSSProperties["mixBlendMode"],
+        }}
+      />
+      {/* Subtle overlay to maintain readability */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60" />
+
       {/* Background geometric decorations — pure CSS, no external CDN */}
       {/* Large subtle ring */}
       <div
