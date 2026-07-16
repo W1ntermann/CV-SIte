@@ -8,7 +8,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 /* ── Base button styles (Tailwind-based, high-contrast) ─────────── */
 
 const BASE_BTN =
-  "inline-flex items-center justify-center gap-3 rounded-md font-semibold tracking-wide transition transform duration-150 disabled:opacity-40 disabled:cursor-not-allowed";
+  "inline-flex items-center justify-center gap-3 rounded-md font-semibold tracking-wide transition transform duration-150 disabled:opacity-40 disabled:cursor-not-allowed min-w-0 max-w-[10rem] sm:max-w-[14rem] truncate";
 
 const SIZES = "px-6 py-3 text-base sm:px-8 sm:py-3.5 lg:px-10 lg:py-4";
 
