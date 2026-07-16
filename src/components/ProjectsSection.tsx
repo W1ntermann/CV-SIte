@@ -227,7 +227,7 @@ function ProjectCard({
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-2 sm:gap-3 flex-wrap w-full sm:w-auto justify-end min-w-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto sm:justify-end min-w-0">
               <ViewProjectButton slug={project.slug} />
               <LiveProjectButton href={project.href} />
             </div>
