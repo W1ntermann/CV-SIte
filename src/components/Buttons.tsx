@@ -24,18 +24,17 @@ const SECONDARY_CLASSES =
 export function ContactButton({ className = "" }: { className?: string }) {
   const { t } = useLanguage();
   return (
-    <motion.button
-      type="button"
-      className={`${BASE_BTN} ${SIZES} ${PRIMARY_CLASSES} ${className}`}
+    <Button
       onClick={() => {
         const el = document.getElementById("contact");
         if (el) el.scrollIntoView({ behavior: "smooth" });
       }}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
+      variant="primary"
+      size="default"
+      className={className}
     >
       {t.buttons.contact}
-    </motion.button>
+    </Button>
   );
 }
 
@@ -53,19 +52,23 @@ export function PrimaryLinkButton({
   onClick?: () => void;
 }) {
   const isExternal = href.startsWith("http") || href.startsWith("mailto:");
-  const MotionComponent = motion.create(isExternal ? "a" : Link);
-  
+
+  if (isExternal) {
+    return (
+      <Button asChild variant="primary" size="default" className={className}>
+        <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClick}>
+          {children}
+        </a>
+      </Button>
+    );
+  }
+
   return (
-    <MotionComponent
-      href={href}
-      {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
-      className={`${BASE_BTN} ${SIZES} ${PRIMARY_CLASSES} ${className}`}
-      onClick={onClick}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
-    >
-      {children}
-    </MotionComponent>
+    <Button asChild variant="primary" size="default" className={className}>
+      <Link href={href} onClick={onClick}>
+        {children}
+      </Link>
+    </Button>
   );
 }
 
@@ -81,18 +84,21 @@ export function SecondaryLinkButton({
   className?: string;
 }) {
   const isExternal = href.startsWith("http") || href.startsWith("mailto:");
-  const MotionComponent = motion.create(isExternal ? "a" : Link);
-  
+
+  if (isExternal) {
+    return (
+      <Button asChild variant="secondary" size="sm" className={className}>
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      </Button>
+    );
+  }
+
   return (
-    <MotionComponent
-      href={href}
-      {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
-      className={`group ${BASE_BTN} ${SIZES} ${SECONDARY_CLASSES} ${className}`}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
-    >
-      {children}
-    </MotionComponent>
+    <Button asChild variant="secondary" size="sm" className={className}>
+      <Link href={href}>{children}</Link>
+    </Button>
   );
 }
 
