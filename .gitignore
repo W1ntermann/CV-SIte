@@ -59,3 +59,6 @@ sw.*
 # python files
 *.cjs
 *.py
+
+# text files
+*.txt
