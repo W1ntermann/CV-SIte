@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /* ── Base button styles (Tailwind-based, high-contrast) ─────────── */
 
@@ -103,32 +104,26 @@ export function LiveProjectButton({ href }: { href?: string }) {
   
   if (href) {
     return (
-      <motion.a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`group ${className} ${SECONDARY_CLASSES}`}
-        whileHover={{ scale: 1.03, y: -2 }}
-        whileTap={{ scale: 0.97 }}
-      >
-        {t.projects.live}
-        <motion.div whileHover={{ x: 2, y: -1 }} transition={{ duration: 0.2 }}>
-          <ExternalLink size={14} strokeWidth={1.5} />
-        </motion.div>
-      </motion.a>
+      <Button asChild size="sm" variant="secondary" className={className}>
+        <a href={href} target="_blank" rel="noopener noreferrer" aria-label={t.projects.live}>
+          <span className="flex items-center gap-2">
+            {t.projects.live}
+            <motion.span whileHover={{ x: 2, y: -1 }} transition={{ duration: 0.2 }}>
+              <ExternalLink size={14} strokeWidth={1.5} />
+            </motion.span>
+          </span>
+        </a>
+      </Button>
     );
   }
-  
+
   return (
-    <motion.button
-      type="button"
-      disabled
-      className={`${className} ${SECONDARY_CLASSES}`}
-      aria-disabled="true"
-    >
-      {t.projects.live}
-      <ExternalLink size={14} strokeWidth={1.5} />
-    </motion.button>
+    <Button size="sm" variant="secondary" isDisabled>
+      <span className="flex items-center gap-2">
+        {t.projects.live}
+        <ExternalLink size={14} strokeWidth={1.5} />
+      </span>
+    </Button>
   );
 }
 
@@ -137,22 +132,15 @@ export function LiveProjectButton({ href }: { href?: string }) {
 export function ViewProjectButton({ slug }: { slug: string }) {
   const { t } = useLanguage();
   return (
-    <Link
-      href={`/projects/${slug}`}
-      className={`group ${BASE_BTN} ${SIZES} ${SECONDARY_CLASSES}`}
-    >
-      <motion.div
-        className="flex items-center gap-2"
-        whileHover={{ gap: "0.75rem" }}
-      >
-        {t.projects.viewMore}
-        <motion.div
-          whileHover={{ x: 3 }}
-          transition={{ duration: 0.2 }}
-        >
-          <ArrowRight size={14} strokeWidth={1.5} />
-        </motion.div>
-      </motion.div>
-    </Link>
+    <Button asChild size="sm" variant="secondary">
+      <Link href={`/projects/${slug}`} aria-label={t.projects.viewMore}>
+        <span className="flex items-center gap-2">
+          {t.projects.viewMore}
+          <motion.span whileHover={{ x: 3 }} transition={{ duration: 0.2 }}>
+            <ArrowRight size={14} strokeWidth={1.5} />
+          </motion.span>
+        </span>
+      </Link>
+    </Button>
   );
 }
