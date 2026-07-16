@@ -6,10 +6,20 @@ export type Lang = "en" | "ua";
 
 type Dict = {
   nav: { about: string; services: string; projects: string; contact: string };
-  hero: { greeting: string; tagline: string };
+  hero: {
+    greeting: string;
+    tagline: string;
+    subtext: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    techStack: string[];
+  };
   about: {
+    eyebrow: string;
     title: string;
     body: string;
+    stats: { value: string; label: string }[];
+    roles: { name: string; desc: string }[];
   };
   services: {
     title: string;
@@ -52,11 +62,29 @@ const en: Dict = {
   hero: {
     greeting: "Hi, i'm bohdan",
     tagline: "a fullstack developer building scalable web apps with c#, .net, react & next.js",
+    subtext:
+      "Clean architecture, transparent communication, and maintainable code — from idea to working product, focused on your business results.",
+    ctaPrimary: "Discuss a Project",
+    ctaSecondary: "View Work",
+    techStack: ["C#", ".NET", "React", "Next.js"],
   },
   about: {
+    eyebrow: "Who I Am",
     title: "About me",
     body:
       "I'm Bohdan Hembatiuk — a passionate Full Stack Developer with expertise in React, TypeScript, C#, .NET, and REST APIs. I build scalable, high-performance digital solutions with clean architecture, robust ASP.NET Core backends, and modern React/Next.js frontends. Let's build something incredible together!",
+    stats: [
+      { value: "3+", label: "Years Experience" },
+      { value: "15+", label: "Projects Delivered" },
+      { value: "100%", label: "Client Satisfaction" },
+      { value: "24/7", label: "Availability" },
+    ],
+    roles: [
+      { name: "Frontend", desc: "React, Next.js, TypeScript, Tailwind CSS" },
+      { name: "Backend", desc: "C#, .NET, ASP.NET Core, REST APIs" },
+      { name: "Database", desc: "SQL Server, Entity Framework, PostgreSQL" },
+      { name: "DevOps", desc: "Docker, CI/CD, Azure, Vercel" },
+    ],
   },
   services: {
     title: "Services",
@@ -105,11 +133,29 @@ const ua: Dict = {
   hero: {
     greeting: "привіт, я богдан",
     tagline: "fullstack розробник, який будує масштабовані веб-додатки на c#, .net, react та next.js",
+    subtext:
+      "Чиста архітектура, прозора комунікація та код, який легко підтримувати — від ідеї до робочого продукту, з фокусом на результат вашого бізнесу.",
+    ctaPrimary: "Обговорити проєкт",
+    ctaSecondary: "Переглянути роботи",
+    techStack: ["C#", ".NET", "React", "Next.js"],
   },
   about: {
+    eyebrow: "Хто я",
     title: "Про мене",
     body:
       "Я Богдан Гембатюк — захоплений Full Stack розробник з експертизою у React, TypeScript, C#, .NET та REST API. Створюю масштабовані, високопродуктивні цифрові рішення з чистою архітектурою, надійними бекендами на ASP.NET Core та сучасними фронтендами на React/Next.js. Давайте створимо щось неймовірне разом!",
+    stats: [
+      { value: "3+", label: "Років досвіду" },
+      { value: "15+", label: "Виконаних проєктів" },
+      { value: "100%", label: "Задоволених клієнтів" },
+      { value: "24/7", label: "Доступність" },
+    ],
+    roles: [
+      { name: "Frontend", desc: "React, Next.js, TypeScript, Tailwind CSS" },
+      { name: "Backend", desc: "C#, .NET, ASP.NET Core, REST API" },
+      { name: "Database", desc: "SQL Server, Entity Framework, PostgreSQL" },
+      { name: "DevOps", desc: "Docker, CI/CD, Azure, Vercel" },
+    ],
   },
   services: {
     title: "Послуги",
@@ -193,4 +239,3 @@ export function useLanguage() {
   if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
   return ctx;
 }
-

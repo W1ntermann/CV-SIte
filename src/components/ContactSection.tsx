@@ -1,6 +1,7 @@
 "use client";
 
-import { Mail, Camera, Send, GitBranch } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail, Camera, Send, GitBranch, ArrowUpRight } from "lucide-react";
 import { FadeIn } from "./FadeIn";
 import { AnimatedText } from "./AnimatedText";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -37,194 +38,262 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="min-h-[auto] md:min-h-screen relative px-4 sm:px-6 md:px-8 lg:px-10 py-12 sm:py-16 md:py-24 flex flex-col items-center justify-start md:justify-center gap-8 sm:gap-12 md:gap-16 overflow-hidden scroll-mt-24"
+      className="relative min-h-screen px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-20 md:py-32 flex flex-col items-center justify-center gap-12 md:gap-16 overflow-hidden scroll-mt-24"
     >
-      {/* Decorative images — same as AboutSection for visual consistency */}
-      <FadeIn
-        delay={0.25}
-        x={-80}
-        y={0}
-        duration={0.9}
-        className="hidden sm:block absolute bottom-[8%] left-[3%] sm:left-[6%] lg:left-[10%] w-[80px] sm:w-[110px] md:w-[150px] lg:w-[190px] xl:w-[230px] opacity-90 pointer-events-none"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="w-full h-auto"
-        />
-      </FadeIn>
-      <FadeIn
-        delay={0.3}
-        x={80}
-        y={0}
-        duration={0.9}
-        className="hidden sm:block absolute bottom-[8%] right-[3%] sm:right-[6%] lg:right-[10%] w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] opacity-90 pointer-events-none"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="w-full h-auto"
-        />
-      </FadeIn>
+      {/* Enhanced decorative background elements */}
+      {/* Top-right gradient blob */}
+      <motion.div
+        className="pointer-events-none absolute top-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full opacity-[0.08]"
+        style={{ background: "radial-gradient(circle, rgba(215,226,234,0.3) 0%, transparent 70%)" }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.08, 0.12, 0.08] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
 
-      <div className="flex flex-col items-center gap-6 sm:gap-10 md:gap-12 relative z-10 w-full max-w-[720px]">
-        {/* Eyebrow */}
-        <FadeIn delay={0} y={20}>
+      {/* Bottom-left gradient blob */}
+      <motion.div
+        className="pointer-events-none absolute bottom-[-8%] left-[-5%] w-[350px] h-[350px] rounded-full opacity-[0.06]"
+        style={{ background: "radial-gradient(circle, rgba(215,226,234,0.3) 0%, transparent 70%)" }}
+        animate={{ scale: [1, 1.15, 1], opacity: [0.06, 0.1, 0.06] }}
+        transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+      />
+
+      {/* Decorative grid lines */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(215,226,234,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(215,226,234,0.015)_1px,transparent_1px)] bg-[size:80px_80px] opacity-50"
+      />
+
+      {/* Content */}
+      <motion.div
+        className="flex flex-col items-center gap-8 md:gap-12 relative z-10 w-full max-w-[800px] text-center"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        {/* Section eyebrow */}
+        <FadeIn delay={0} y={20} duration={0.6}>
           <span
             className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-medium"
-            style={{ color: "rgba(215,226,234,0.45)" }}
+            style={{ color: "rgba(215,226,234,0.35)" }}
           >
-            {t.contact.eyebrow}
+            — {t.contact.eyebrow}
           </span>
         </FadeIn>
 
-        {/* Availability badge */}
-        <FadeIn delay={0.05} y={20}>
-          <span
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-wider"
+        {/* Availability status badge */}
+        <FadeIn delay={0.1} y={20} duration={0.6}>
+          <motion.div
+            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-wider cursor-default"
             style={{
-              background: "rgba(34,197,94,0.08)",
-              border: "1px solid rgba(34,197,94,0.2)",
+              background: "rgba(34,197,94,0.1)",
+              border: "1px solid rgba(34,197,94,0.25)",
               color: "#4ade80",
             }}
+            whileHover={{
+              background: "rgba(34,197,94,0.15)",
+              borderColor: "rgba(34,197,94,0.4)",
+            }}
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
-            </span>
-            {t.contact.availability}
-          </span>
+            <motion.span
+              className="relative flex h-2 w-2 rounded-full bg-green-400"
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+            <span>{t.contact.availability}</span>
+          </motion.div>
         </FadeIn>
 
-        {/* Title */}
-        <FadeIn delay={0.1} y={40}>
-          <h2
-            className="hero-heading font-black uppercase leading-none tracking-tight text-center"
-            style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+        {/* Main title */}
+        <FadeIn delay={0.2} y={40} duration={0.7}>
+          <motion.h2
+            className="hero-heading font-black uppercase leading-none tracking-tight"
+            style={{ fontSize: "clamp(2.5rem, 8vw, 5rem)" }}
           >
             {t.contact.title}
-          </h2>
+          </motion.h2>
         </FadeIn>
 
-        {/* Intro */}
-        <AnimatedText
-          key={lang}
-          text={t.contact.intro}
-          className="font-medium text-center leading-relaxed max-w-[90%] sm:max-w-[480px] md:max-w-[520px]"
-          style={{ color: "#D7E2EA", fontSize: "clamp(0.95rem, 1.9vw, 1.35rem)" }}
-        />
+        {/* Subtitle/intro text */}
+        <FadeIn delay={0.3} y={30} duration={0.6}>
+          <AnimatedText
+            key={lang}
+            text={t.contact.intro}
+            className="font-light leading-relaxed max-w-[90%] sm:max-w-[600px]"
+            style={{ color: "rgba(215,226,234,0.7)", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}
+          />
+        </FadeIn>
 
-        {/* Contact links */}
-        <FadeIn delay={0.4} y={30}>
-          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 md:gap-9">
-            {contactLinks.map((link) => {
+        {/* Contact links grid */}
+        <FadeIn delay={0.4} y={30} duration={0.6}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 w-full mt-4">
+            {contactLinks.map((link, idx) => {
               const Icon = link.icon;
               return (
-                <a
+                <motion.a
                   key={link.name}
                   href={link.href}
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noopener noreferrer" : undefined}
-                  className="group flex flex-col items-center gap-2.5 transition-all duration-200 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7E2EA] rounded-lg"
-                  style={{ color: "rgba(215,226,234,0.55)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#D7E2EA";
+                  className="group flex flex-col items-center gap-2 sm:gap-3 rounded-2xl px-4 py-5 sm:px-6 sm:py-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7E2EA] transition-all duration-300"
+                  style={{
+                    background: "rgba(215,226,234,0.04)",
+                    border: "1px solid rgba(215,226,234,0.1)",
                   }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "rgba(215,226,234,0.55)";
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + idx * 0.08, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  whileHover={{
+                    background: "rgba(215,226,234,0.12)",
+                    borderColor: "rgba(215,226,234,0.25)",
+                    y: -6,
                   }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <span
-                    className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full transition-all duration-200"
+                  <motion.div
+                    className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl transition-all duration-300"
                     style={{
                       background: "rgba(215,226,234,0.06)",
                       border: "1px solid rgba(215,226,234,0.12)",
                     }}
+                    whileHover={{
+                      scale: 1.15,
+                      background: "rgba(215,226,234,0.15)",
+                      borderColor: "rgba(215,226,234,0.25)",
+                    }}
                   >
-                    <Icon size={18} className="sm:size-5" />
-                  </span>
-                  <span className="text-[10px] sm:text-[11px] uppercase tracking-wider font-medium">
+                    <motion.div whileHover={{ rotate: 12, scale: 1.2 }}>
+                      <Icon
+                        size={20}
+                        className="sm:size-6"
+                        style={{ color: "rgba(215,226,234,0.7)" }}
+                      />
+                    </motion.div>
+                  </motion.div>
+                  <span
+                    className="text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold leading-tight transition-colors duration-300"
+                    style={{ color: "rgba(215,226,234,0.6)" }}
+                  >
                     {link.name}
                   </span>
-                </a>
+                </motion.a>
               );
             })}
           </div>
         </FadeIn>
 
-        {/* Info cards */}
-        <FadeIn delay={0.5} y={30}>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5">
-            <div
-              className="flex flex-col items-center gap-1 rounded-2xl px-6 py-4 sm:px-8 sm:py-5"
+        {/* Info cards section */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full mt-8 md:mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <FadeIn delay={0.5} y={20} duration={0.6} className="flex-1">
+            <motion.div
+              className="flex flex-col gap-3 rounded-2xl px-6 py-8 sm:px-8 sm:py-10"
               style={{
                 background: "rgba(215,226,234,0.04)",
-                border: "1px solid rgba(215,226,234,0.08)",
+                border: "1px solid rgba(215,226,234,0.1)",
               }}
+              whileHover={{
+                background: "rgba(215,226,234,0.08)",
+                borderColor: "rgba(215,226,234,0.2)",
+                y: -4,
+              }}
+              transition={{ duration: 0.3 }}
             >
               <span
-                className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-medium"
-                style={{ color: "rgba(215,226,234,0.35)" }}
+                className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium"
+                style={{ color: "rgba(215,226,234,0.45)" }}
               >
                 {t.contact.location}
               </span>
               <span
-                className="text-sm sm:text-base font-medium"
+                className="text-base sm:text-lg font-semibold"
                 style={{ color: "#D7E2EA" }}
               >
                 {t.contact.locationValue}
               </span>
-            </div>
-            <div
-              className="flex flex-col items-center gap-1 rounded-2xl px-6 py-4 sm:px-8 sm:py-5"
+            </motion.div>
+          </FadeIn>
+
+          <FadeIn delay={0.55} y={20} duration={0.6} className="flex-1">
+            <motion.div
+              className="flex flex-col gap-3 rounded-2xl px-6 py-8 sm:px-8 sm:py-10"
               style={{
                 background: "rgba(215,226,234,0.04)",
-                border: "1px solid rgba(215,226,234,0.08)",
+                border: "1px solid rgba(215,226,234,0.1)",
               }}
+              whileHover={{
+                background: "rgba(215,226,234,0.08)",
+                borderColor: "rgba(215,226,234,0.2)",
+                y: -4,
+              }}
+              transition={{ duration: 0.3 }}
             >
               <span
-                className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-medium"
-                style={{ color: "rgba(215,226,234,0.35)" }}
+                className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium"
+                style={{ color: "rgba(215,226,234,0.45)" }}
               >
                 {t.contact.responseTime}
               </span>
               <span
-                className="text-sm sm:text-base font-medium"
+                className="text-base sm:text-lg font-semibold"
                 style={{ color: "#D7E2EA" }}
               >
                 {t.contact.responseValue}
               </span>
-            </div>
-          </div>
-        </FadeIn>
+            </motion.div>
+          </FadeIn>
+        </motion.div>
 
-        {/* CTA Button */}
-        <FadeIn delay={0.6} y={30}>
-          <a
+        {/* Primary CTA Button */}
+        <FadeIn delay={0.6} y={30} duration={0.6}>
+          <motion.a
             href="mailto:bogdangembatyuk@gmail.com"
-            className="inline-flex rounded-full font-medium uppercase tracking-widest px-7 py-3 text-xs lg:px-8 lg:py-3.5 lg:text-sm transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA]"
+            className="inline-flex items-center gap-2 rounded-full font-semibold uppercase tracking-widest px-8 py-4 text-xs sm:px-10 sm:py-4.5 sm:text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7E2EA] mt-4 md:mt-8"
             style={{
-              background: "rgba(215, 226, 234, 0.08)",
-              border: "1px solid rgba(215, 226, 234, 0.25)",
-              color: "#D7E2EA",
+              background: "#D7E2EA",
+              color: "#0C0C0C",
+              border: "1px solid #D7E2EA",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(215, 226, 234, 0.15)";
-              e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.4)";
+            whileHover={{
+              background: "#C8D4DD",
+              borderColor: "#C8D4DD",
+              scale: 1.08,
+              boxShadow: "0 8px 40px rgba(215,226,234,0.15)",
             }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(215, 226, 234, 0.08)";
-              e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.25)";
-            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
           >
             {t.contact.cta}
-          </a>
+            <motion.div whileHover={{ x: 2, y: -1 }} transition={{ duration: 0.2 }}>
+              <ArrowUpRight size={16} strokeWidth={1.5} />
+            </motion.div>
+          </motion.a>
         </FadeIn>
-      </div>
+
+        {/* Secondary CTA */}
+        <FadeIn delay={0.7} y={20} duration={0.6}>
+          <span
+            className="text-xs sm:text-sm"
+            style={{ color: "rgba(215,226,234,0.5)" }}
+          >
+            or email directly to{" "}
+            <motion.a
+              href="mailto:bogdangembatyuk@gmail.com"
+              className="font-semibold transition-colors duration-200"
+              style={{ color: "#D7E2EA" }}
+              whileHover={{ color: "rgba(215,226,234,0.9)" }}
+            >
+              bogdangembatyuk@gmail.com
+            </motion.a>
+          </span>
+        </FadeIn>
+      </motion.div>
     </section>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getProjectBySlug, projects } from "@/lib/projects";
 import { FadeIn } from "@/components/FadeIn";
@@ -19,7 +20,12 @@ export default function ProjectDetailPage() {
         style={{ backgroundColor: "#0C0C0C", overflowX: "clip" }}
         className="min-h-screen flex items-center justify-center px-4"
       >
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h1
             className="hero-heading font-black uppercase mb-6"
             style={{ fontSize: "clamp(2rem, 8vw, 6rem)" }}
@@ -32,19 +38,23 @@ export default function ProjectDetailPage() {
           >
             {t.projects.detail.notFound}
           </p>
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium uppercase tracking-widest transition-all duration-200"
-            style={{
-              background: "rgba(215, 226, 234, 0.08)",
-              border: "1px solid rgba(215, 226, 234, 0.25)",
-              color: "#D7E2EA",
-            }}
-          >
-            <ArrowLeft size={16} />
-            {t.projects.backToProjects}
-          </Link>
-        </div>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium uppercase tracking-widest transition-all duration-200"
+              style={{
+                background: "rgba(215, 226, 234, 0.08)",
+                border: "1px solid rgba(215, 226, 234, 0.25)",
+                color: "#D7E2EA",
+              }}
+            >
+              <motion.div whileHover={{ x: -2 }}>
+                <ArrowLeft size={16} />
+              </motion.div>
+              {t.projects.backToProjects}
+            </Link>
+          </motion.div>
+        </motion.div>
       </main>
     );
   }
@@ -61,15 +71,22 @@ export default function ProjectDetailPage() {
       <div className="mx-auto max-w-[1400px] px-3 sm:px-5 md:px-8 lg:px-10">
         {/* Hero section */}
         <FadeIn>
-          <div className="flex flex-col gap-4 mb-10 sm:mb-14">
-            <div className="flex items-center gap-4 sm:gap-6">
-              <span
+          <motion.div className="flex flex-col gap-4 mb-10 sm:mb-14">
+            <div className="flex items-center gap-4 sm:gap-6 flex-col sm:flex-row">
+              <motion.span
                 className="font-black"
                 style={{ color: "#D7E2EA", fontSize: "clamp(3rem, 10vw, 8rem)", lineHeight: 1 }}
+                animate={{ scale: [1, 1.02, 1], opacity: [0.9, 1, 0.9] }}
+                transition={{ duration: 4, repeat: Infinity }}
               >
                 {project.n}
-              </span>
-              <div className="flex flex-col gap-1 sm:gap-2">
+              </motion.span>
+              <motion.div
+                className="flex flex-col gap-1 sm:gap-2"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
                 <span
                   className="uppercase tracking-widest font-light text-xs sm:text-sm md:text-base"
                   style={{ color: "rgba(215, 226, 234, 0.6)" }}
@@ -88,21 +105,28 @@ export default function ProjectDetailPage() {
                 >
                   {project.name}
                 </h1>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </FadeIn>
 
         {/* Main image */}
         <FadeIn delay={0.1}>
-          <div className="rounded-[28px] sm:rounded-[40px] lg:rounded-[50px] overflow-hidden border-2 mb-10 sm:mb-14 lg:mb-20" style={{ borderColor: "rgba(215, 226, 234, 0.12)" }}>
-            <img
+          <motion.div
+            className="rounded-[28px] sm:rounded-[40px] lg:rounded-[50px] overflow-hidden border-2 mb-10 sm:mb-14 lg:mb-20"
+            style={{ borderColor: "rgba(215, 226, 234, 0.12)" }}
+            whileHover={{ scale: 1.01, borderColor: "rgba(215, 226, 234, 0.25)" }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.img
               src={project.col2}
               alt={project.name}
               className="w-full h-auto object-cover"
               style={{ maxHeight: "70vh" }}
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5 }}
             />
-          </div>
+          </motion.div>
         </FadeIn>
 
         {/* Info grid */}
@@ -175,25 +199,34 @@ export default function ProjectDetailPage() {
                   {t.projects.detail.techStack}
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech) => (
-                    <span
+                  {project.techStack.map((tech, idx) => (
+                    <motion.span
                       key={tech}
-                      className="rounded-full px-3 py-1 text-xs font-medium"
+                      className="rounded-full px-3 py-1 text-xs font-medium cursor-default"
                       style={{
                         background: "rgba(215, 226, 234, 0.08)",
                         border: "1px solid rgba(215, 226, 234, 0.2)",
                         color: "#D7E2EA",
                       }}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.05, duration: 0.4 }}
+                      whileHover={{
+                        background: "rgba(215, 226, 234, 0.15)",
+                        borderColor: "rgba(215, 226, 234, 0.35)",
+                        scale: 1.05,
+                        y: -2,
+                      }}
                     >
                       {tech}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
               {/* Live link */}
               {project.href && (
                 <div>
-                  <a
+                  <motion.a
                     href={project.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -211,10 +244,14 @@ export default function ProjectDetailPage() {
                       e.currentTarget.style.background = "rgba(215, 226, 234, 0.08)";
                       e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.25)";
                     }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     {t.projects.detail.visitLive}
-                    <ExternalLink size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </a>
+                    <motion.div whileHover={{ x: 2, y: -1 }} transition={{ duration: 0.2 }}>
+                      <ExternalLink size={14} />
+                    </motion.div>
+                  </motion.a>
                 </div>
               )}
             </div>
@@ -232,20 +269,32 @@ export default function ProjectDetailPage() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {project.gallery.map((img, i) => (
-                <div
+                <motion.div
                   key={i}
-                  className={`rounded-[24px] sm:rounded-[36px] lg:rounded-[48px] overflow-hidden border-2 ${i === 0 ? "sm:col-span-2" : ""}`}
+                  className={`rounded-[24px] sm:rounded-[36px] lg:rounded-[48px] overflow-hidden border-2 cursor-pointer ${
+                    i === 0 ? "sm:col-span-2" : ""
+                  }`}
                   style={{ borderColor: "rgba(215, 226, 234, 0.12)" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  viewport={{ once: true, margin: "50px" }}
+                  whileHover={{
+                    scale: 1.02,
+                    borderColor: "rgba(215, 226, 234, 0.25)",
+                  }}
                 >
-                  <img
+                  <motion.img
                     src={img}
                     alt={`${project.name} — ${i + 1}`}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover"
                     style={{ aspectRatio: i === 0 ? "16/9" : "4/3" }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.5 }}
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -253,18 +302,36 @@ export default function ProjectDetailPage() {
 
         {/* Next project */}
         <FadeIn delay={0.3}>
-          <div
+          <motion.div
             className="rounded-[28px] sm:rounded-[40px] lg:rounded-[50px] border-2 p-6 sm:p-8 lg:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
             style={{ borderColor: "rgba(215, 226, 234, 0.12)" }}
+            whileHover={{
+              scale: 1.01,
+              borderColor: "rgba(215, 226, 234, 0.25)",
+              boxShadow: "0 0 30px rgba(215,226,234,0.05)",
+            }}
+            transition={{ duration: 0.3 }}
           >
             <div className="flex items-center gap-4 sm:gap-6">
-              <span
+              <motion.span
                 className="font-black"
-                style={{ color: "rgba(215, 226, 234, 0.4)", fontSize: "clamp(2rem, 6vw, 5rem)", lineHeight: 1 }}
+                style={{
+                  color: "rgba(215, 226, 234, 0.4)",
+                  fontSize: "clamp(2rem, 6vw, 5rem)",
+                  lineHeight: 1,
+                }}
+                animate={{ opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 3, repeat: Infinity }}
               >
                 {nextProject.n}
-              </span>
-              <div className="flex flex-col gap-1">
+              </motion.span>
+              <motion.div
+                className="flex flex-col gap-1"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
                 <span
                   className="uppercase tracking-widest font-light text-xs"
                   style={{ color: "rgba(215, 226, 234, 0.5)" }}
@@ -275,33 +342,44 @@ export default function ProjectDetailPage() {
                 </span>
                 <span
                   className="font-medium uppercase"
-                  style={{ color: "#D7E2EA", fontSize: "clamp(1.2rem, 3vw, 2rem)", lineHeight: 1.1 }}
+                  style={{
+                    color: "#D7E2EA",
+                    fontSize: "clamp(1.2rem, 3vw, 2rem)",
+                    lineHeight: 1.1,
+                  }}
                 >
                   {nextProject.name}
                 </span>
-              </div>
+              </motion.div>
             </div>
-            <Link
-              href={`/projects/${nextProject.slug}`}
-              className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium uppercase tracking-widest transition-all duration-200"
-              style={{
-                background: "rgba(215, 226, 234, 0.08)",
-                border: "1px solid rgba(215, 226, 234, 0.25)",
-                color: "#D7E2EA",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(215, 226, 234, 0.15)";
-                e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.4)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(215, 226, 234, 0.08)";
-                e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.25)";
-              }}
-            >
-              {t.projects.viewMore}
-              <ArrowLeft size={16} className="rotate-180 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </Link>
-          </div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href={`/projects/${nextProject.slug}`}
+                className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium uppercase tracking-widest transition-all duration-200"
+                style={{
+                  background: "rgba(215, 226, 234, 0.08)",
+                  border: "1px solid rgba(215, 226, 234, 0.25)",
+                  color: "#D7E2EA",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(215, 226, 234, 0.15)";
+                  e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.4)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(215, 226, 234, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(215, 226, 234, 0.25)";
+                }}
+              >
+                {t.projects.viewMore}
+                <motion.div
+                  whileHover={{ x: 2, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowLeft size={16} className="rotate-180" />
+                </motion.div>
+              </Link>
+            </motion.div>
+          </motion.div>
         </FadeIn>
       </div>
     </main>

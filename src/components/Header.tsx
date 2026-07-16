@@ -1,29 +1,181 @@
 "use client";
-import { ArrowUpRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function Header() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 md:px-6">
-        <a
-          href="/"
-          className="text-sm font-light tracking-[0.2em] text-white uppercase transition-opacity duration-300 hover:opacity-70 md:text-base"
-        >
-          BOHDAN HEMBATIUK
-        </a>
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
-        <a
-          href="#contact"
-          className="group flex items-center gap-2 text-sm text-white transition-opacity duration-300 hover:opacity-70"
-        >
-          <span className="hidden md:inline">Зв'язатися</span>
-          <ArrowUpRight
-            size={18}
-            strokeWidth={1.5}
-            className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
-        </a>
-      </div>
-    </header>
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navItems = [
+    { label: "About", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Projects", href: "#projects" },
+  ];
+
+  const menuVariants: Variants = {
+    hidden: { opacity: 0, x: 300 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { type: "spring", stiffness: 300, damping: 30 } as any,
+    },
+    exit: { opacity: 0, x: 300 },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: { delay: i * 0.1, duration: 0.4 },
+    }),
+  };
+
+  return (
+    <>
+      {/* Main header */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          isScrolled
+            ? "bg-black/90 backdrop-blur-md border-b border-white/5"
+            : "bg-gradient-to-b from-black/40 to-transparent backdrop-blur-sm"
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6 md:py-5">
+          {/* Logo */}
+          <motion.a
+            href="/"
+            className="text-sm font-light tracking-[0.2em] text-white uppercase transition-opacity duration-300 hover:opacity-70 md:text-base cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            BOHDAN
+          </motion.a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                className="relative text-sm text-gray-300 transition-colors duration-300 hover:text-white"
+                whileHover="hover"
+                initial="initial"
+              >
+                {item.label}
+                <motion.span
+                  className="absolute -bottom-1 left-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.a>
+            ))}
+          </nav>
+
+          {/* Right section - Contact button & Mobile menu toggle */}
+          <div className="flex items-center gap-4">
+            <motion.a
+              href="#contact"
+              className="group hidden items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm text-white transition-all duration-300 hover:border-white/50 hover:bg-white/5 sm:flex"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>Contact</span>
+              <motion.div
+                className="transition-transform duration-300"
+                whileHover={{ x: 2, y: -2 }}
+              >
+                <ArrowUpRight size={16} strokeWidth={1.5} />
+              </motion.div>
+            </motion.a>
+
+            {/* Mobile menu button */}
+            <motion.button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="inline-flex items-center justify-center rounded-lg p-2 text-gray-300 transition-colors duration-300 hover:bg-white/10 hover:text-white md:hidden"
+              whileTap={{ scale: 0.95 }}
+            >
+              {isMobileMenuOpen ? (
+                <X size={24} strokeWidth={1.5} />
+              ) : (
+                <Menu size={24} strokeWidth={1.5} />
+              )}
+            </motion.button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile menu overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm md:hidden"
+            />
+
+            {/* Mobile menu */}
+            <motion.nav
+              variants={menuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed right-0 top-0 z-30 h-screen w-4/5 bg-black/95 backdrop-blur-md border-l border-white/10 pt-24 px-6 md:hidden"
+            >
+              <div className="space-y-6">
+                {navItems.map((item, i) => (
+                  <motion.a
+                    key={item.label}
+                    href={item.href}
+                    custom={i}
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="block text-lg font-light text-gray-300 transition-colors duration-300 hover:text-white"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </motion.a>
+                ))}
+              </div>
+
+              <motion.div
+                custom={3}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                className="mt-8 border-t border-white/10 pt-6"
+              >
+                <a
+                  href="#contact"
+                  className="group flex items-center gap-2 rounded-full border border-white/20 px-4 py-3 text-white transition-all duration-300 hover:border-white/50 hover:bg-white/5 w-fit"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <span>Contact</span>
+                  <ArrowUpRight size={16} strokeWidth={1.5} />
+                </a>
+              </motion.div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

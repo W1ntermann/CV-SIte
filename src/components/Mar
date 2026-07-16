@@ -33,34 +33,23 @@ const CARD_H = "clamp(140px, 16vw, 300px)";
 function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }) {
   const loop = [...images, ...images];
   return (
-    <div className="overflow-hidden w-full group">
+    <div className="overflow-hidden w-full">
       <div
-        className="flex gap-2 sm:gap-3 w-max group-hover:[animation-play-state:paused]"
+        className="flex gap-2 sm:gap-3 w-max"
         style={{
           animation: `marquee-scroll ${reverse ? "60s" : "50s"} linear infinite`,
           animationDirection: reverse ? "reverse" : "normal",
         }}
       >
         {loop.map((src, i) => (
-          <div
+          <img
             key={`${reverse ? "r2" : "r1"}-${i}`}
-            className="relative flex-shrink-0 overflow-hidden rounded-xl sm:rounded-2xl"
+            src={src}
+            alt=""
+            loading="lazy"
+            className="rounded-xl sm:rounded-2xl object-cover flex-shrink-0"
             style={{ width: CARD_W, height: CARD_H }}
-          >
-            <img
-              src={src}
-              alt=""
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-            {/* Dark overlay for consistency */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "linear-gradient(to top, rgba(12,12,12,0.25) 0%, transparent 60%)",
-              }}
-            />
-          </div>
+          />
         ))}
       </div>
     </div>
@@ -70,31 +59,11 @@ function MarqueeRow({ images, reverse }: { images: string[]; reverse?: boolean }
 export function MarqueeSection() {
   return (
     <section
-      className="relative pt-12 sm:pt-20 md:pt-36 pb-8 sm:pb-10 flex flex-col gap-3 sm:gap-4 overflow-hidden"
+      className="pt-8 sm:pt-12 md:pt-16 pb-8 sm:pb-10 flex flex-col gap-2 sm:gap-3 overflow-hidden"
       style={{ backgroundColor: "#0C0C0C" }}
     >
-      {/* Section label */}
-      <div className="text-center mb-1 sm:mb-2">
-        <span
-          className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-medium"
-          style={{ color: "rgba(215,226,234,0.35)" }}
-        >
-          — Inspiration & Recent Work
-        </span>
-      </div>
-
-      {/* Fade edges container */}
-      <div
-        className="relative"
-        style={{
-          maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-        }}
-      >
-        <MarqueeRow images={row1} />
-        <MarqueeRow images={row2} reverse />
-      </div>
-
+      <MarqueeRow images={row1} />
+      <MarqueeRow images={row2} reverse />
       <style>{`
         @keyframes marquee-scroll {
           from { transform: translateX(0); }
@@ -102,9 +71,7 @@ export function MarqueeSection() {
         }
         @media (prefers-reduced-motion: reduce) {
           .flex.gap-2[style*="marquee-scroll"],
-          .flex.gap-3[style*="marquee-scroll"] {
-            animation: none !important;
-          }
+          .flex.gap-3[style*="marquee-scroll"] { animation: none !important; }
         }
       `}</style>
     </section>
